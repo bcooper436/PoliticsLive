@@ -8,7 +8,7 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         card_view:cardCornerRadius="4dp"
         android:layout_margin="10dp">
         <RelativeLayout
@@ -33,8 +33,8 @@
                 android:textSize="25dp" />
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:id="@+id/userPictureThumb"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"

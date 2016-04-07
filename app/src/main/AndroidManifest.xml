@@ -59,6 +59,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bradleycooper.politicslive.LoginActivity" />
         </activity>
+        <activity
+            android:name=".AppSettings"
+            android:label="@string/title_activity_app_settings"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bradleycooper.politicslive.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

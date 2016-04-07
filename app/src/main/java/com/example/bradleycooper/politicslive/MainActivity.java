@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity
         RepublicansList.OnFragmentInteractionListener,
         DemocratsList.OnFragmentInteractionListener,
         HomePage.OnFragmentInteractionListener,
-        Settings.OnFragmentInteractionListener,
-        UserProfile.OnFragmentInteractionListener {
+        UserProfile.OnFragmentInteractionListener,
+        AllCandidates.OnFragmentInteractionListener {
 
     private CharSequence mTitle;
     @Override
@@ -74,11 +74,14 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userName = preferences.getString("Username", "");
+        String skip = preferences.getString("Skip", "");
         if(userName.equalsIgnoreCase("") || userName==null)
         {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            if(skip == null || skip.equalsIgnoreCase("")) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
         }
 
         /*
@@ -213,18 +216,85 @@ public class MainActivity extends AppCompatActivity
             mTitle = "Politics Live!";
         } else if (id == R.id.nav_GOP) {
             fragment = new RepublicansList();
-            mTitle = "Republican Candidates";
+            mTitle = "Republican Party" +
+                    "";
+        } else if (id == R.id.nav_Candidates) {
+            fragment = new AllCandidates();
+            mTitle = "All Candidates" +
+                    "";
+        } else if (id == R.id.logout) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setMessage("Are you sure you want to logout?");
+            builder1.setCancelable(true);
+
+            builder1.setNegativeButton(
+                    "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            builder1.setPositiveButton(
+                    "Logout",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            clearUserPreferences();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+
         } else if (id == R.id.nav_DNC) {
             fragment = new DemocratsList();
-            mTitle = "Democratic Candidates";
+            mTitle = "Democratic Party";
         } else if (id == R.id.nav_settings) {
-            fragment = new UserProfile();
-            mTitle = "User Profiles";
-        }
-        else if (id == R.id.nav_user) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, AppSettings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+        }
+        else if (id == R.id.nav_user) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String userName = preferences.getString("Username", "");
+            if(userName.equalsIgnoreCase("") || userName == null) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                builder1.setMessage("You must be logged in to access this page.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Login",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }
+            else {
+                fragment = new UserProfile();
+                mTitle = userName +
+                        "";
+            }
         }
         restoreActionBar();
 
@@ -245,6 +315,13 @@ public class MainActivity extends AppCompatActivity
         ByteArrayOutputStream buffer = new ByteArrayOutputStream(bitmap.getWidth() * bitmap.getHeight());
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, buffer);
         return buffer.toByteArray();
+    }
+    public void clearUserPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Username","");
+        editor.putString("Password","");
+        editor.apply();
     }
     @Override
     public void onFragmentInteraction(Uri uri) {

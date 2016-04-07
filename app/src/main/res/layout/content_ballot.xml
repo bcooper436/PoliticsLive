@@ -22,16 +22,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Clear Selections"
-            android:id="@+id/button_clear_selections"
-            android:background="@color/colorBlueLight" />
+            android:id="@+id/button_clear_selections" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Submit"
-            android:id="@+id/button_submit"
-            android:background="@color/colorBlueLight" />
+            android:id="@+id/button_submit" />
     </LinearLayout>
 
     <ScrollView
@@ -57,10 +55,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Democratic Nominee:"
                 android:id="@+id/textView2"
-                android:layout_marginTop="15dp"
-                android:layout_alignLeft="@+id/linearLayout"
-                android:layout_marginLeft="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -73,8 +71,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="60dp">
+                android:layout_marginLeft="75dp"
+                android:layout_marginRight="75dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -113,8 +111,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="60dp">
+                android:layout_marginLeft="75dp"
+                android:layout_marginRight="75dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -165,8 +163,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="60dp">
+                android:layout_marginLeft="75dp"
+                android:layout_marginRight="75dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -205,8 +203,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="60dp">
+                android:layout_marginLeft="75dp"
+                android:layout_marginRight="75dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -245,8 +243,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="60dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginRight="75dp"
                 android:layout_marginBottom="10dp">
 
                 <CheckBox

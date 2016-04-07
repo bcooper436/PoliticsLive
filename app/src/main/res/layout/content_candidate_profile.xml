@@ -26,18 +26,21 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/hilary" />
 
         <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/arrow_back"
             android:padding="25dp"
-            android:layout_marginLeft="-10dp" />
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="-10dp"
+            android:onClick="BackNavigate" />
 
         <ImageView
             android:layout_width="75dp"
@@ -47,30 +50,91 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:src="@android:drawable/btn_star_big_off"
-            android:padding="25dp" />
+            android:padding="25dp"
+            android:layout_marginRight="-12dp"
+            android:layout_marginTop="-12dp" />
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bernie Sanders"
-        android:id="@+id/textViewCandidateName"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:textSize="30dp" />
+        android:layout_alignParentStart="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textViewId"
-        android:layout_below="@+id/textViewCandidateName"
-        android:layout_alignLeft="@+id/textViewCandidateName"
-        android:layout_alignStart="@+id/textViewCandidateName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/textViewDescription"
+            android:layout_below="@+id/relativeLayoutPartyColor"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/colorBlack" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorBlueDark"
+            android:id="@+id/relativeLayoutPartyColor"
+            android:elevation="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Hilary Clinton"
+                android:id="@+id/textViewCandidateName"
+                android:textSize="25dp"
+                android:textColor="@color/colorWhite"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageViewPartyIcon"
+                android:src="@drawable/ic_action_dnc_blue"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Number of Votes:"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/textViewDescription"
+            android:layout_alignLeft="@+id/textViewDescription"
+            android:layout_alignStart="@+id/textViewDescription"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="5"
+            android:id="@+id/textView13"
+            android:layout_below="@+id/textViewDescription"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_toEndOf="@+id/textView4"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
 </RelativeLayout>

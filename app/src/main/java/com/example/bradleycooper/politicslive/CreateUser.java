@@ -21,10 +21,7 @@ import android.widget.RadioGroup;
 public class CreateUser extends AppCompatActivity {
 
     User newUser;
-    public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
-    public static final String Username = "userNameKey";
-    public static final String Password = "passwordKey";
 
 
     @Override
@@ -83,10 +80,10 @@ public class CreateUser extends AppCompatActivity {
                     ds.close();
 
                     if(wasSuccessful) {
-                        storeUserPreferences();
+                        storeUserPreferences(newUser.getUserName(), newUser.getPassword());
                         AlertDialog alertDialog = new AlertDialog.Builder(CreateUser.this).create();
                         alertDialog.setTitle("Success");
-                        alertDialog.setMessage("Your account is created. Password= " + newUser.getPassword() + ", Username = " + newUser.getUserName() + ", Display Name = " + newUser.getDisplayName() + ", Age = " + newUser.getAge() + ", Party = " + newUser.getPartyAffiliation() + ", Gender = " + newUser.getGender());
+                        alertDialog.setMessage("Your account has been created");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -126,10 +123,11 @@ public class CreateUser extends AppCompatActivity {
     public void choosePicture(View view) {
     }
 
-    public void storeUserPreferences(){
+    public void storeUserPreferences(String username, String password){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("Username","Bcooper");
+        editor.putString("Username",username);
+        editor.putString("Password",password);
         editor.apply();
     }
 }

@@ -2,7 +2,9 @@ package com.example.bradleycooper.politicslive;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +29,8 @@ public class Ballot extends AppCompatActivity {
     public String chosenRepublican = "";
     public String chosenDemocrat = "";
 
+    User user;
+    UserDataSource userDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,20 @@ public class Ballot extends AppCompatActivity {
                         ds.updateCandidate(currentCandidateGOP);
                     }
                     ds.close();
+
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Ballot.this);
+                    String userName = preferences.getString("Username", "");
+
+                    userDataSource = new UserDataSource(Ballot.this);
+                    userDataSource.open();
+                    user = userDataSource.getSpecificUserFromLoginInfo(userName,"zun3ukit");
+                    user.setChosenDemocrat(chosenDemocrat);
+                    user.setChosenRepublican(chosenRepublican);
+                    userDataSource.updateUser(user);
+                    userDataSource.close();
+
+
+                    saveUserVote(user, chosenRepublican, chosenDemocrat);
                     AlertDialog alertDialog = new AlertDialog.Builder(Ballot.this).create();
                     alertDialog.setTitle("Success");
                     alertDialog.setMessage("You votes have been cast for " + chosenDemocrat + " and " + chosenRepublican + ".  If you want to change your vote, just return to this page!");
@@ -113,8 +131,8 @@ public class Ballot extends AppCompatActivity {
         });
         white = ContextCompat.getColor(getApplicationContext(), R.color.colorWhite);
         black = ContextCompat.getColor(getApplicationContext(), R.color.colorBlack);
-        chosenDemocratColor = ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary);
-        chosenRepublicanColor = ContextCompat.getColor(getApplicationContext(),R.color.colorAccent);
+        chosenDemocratColor = ContextCompat.getColor(getApplicationContext(),R.color.colorBlue);
+        chosenRepublicanColor = ContextCompat.getColor(getApplicationContext(),R.color.colorRed);
 
         layoutBernie = (RelativeLayout)findViewById(R.id.layoutBernie);
         layoutHilary = (RelativeLayout)findViewById(R.id.layoutHilary);
@@ -231,5 +249,10 @@ public class Ballot extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void saveUserVote(User user, String chosenRepublican, String chosenDemocrat){
+        user.setChosenRepublican(chosenRepublican);
+        user.setChosenDemocrat(chosenDemocrat);
+
     }
 }
