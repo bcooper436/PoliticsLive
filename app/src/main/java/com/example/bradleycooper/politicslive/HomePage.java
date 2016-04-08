@@ -160,7 +160,6 @@ public class HomePage extends Fragment {
             for (Map.Entry<String, Integer> entry : democrats.entrySet()) {
                 demCandidates.add(entry.getKey());
                 demVotes.add(new BarEntry((float) entry.getValue() / (float) totalDemocratVotes, i));
-                System.out.println("***** " +entry.getKey() +" -- " +entry.getValue());
                 i++;
             }
         }
@@ -172,7 +171,6 @@ public class HomePage extends Fragment {
             for (Map.Entry<String, Integer> entry : republicans.entrySet()) {
                 repCandidates.add(entry.getKey());
                 repVotes.add(new BarEntry((float) entry.getValue() / (float) totalRepublicanVotes, i));
-                System.out.println("***** " +entry.getKey() +" -- " +entry.getValue());
                 i++;
             }
         }
