@@ -8,6 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +39,8 @@ public class HomePage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Context thisContext;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,6 +75,7 @@ public class HomePage extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,12 +99,24 @@ public class HomePage extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        thisContext = context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        createGraphs();
     }
 
     /**
@@ -105,4 +133,59 @@ public class HomePage extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    private void createGraphs() {
+        BarChart demBarChart = (BarChart) getView().findViewById(R.id.chartDem);
+        BarChart repBarChart = (BarChart) getView().findViewById(R.id.chartRep);
+
+        CandidateDataSource ds = new CandidateDataSource(thisContext);
+        int totalDemocratVotes;
+        int totalRepublicanVotes;
+
+        ds.open();
+        Map<String, Integer> democrats = ds.getDemocratVotes();
+        Map<String, Integer> republicans = ds.getRepublicanVotes();
+        ds.close();
+
+        totalDemocratVotes = democrats.get("TOTAL");
+        democrats.remove("TOTAL");
+        totalRepublicanVotes = republicans.get("TOTAL");
+        republicans.remove("TOTAL");
+
+        ArrayList<String> demCandidates = new ArrayList<>();
+        ArrayList<BarEntry> demVotes = new ArrayList<>();
+        if (totalDemocratVotes > 0) {
+            int i = 0;
+            for (Map.Entry<String, Integer> entry : democrats.entrySet()) {
+                demCandidates.add(entry.getKey());
+                demVotes.add(new BarEntry((float) entry.getValue() / (float) totalDemocratVotes, i));
+                System.out.println("***** " +entry.getKey() +" -- " +entry.getValue());
+                i++;
+            }
+        }
+
+        ArrayList<String> repCandidates = new ArrayList<>();
+        ArrayList<BarEntry> repVotes = new ArrayList<>();
+        if (totalRepublicanVotes > 0) {
+            int i = 0;
+            for (Map.Entry<String, Integer> entry : republicans.entrySet()) {
+                repCandidates.add(entry.getKey());
+                repVotes.add(new BarEntry((float) entry.getValue() / (float) totalRepublicanVotes, i));
+                System.out.println("***** " +entry.getKey() +" -- " +entry.getValue());
+                i++;
+            }
+        }
+
+        BarDataSet repDataSet = new BarDataSet(repVotes, "Percent of Votes");
+        BarData repData = new BarData(repCandidates, repDataSet);
+        repBarChart.setData(repData);
+
+        BarDataSet demDataSet = new BarDataSet(demVotes, "Percent of Votes");
+        BarData demData = new BarData(demCandidates, demDataSet);
+        demBarChart.setData(demData);
+
+    }
+
+
 }

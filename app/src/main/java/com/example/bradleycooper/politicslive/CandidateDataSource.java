@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Bradley Cooper on 4/4/2016.
@@ -195,5 +197,27 @@ public class CandidateDataSource {
 
         }
         return didDelete;
+    }
+
+    public Map<String, Integer> getRepublicanVotes() {
+        HashMap<String, Integer> counts = new HashMap<>();
+        int total = 0;
+        for(Candidate c : getSpecificParty("GOP")) {
+            counts.put(c.getCandidateName(), c.getNumberOfVotes());
+            total += c.getNumberOfVotes();
+        }
+        counts.put("TOTAL", total);
+        return counts;
+    }
+
+    public Map<String, Integer> getDemocratVotes() {
+        Map<String, Integer> counts = new HashMap<>();
+        int total = 0;
+        for(Candidate c : getSpecificParty("DNC")) {
+            counts.put(c.getCandidateName(), c.getNumberOfVotes());
+            total += c.getNumberOfVotes();
+        }
+        counts.put("TOTAL", total);
+        return counts;
     }
 }
