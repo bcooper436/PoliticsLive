@@ -200,7 +200,7 @@ public class CandidateDataSource {
     }
 
     public Map<String, Integer> getRepublicanVotes() {
-        HashMap<String, Integer> counts = new HashMap<>();
+        Map<String, Integer> counts = new HashMap<>();
         int total = 0;
         for(Candidate c : getSpecificParty("GOP")) {
             counts.put(c.getCandidateName(), c.getNumberOfVotes());
