@@ -140,17 +140,15 @@ public class HomePage extends Fragment {
         BarChart repBarChart = (BarChart) getView().findViewById(R.id.chartRep);
 
         CandidateDataSource ds = new CandidateDataSource(thisContext);
-        int totalDemocratVotes;
-        int totalRepublicanVotes;
 
         ds.open();
         Map<String, Integer> democrats = ds.getDemocratVotes();
         Map<String, Integer> republicans = ds.getRepublicanVotes();
         ds.close();
 
-        totalDemocratVotes = democrats.get("TOTAL");
+        int totalDemocratVotes = democrats.get("TOTAL");
         democrats.remove("TOTAL");
-        totalRepublicanVotes = republicans.get("TOTAL");
+        int totalRepublicanVotes = republicans.get("TOTAL");
         republicans.remove("TOTAL");
 
         ArrayList<String> demCandidates = new ArrayList<>();
@@ -159,7 +157,7 @@ public class HomePage extends Fragment {
             int i = 0;
             for (Map.Entry<String, Integer> entry : democrats.entrySet()) {
                 demCandidates.add(entry.getKey());
-                demVotes.add(new BarEntry((float) entry.getValue() / (float) totalDemocratVotes, i));
+                demVotes.add(new BarEntry(((float) entry.getValue() / (float) totalDemocratVotes) * 100f, i));
                 i++;
             }
         }
@@ -170,7 +168,7 @@ public class HomePage extends Fragment {
             int i = 0;
             for (Map.Entry<String, Integer> entry : republicans.entrySet()) {
                 repCandidates.add(entry.getKey());
-                repVotes.add(new BarEntry((float) entry.getValue() / (float) totalRepublicanVotes, i));
+                repVotes.add(new BarEntry(((float) entry.getValue() / (float) totalRepublicanVotes) * 100f, i));
                 i++;
             }
         }
