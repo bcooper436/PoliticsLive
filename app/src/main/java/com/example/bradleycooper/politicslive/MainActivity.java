@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity
         AllCandidates.OnFragmentInteractionListener {
 
     private CharSequence mTitle;
+    public final static String IS_LOGIN_USER = "pref_is_login";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userName = preferences.getString("Username", "");
+        Menu menu = navigationView.getMenu();
+        MenuItem nav_camara = menu.findItem(R.id.logout);
+        if(userName.equalsIgnoreCase("") || userName == null) {
+            nav_camara.setTitle("Login");
+        }
+
+
         Fragment fragment;
         FragmentManager fragmentManager = getFragmentManager();
         fragment = new HomePage();
@@ -72,8 +83,8 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, fragment)
                 .commit();
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String userName = preferences.getString("Username", "");
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        String userName = preferences.getString("Username", "");
         String skip = preferences.getString("Skip", "");
         if(userName.equalsIgnoreCase("") || userName==null)
         {
@@ -223,32 +234,39 @@ public class MainActivity extends AppCompatActivity
             mTitle = "All Candidates" +
                     "";
         } else if (id == R.id.logout) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-            builder1.setMessage("Are you sure you want to logout?");
-            builder1.setCancelable(true);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String userName = preferences.getString("Username", "");
+            if(userName.equalsIgnoreCase("") || userName == null) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }else{
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                builder1.setMessage("Are you sure you want to logout?");
+                builder1.setCancelable(true);
 
-            builder1.setNegativeButton(
-                    "Cancel",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                builder1.setNegativeButton(
+                        "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
 
-            builder1.setPositiveButton(
-                    "Logout",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            clearUserPreferences();
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }
-                    });
+                builder1.setPositiveButton(
+                        "Logout",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                clearUserPreferences();
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
 
         } else if (id == R.id.nav_DNC) {
             fragment = new DemocratsList();
@@ -323,6 +341,19 @@ public class MainActivity extends AppCompatActivity
         editor.putString("Password","");
         editor.apply();
     }
+
+    public void setUserPreferences(boolean isLogin){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(IS_LOGIN_USER, isLogin);
+        editor.commit();
+    }
+
+    public boolean getIsLogin(){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        return pref.getBoolean(IS_LOGIN_USER, false);
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 

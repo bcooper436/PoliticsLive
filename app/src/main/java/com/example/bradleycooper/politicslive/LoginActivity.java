@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Username",username);
         editor.putString("Password", password);
+        editor.putBoolean(MainActivity.IS_LOGIN_USER,true);
         editor.apply();
     }
 
