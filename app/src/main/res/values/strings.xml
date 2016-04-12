@@ -93,4 +93,17 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_app_settings">Settings</string>
+
+    <!-- SendingEmailActivity -->
+
+    <string name="title_activity_app_send_email">Send Email</string>
+
+    <string-array name="email_arrays">
+        <item>bcooper436@gmail.com</item>
+        <item>parkkeonhee@gmail.com</item>
+        <item>bailiquan@gmail.com</item>
+        <item>jhinze@student.gsu.edu</item>
+        <item>dbinnion@gmail.com</item>
+    </string-array>
+
 </resources>

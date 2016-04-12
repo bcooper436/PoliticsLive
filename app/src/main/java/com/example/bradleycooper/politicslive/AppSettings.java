@@ -1,5 +1,6 @@
 package com.example.bradleycooper.politicslive;
 
+import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,9 +19,13 @@ import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 public class AppSettings extends AppCompatActivity {
     UserDataSource userDataSource;
+
+    private Button btnSendEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,16 @@ public class AppSettings extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        btnSendEmail = (Button)findViewById(R.id.buttonEmail);
+        btnSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AppSettings.this, SendingEmailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         Button buttonClearUserTable = (Button)findViewById(R.id.buttonClearUserTable);
         buttonClearUserTable.setOnClickListener(new View.OnClickListener() {

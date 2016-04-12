@@ -74,6 +74,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bradleycooper.politicslive.MainActivity" />
         </activity>
+        <activity android:name=".SendingEmailActivity"
+            android:label="@string/title_activity_app_send_email"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
