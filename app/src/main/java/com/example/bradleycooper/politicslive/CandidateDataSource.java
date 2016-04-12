@@ -198,7 +198,13 @@ public class CandidateDataSource {
         }
         return didDelete;
     }
-
+    public int getNumberOfVotesByParty(String partyString){
+        int totalVotes = 0;
+        for(Candidate c : getSpecificParty(partyString)){
+            totalVotes += c.getNumberOfVotes();
+        }
+        return totalVotes;
+    }
     public Map<String, Integer> getRepublicanVotes() {
         Map<String, Integer> counts = new HashMap<>();
         int total = 0;
@@ -219,5 +225,67 @@ public class CandidateDataSource {
         }
         counts.put("TOTAL", total);
         return counts;
+    }
+
+    public String getPercentageOfVote(String candidateName){
+        Candidate currentCandidate;
+        String percentageOfVotes;
+        StringBuilder sb;
+        int totalVotesFromParty, votesPercentage;
+
+        currentCandidate = getCandidateByName(candidateName);
+        totalVotesFromParty = getNumberOfVotesByParty(currentCandidate.getParty());
+        votesPercentage = (100 * currentCandidate.getNumberOfVotes()) / totalVotesFromParty;
+
+        sb = new StringBuilder();
+        sb.append(votesPercentage);
+        sb.append("%");
+        return sb.toString();
+    }
+    public ArrayList<Candidate> getCandidatesInOrderOfVotes(String partyString){
+        ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+        try {
+            String query = "SELECT * FROM candidate WHERE party = '" + partyString + "' ORDER BY numberofvotes DESC";
+            Cursor cursor = database.rawQuery(query, null);
+
+            Candidate newCandidate;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newCandidate = new Candidate();
+                newCandidate.setCandidateID(cursor.getInt(0));
+                newCandidate.setCandidateName(cursor.getString(1));
+                newCandidate.setCandidateDescription(cursor.getString(2));
+                newCandidate.setNumberOfVotes(cursor.getInt(3));
+                newCandidate.setSquarePicture(cursor.getBlob(4));
+                newCandidate.setWidePicture(cursor.getBlob(5));
+                newCandidate.setParty(cursor.getString(6));
+                candidates.add(newCandidate);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            candidates = new ArrayList<Candidate>();
+        }
+        return candidates;
+    }
+    public int getCandidateRanking(String candidateName){
+        int currentRanking = 0;
+        String candidateParty = getCandidateByName(candidateName).getParty();
+        ArrayList<Candidate> arrayList = getCandidatesInOrderOfVotes(candidateParty);
+        int i = 1;
+        for(Candidate c : arrayList){
+            if(c.getCandidateName().equalsIgnoreCase(candidateName)){
+                currentRanking = i;
+            }
+            i++;
+        }
+        return currentRanking;
+    }
+    public void clearAllVotes(){
+        ContentValues cv = new ContentValues();
+        cv.put("numberofvotes", 0);
+        String where = "UPDATE candidate SET numberofvotes = 0";
+        database.execSQL(where);
     }
 }

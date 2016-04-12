@@ -18,14 +18,14 @@ import java.util.ArrayList;
 /**
  * Created by Bradley Cooper on 4/4/2016.
  */
-public class CandidateAdapter extends ArrayAdapter<Candidate> {
+public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
     private ArrayList<Candidate> items;
     private Context adapterContext;
     private int democratColor, republicanColor;
     private int totalDemocratVotes, totalRepublicanVotes, candidateVotesDNC, candidateVotesGOP, votePercentage, totalVotesForParty;
     private Bitmap bitmapRepublican, bitmapDemocrat;
-    public CandidateAdapter(Context context, ArrayList<Candidate> items) {
-        super(context, R.layout.list_item_democrat, items);
+    public CandidateAdapterRanking(Context context, ArrayList<Candidate> items) {
+        super(context, R.layout.list_item_democrat_ranked, items);
         adapterContext = context;
         this.items = items;
     }
@@ -36,8 +36,6 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
         democratColor = ContextCompat.getColor(adapterContext, R.color.colorPrimary);
         republicanColor = ContextCompat.getColor(adapterContext, R.color.colorRed);
 
-        bitmapDemocrat = BitmapFactory.decodeResource(adapterContext.getResources(),R.drawable.ic_action_dnc_blue);
-        bitmapRepublican = BitmapFactory.decodeResource(adapterContext.getResources(),R.drawable.ic_action_gop_red);
 
         View v = convertView;
         try {
@@ -45,28 +43,42 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
 
             if(v == null){
                 LayoutInflater vi = (LayoutInflater) adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.list_item_democrat, null);
+                v = vi.inflate(R.layout.list_item_democrat_ranked, null);
             }
 
             TextView candidateName = (TextView)v.findViewById(R.id.textCandidateName);
             TextView voteCount = (TextView)v.findViewById(R.id.textViewVotePercent);
+            TextView ranking = (TextView)v.findViewById(R.id.textViewCandidatePlace);
             ImageView imageView = (ImageView)v.findViewById(R.id.imageViewCandidate);
-            ImageView imageViewParty = (ImageView)v.findViewById(R.id.imageViewParty);
 
             if(candidate.getParty().equalsIgnoreCase("GOP")) {
                 voteCount.setTextColor(republicanColor);
-                imageViewParty.setImageBitmap(bitmapRepublican);
             }
             else{
                 voteCount.setTextColor(democratColor);
-                imageViewParty.setImageBitmap(bitmapDemocrat);
             }
 
             if(candidate.getNumberOfVotes() > 0) {
                 CandidateDataSource candidateDataSource = new CandidateDataSource(getContext());
                 candidateDataSource.open();
                 voteCount.setText(candidateDataSource.getPercentageOfVote(candidate.getCandidateName()));
-                //ranking.setText(Integer.toString(candidateDataSource.getCandidateRanking(candidate.getCandidateName())));
+                String rankingString = (Integer.toString(candidateDataSource.getCandidateRanking(candidate.getCandidateName())));
+                StringBuilder sb = new StringBuilder();
+                sb.append(rankingString);
+                if(rankingString.equalsIgnoreCase("1")) {
+                    sb.append("st");
+                }
+                else if(rankingString.equalsIgnoreCase("2")){
+                    sb.append("nd");
+                }
+                else if(rankingString.equalsIgnoreCase("3")){
+                    sb.append("rd");
+                }
+                else {
+                    sb.append("th");
+                }
+                sb.append(":");
+                ranking.setText(sb.toString());
                 candidateDataSource.close();
             }
             candidateName.setText(candidate.getCandidateName());

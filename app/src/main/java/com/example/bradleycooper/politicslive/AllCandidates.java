@@ -88,8 +88,8 @@ public class AllCandidates extends Fragment {
 
         CandidateDataSource dataSource = new CandidateDataSource(getActivity());
         dataSource.open();
-        arrayListGOP = dataSource.getSpecificParty("GOP");
-        arrayListDNC = dataSource.getSpecificParty("DNC");
+        arrayListGOP = dataSource.getCandidatesInOrderOfVotes("GOP");
+        arrayListDNC = dataSource.getCandidatesInOrderOfVotes("DNC");
         dataSource.close();
 
         adapterGOP = new CandidateAdapter(getActivity(),arrayListGOP);
@@ -108,7 +108,7 @@ public class AllCandidates extends Fragment {
             }
         });
         listViewDNC.setAdapter(adapterDNC);
-        listViewGOP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewDNC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
                 Candidate selectedCandidate = arrayListDNC.get(position);

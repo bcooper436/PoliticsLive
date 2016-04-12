@@ -1,16 +1,21 @@
 package com.example.bradleycooper.politicslive;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,9 +23,9 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RepublicansList.OnFragmentInteractionListener} interface
+ * {@link DemocratsList.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link RepublicansList#newInstance} factory method to
+ * Use the {@link DemocratsList#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class RepublicansList extends Fragment {
@@ -33,10 +38,15 @@ public class RepublicansList extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Activity thisActivity;
+    private int republicanColor;
+
     Context thisContext;
-    ArrayList<Candidate> arrayList;
-    CandidateAdapter adapter;
+    ArrayList<Candidate> arrayListCandidates;
+    CandidateAdapterRanking adapter;
+
+    ArrayList<User> arrayListUsers;
+
+
     private OnFragmentInteractionListener mListener;
 
     public RepublicansList() {
@@ -52,8 +62,8 @@ public class RepublicansList extends Fragment {
      * @return A new instance of fragment DemocratsList.
      */
     // TODO: Rename and change types and number of parameters
-    public static DemocratsList newInstance(String param1, String param2) {
-        DemocratsList fragment = new DemocratsList();
+    public static RepublicansList newInstance(String param1, String param2) {
+        RepublicansList fragment = new RepublicansList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,24 +97,225 @@ public class RepublicansList extends Fragment {
 
         CandidateDataSource dataSource = new CandidateDataSource(thisContext);
         dataSource.open();
-        arrayList = dataSource.getSpecificParty("GOP");
+        arrayListCandidates = dataSource.getSpecificParty("GOP");
         dataSource.close();
 
-        adapter = new CandidateAdapter(thisContext,arrayList);
-        ListView listViewGOP = (ListView)getView().findViewById(R.id.listViewGOP);
+        adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);
+        ListView listViewGOP = (ListView)getView().findViewById(R.id.listViewDNC);
         listViewGOP.setAdapter(adapter);
+
         listViewGOP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayList.get(position);
+                Candidate selectedCandidate = arrayListCandidates.get(position);
                 Intent intent = new Intent(thisContext, CandidateProfile.class);
                 intent.putExtra("candidateId", selectedCandidate.getCandidateID());
                 startActivity(intent);
             }
         });
+        listViewGOP.setFocusable(false);
+
+
+
+        UserDataSource userDataSource = new UserDataSource(thisContext);
+        userDataSource.open();
+        arrayListUsers = userDataSource.getUsersByParty("Republican");
+        republicanColor = ContextCompat.getColor(thisContext, R.color.colorRed);
+
+        TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
+        TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
+        TextView textViewRegisteredPartyMembers = (TextView) getView().findViewById(R.id.textViewRegisteredPartyMembers);
+        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewRegisteredPartyMembersLabel);
+        TextView textViewAverageAge = (TextView) getView().findViewById(R.id.textViewAverageAge);
+        TextView textViewAverageAgeLabel = (TextView) getView().findViewById(R.id.textViewAverageAgeLabel);
+        TextView textViewMalePercentage = (TextView) getView().findViewById(R.id.textViewMalePercentage);
+        TextView textViewFemalePercentage = (TextView) getView().findViewById(R.id.textViewFemalePercentage);
+
+        if(arrayListUsers.size() > 0) {
+            textViewRegisteredPartyMembers.setText(Integer.toString(userDataSource.getPartyMembers("Republican")));
+            textViewAverageAge.setText(Integer.toString(userDataSource.getAverageVoterAge("Republican")));
+            textViewMalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Republican", "Male")));
+            textViewFemalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Republican", "Female")));
+        }
+
+        textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
+        textViewTotalVotes.setBackgroundResource(R.drawable.circle_gop);
+        textViewTotalVotesLabel.setText("Total votes for Republican Candidates = ");
+        textViewRegisteredPartyMembers.setBackgroundResource(R.drawable.circle_gop);
+        textViewRegisteredPartyMembersLabel.setText("Registered Republican Voters = ");
+        textViewAverageAge.setBackgroundResource(R.drawable.circle_gop);
+        textViewAverageAgeLabel.setText("Average Age of Republican Voter = ");
+        textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
+        textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
+        userDataSource.close();
+
+        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
+        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+
+        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
+        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+
+        final RelativeLayout relativeLayoutBrowseUsers = (RelativeLayout)getView().findViewById(R.id.relativeLayoutBrowseUsers);
+        relativeLayoutBrowseUsers.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutBrowseUsers.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
+                        AlertDialog alertDialog2 = new AlertDialog.Builder(thisContext).create();
+                        alertDialog2.setTitle("Success");
+                        alertDialog2.setMessage("TODO = goto Users List Page");
+                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog2.show();
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+        final RelativeLayout relativeLayoutRegisteredParty = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredParty);
+        final RelativeLayout relativeLayoutRegisteredPartyExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredPartyExtended);
+        final RelativeLayout relativeLayoutTotalVotes = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotes);
+        final RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
+        final RelativeLayout relativeLayoutAverageAge = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAge);
+        final RelativeLayout relativeLayoutAverageAgeExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAgeExtended);
+        final RelativeLayout relativeLayoutGender = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGender);
+        final RelativeLayout relativeLayoutGenderExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGenderExtended);
+
+        relativeLayoutRegisteredParty.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutRegisteredPartyExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutRegisteredPartyExtended");
+                        }
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutTotalVotes.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutTotalVotes.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutTotalVotesExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutTotalVotesExtended");
+                        }
+                        relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutAverageAge.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutAverageAge.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutAverageAgeExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutAverageAgeExtended");
+                        }
+                        relativeLayoutAverageAge.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutAverageAge.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutGender.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutGender.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutGenderExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutGenderExtended");
+                        }
+                        relativeLayoutGender.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutGender.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
+    public void makeAllExtendedInvisible(String relativeLayoutName){
+        RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
+        relativeLayoutTotalVotesExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutAverageAgeExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAgeExtended);
+        relativeLayoutAverageAgeExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutGenderExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGenderExtended);
+        relativeLayoutGenderExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutRegisteredPartyExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredPartyExtended);
+        relativeLayoutRegisteredPartyExtended.setVisibility(View.GONE);
 
+        switch(relativeLayoutName){
+            case "relativeLayoutTotalVotesExtended":
+                relativeLayoutTotalVotesExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutAverageAgeExtended":
+                relativeLayoutAverageAgeExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutGenderExtended":
+                relativeLayoutGenderExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutRegisteredPartyExtended":
+                relativeLayoutRegisteredPartyExtended.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -122,6 +333,27 @@ public class RepublicansList extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
         thisContext = context;
+    }
+    public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
+        int totalVotes = 0;
+        for(Candidate c : arrayListCandidates) {
+            totalVotes += c.getNumberOfVotes();
+        }
+        return totalVotes;
+    }
+    public int getNumberOfRegisteredRepublicans(ArrayList<User> arrayListUsers) {
+        int registeredRepublicans = 0;
+        for(User u : arrayListUsers) {
+            registeredRepublicans++;
+        }
+        return registeredRepublicans;
+    }
+    public int getAverageAgeOfVoter(ArrayList<User> arrayListUsers) {
+        int averageAgeOfVoter = 0;
+        for(User u : arrayListUsers) {
+            averageAgeOfVoter += u.getAge();
+        }
+        return averageAgeOfVoter/arrayListUsers.size();
     }
 
     @Override

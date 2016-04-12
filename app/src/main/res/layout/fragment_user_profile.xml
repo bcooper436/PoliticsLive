@@ -7,48 +7,53 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/relativeLayout"
-        android:background="@color/colorBlueLight"
-        android:elevation="10dp">
+        android:layout_marginTop="55dp">
 
         <ImageView
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:id="@+id/imageViewProfilePicture"
-            android:layout_above="@+id/textViewDisplayName"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/contact_blue"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textViewDisplayName"
-            android:textColor="@color/colorPrimary"
-            android:layout_above="@+id/textViewUserName"
-            android:layout_centerHorizontal="true" />
+            android:textColor="@color/colorBlack"
+            android:text="Display Name"
+            android:layout_alignBottom="@+id/imageViewPartyIcon"
+            android:layout_toRightOf="@+id/imageViewProfilePicture"
+            android:layout_toEndOf="@+id/imageViewProfilePicture" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/imageViewPartyIcon"
-            android:layout_alignTop="@+id/imageViewProfilePicture"
+            android:src="@drawable/ic_action_dnc_color"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/textViewUserName"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorBlack"
+            android:text="username"
+            android:layout_below="@+id/textViewDisplayName"
+            android:layout_toRightOf="@+id/imageViewProfilePicture"
+            android:layout_toEndOf="@+id/imageViewProfilePicture" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -63,103 +68,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Your Current Vote(s):"
-            android:id="@+id/textView18"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change"
-            android:id="@+id/buttonChangeVote"
-            android:layout_alignTop="@+id/relativeLayout2"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <RelativeLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:contextClickable="false"
-            android:elevation="3dp"
-            android:background="#ffffff"
-            android:id="@+id/relativeLayout2"
-            android:layout_below="@+id/textView18"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewChosenDemocrat"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/bernie_square" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bernie Sanders"
-                android:id="@+id/textViewChosenDemocrat"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorBlack" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:contextClickable="false"
-            android:elevation="3dp"
-            android:background="#ffffff"
-            android:id="@+id/relativeLayout3"
-            android:layout_below="@+id/buttonChangeVote"
-            android:layout_alignLeft="@+id/relativeLayout2"
-            android:layout_alignStart="@+id/relativeLayout2"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewChosenRepublican"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/bernie_square" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bernie Sanders"
-                android:id="@+id/textViewChosenRepublican"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorBlack" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Age:"
             android:id="@+id/textView21"
-            android:layout_below="@+id/button"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="0dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -216,34 +129,110 @@
             android:layout_toEndOf="@+id/textView25"
             android:layout_marginLeft="15dp" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change"
-            android:id="@+id/buttonChangeParty"
-            android:layout_alignBottom="@+id/textViewParty"
-            android:layout_alignLeft="@+id/buttonChangeVote"
-            android:layout_alignStart="@+id/buttonChangeVote"
-            android:layout_marginBottom="-10dp" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Current Votes:"
+            android:id="@+id/textView18"
+            android:layout_below="@+id/textViewParty"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log Off"
-            android:id="@+id/buttonLogOff"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:contextClickable="false"
+            android:elevation="3dp"
+            android:background="#ffffff"
+            android:id="@+id/relativeLayout3"
+            android:layout_below="@+id/textView18"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change"
-            android:id="@+id/button"
-            android:layout_alignTop="@+id/relativeLayout3"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewChosenDemocrat"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/bernie_square" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Bernie Sanders"
+                android:id="@+id/textViewChosenDemocrat"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:contextClickable="false"
+            android:elevation="3dp"
+            android:background="#ffffff"
+            android:id="@+id/relativeLayout6"
+            android:layout_below="@+id/relativeLayout3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewChosenRepublican"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/bernie_square" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Bernie Sanders"
+                android:id="@+id/textViewChosenRepublican"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="2"
+        android:id="@+id/linearLayout3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Change Info"
+            android:id="@+id/buttonChangeUserSettings"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Logout"
+            android:id="@+id/buttonLogout"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
 
 </RelativeLayout>

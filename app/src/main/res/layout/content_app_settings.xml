@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="App Version: 1.0.0.0."
-        android:id="@+id/textView14"
+        android:id="@+id/textViewAppVersion"
         android:textColor="@color/colorBlack"
         android:layout_above="@+id/buttonEmail"
         android:layout_centerHorizontal="true" />
@@ -76,5 +76,39 @@
         android:layout_alignBottom="@+id/switch1"
         android:layout_toRightOf="@+id/switch1"
         android:layout_toEndOf="@+id/switch1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete All Users"
+        android:id="@+id/buttonClearUserTable"
+        android:layout_below="@+id/textViewDeveloperOptions"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Developer Options:"
+        android:id="@+id/textViewDeveloperOptions"
+        android:layout_below="@+id/switch1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear All Votes"
+        android:id="@+id/buttonClearAllVotes"
+        android:layout_below="@+id/buttonClearUserTable"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

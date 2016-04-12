@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="7dp"
+            android:contextClickable="false"
+            android:orientation="vertical"
+            android:background="@color/colorDemographicBackground">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/relativeLayoutRegisteredParty"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Registered Democrats = "
+                    android:id="@+id/textViewRegisteredPartyMembersLabel"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-"
+                    android:id="@+id/textViewRegisteredPartyMembers"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/circle_dnc"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Users"
+                    android:id="@+id/textView15"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembers"
+                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembers"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:id="@+id/relativeLayoutRegisteredPartyExtended"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="TODO: Insert Graph about Total Votes"
+                    android:id="@+id/textView30"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="1dp"
+                android:id="@+id/relativeLayoutTotalVotes"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Total Votes for the Democratic Party = "
+                    android:id="@+id/textViewTotalVotesLabel"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-"
+                    android:id="@+id/textViewTotalVotes"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/circle_dnc"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewTotalVotesLabel"
+                    android:layout_toEndOf="@+id/textViewTotalVotesLabel"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Votes"
+                    android:id="@+id/textView19"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewTotalVotes"
+                    android:layout_toEndOf="@+id/textViewTotalVotes"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:id="@+id/relativeLayoutTotalVotesExtended"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="TODO: Insert Graph about Total Votes"
+                    android:id="@+id/textView31"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="1dp"
+                android:id="@+id/relativeLayoutAverageAge"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Average Age of Democratic Voter ="
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/textViewAverageAgeLabel" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/circle_dnc"
+                    android:textColor="@color/colorWhite"
+                    android:id="@+id/textViewAverageAge"
+                    android:layout_alignParentBottom="false"
+                    android:layout_toRightOf="@+id/textViewAverageAgeLabel"
+                    android:layout_toEndOf="@+id/textViewAverageAgeLabel"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:elevation="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Years old"
+                    android:id="@+id/textView20"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewAverageAge"
+                    android:layout_toEndOf="@+id/textViewAverageAge"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:id="@+id/relativeLayoutAverageAgeExtended"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="TODO: Insert Graph about Voters&apos; Ages"
+                    android:id="@+id/textView33"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="1dp"
+                android:id="@+id/relativeLayoutGender"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Gender Breakdown = "
+                    android:id="@+id/textViewGenderBreakdown"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-"
+                    android:id="@+id/textViewMalePercentage"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/circle_dnc"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewGenderBreakdown"
+                    android:layout_toEndOf="@+id/textViewGenderBreakdown"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="10dp" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-"
+                    android:id="@+id/textViewFemalePercentage"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/circle_dnc"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewMalePercentageLabel"
+                    android:layout_toEndOf="@+id/textViewMalePercentageLabel"
+                    android:layout_marginLeft="15dp"
+                    android:elevation="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="% Male"
+                    android:id="@+id/textViewMalePercentageLabel"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textViewMalePercentage"
+                    android:layout_toEndOf="@+id/textViewMalePercentage"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="% Female"
+                    android:id="@+id/textViewFemalePercentageLabel"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/textViewMalePercentageLabel"
+                    android:layout_toRightOf="@+id/textViewFemalePercentage"
+                    android:layout_toEndOf="@+id/textViewFemalePercentage"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:id="@+id/relativeLayoutGenderExtended"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="TODO: Insert Graph about Genders"
+                    android:id="@+id/textView34"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

@@ -22,14 +22,18 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Clear Selections"
-            android:id="@+id/button_clear_selections" />
+            android:id="@+id/button_clear_selections"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Submit"
-            android:id="@+id/button_submit" />
+            android:id="@+id/button_submit"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
     <ScrollView
@@ -53,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Democratic Nominee:"
+                android:text="Democratic Nominee for President:"
                 android:id="@+id/textView2"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
@@ -88,16 +92,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/candidate_bernie"
                     android:id="@+id/checkBoxBernie"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:checked="false"
                     android:textSize="15sp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toStartOf="@+id/imageView2"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true" />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -128,23 +130,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/candidate_hilary"
                     android:id="@+id/checkBoxHilary"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:checked="false"
                     android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toStartOf="@+id/imageView3"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Republican Nominee:"
+                android:text="Republican Nominee for President:"
                 android:id="@+id/textView5"
                 android:layout_alignLeft="@+id/textView2"
                 android:layout_alignStart="@+id/textView2"
@@ -180,16 +180,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/candidate_trump"
                     android:id="@+id/checkBoxTrump"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:checked="false"
                     android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toStartOf="@+id/imageView4"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true" />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -220,16 +218,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/candidate_cruz"
                     android:id="@+id/checkBoxCruz"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:checked="false"
                     android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toStartOf="@+id/imageView5"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -252,16 +248,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/candidate_kasich"
                     android:id="@+id/checkBoxKasich"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:checked="false"
                     android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toStartOf="@+id/imageView6"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <ImageView
                     android:layout_width="50dp"

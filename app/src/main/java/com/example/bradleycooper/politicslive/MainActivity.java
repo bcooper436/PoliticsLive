@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity
             initializeDB();
         }
 
-
     }
     private static boolean doesDataBaseExist(Context context, String dbName){
         File dbFile = context.getDatabasePath(dbName);

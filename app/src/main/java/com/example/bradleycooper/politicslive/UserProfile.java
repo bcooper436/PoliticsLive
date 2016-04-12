@@ -51,6 +51,7 @@ public class UserProfile extends Fragment {
     UserAdapter adapter;
     UserDataSource userDataSource;
     User currentUser;
+    Candidate candidateDemocrat, candidateRepublican;
     private OnFragmentInteractionListener mListener;
 
     public UserProfile() {
@@ -110,9 +111,7 @@ public class UserProfile extends Fragment {
         currentUser = userDataSource.getSpecificUserFromLoginInfo(userName,"zun3ukit");
         userDataSource.close();
 
-        Button buttonLogOff = (Button)getView().findViewById(R.id.buttonLogOff);
-        Button buttonChangeVote = (Button)getView().findViewById(R.id.buttonChangeVote);
-        Button buttonChangeParty = (Button)getView().findViewById(R.id.buttonChangeParty);
+        Button buttonLogOff = (Button)getView().findViewById(R.id.buttonLogout);
 
         buttonLogOff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,22 +143,20 @@ public class UserProfile extends Fragment {
                 alert11.show();
             }
         });
-        buttonChangeVote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Ballot.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
 
         initUser(currentUser);
     }
     public void initUser(User currentUser) {
+        candidateDemocrat = null;
+        candidateRepublican = null;
         CandidateDataSource ds = new CandidateDataSource(getActivity());
         ds.open();
-        Candidate candidateDemocrat = ds.getCandidateByName(currentUser.getChosenDemocrat());
-        Candidate candidateRepublican = ds.getCandidateByName(currentUser.getChosenRepublican());
+        if(currentUser.getChosenDemocrat() != null) {
+            Candidate candidateDemocrat = ds.getCandidateByName(currentUser.getChosenDemocrat());
+        }
+        if(currentUser.getChosenRepublican() != null) {
+            Candidate candidateRepublican = ds.getCandidateByName(currentUser.getChosenRepublican());
+        }
 
         TextView textViewDisplayName = (TextView)getView().findViewById(R.id.textViewDisplayName);
         TextView textViewUserName = (TextView)getView().findViewById(R.id.textViewUserName);
@@ -197,13 +194,16 @@ public class UserProfile extends Fragment {
         textChosenDemocrat.setText(currentUser.getChosenDemocrat());
         textChosenRepublican.setText(currentUser.getChosenRepublican());
 
-        byte[] byteArrayDemocrat = candidateDemocrat.getSquarePicture();
-        byte[] byteArrayRepublican = candidateRepublican.getSquarePicture();
-        Bitmap bmpDemocrat = BitmapFactory.decodeByteArray(byteArrayDemocrat, 0, byteArrayDemocrat.length);
-        Bitmap bmpRepublican = BitmapFactory.decodeByteArray(byteArrayRepublican, 0, byteArrayRepublican.length);
-
-        imageViewChosenDemocrat.setImageBitmap(bmpDemocrat);
-        imageViewChosenRepublican.setImageBitmap(bmpRepublican);
+        if(candidateDemocrat != null){
+            byte[] byteArrayDemocrat = candidateDemocrat.getSquarePicture();
+            Bitmap bmpDemocrat = BitmapFactory.decodeByteArray(byteArrayDemocrat, 0, byteArrayDemocrat.length);
+            imageViewChosenDemocrat.setImageBitmap(bmpDemocrat);
+        }
+        if(candidateRepublican != null) {
+            byte[] byteArrayRepublican = candidateRepublican.getSquarePicture();
+            Bitmap bmpRepublican = BitmapFactory.decodeByteArray(byteArrayRepublican, 0, byteArrayRepublican.length);
+            imageViewChosenRepublican.setImageBitmap(bmpRepublican);
+        }
     }
     @Override
     public void onAttach(Context context) {
