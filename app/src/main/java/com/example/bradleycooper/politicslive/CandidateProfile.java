@@ -25,6 +25,7 @@ public class CandidateProfile extends AppCompatActivity {
     private int idDNC, democratColor, democratColorLight, democratColorDark, idGOP, republicanColor, republicanColorLight, republicanColorDark;
     private String candidateParty;
     private Toolbar toolbar;
+    private ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +53,15 @@ public class CandidateProfile extends AppCompatActivity {
         idGOP = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_gop_red_light", null, null);
         idDNC = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_dnc_blue_light", null, null);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        imgView = (ImageView)findViewById(R.id.imageView);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         candidateParty = currentCandidate.getParty();
 

@@ -39,8 +39,7 @@
             android:src="@drawable/arrow_back"
             android:padding="27dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:onClick="BackNavigate" />
+            android:layout_marginTop="0dp" />
 
         <ImageView
             android:layout_width="75dp"
