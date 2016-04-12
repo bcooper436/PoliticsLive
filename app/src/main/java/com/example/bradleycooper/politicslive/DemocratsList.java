@@ -131,7 +131,6 @@ public class DemocratsList extends Fragment {
         TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewRegisteredPartyMembersLabel);
         TextView textViewAverageAge = (TextView) getView().findViewById(R.id.textViewAverageAge);
         TextView textViewAverageAgeLabel = (TextView) getView().findViewById(R.id.textViewAverageAgeLabel);
-        TextView textViewGenderLabel = (TextView) getView().findViewById(R.id.textViewGenderBreakdown);
         TextView textViewMalePercentage = (TextView) getView().findViewById(R.id.textViewMalePercentage);
         TextView textViewFemalePercentage = (TextView) getView().findViewById(R.id.textViewFemalePercentage);
 
@@ -344,13 +343,6 @@ public class DemocratsList extends Fragment {
             totalVotes += c.getNumberOfVotes();
         }
         return totalVotes;
-    }
-    public int getNumberOfRegisteredDemocrats(ArrayList<User> arrayListUsers) {
-        int registeredDemocrats = 0;
-        for(User u : arrayListUsers) {
-            registeredDemocrats++;
-        }
-        return registeredDemocrats;
     }
 
     @Override

@@ -1,16 +1,22 @@
 package com.example.bradleycooper.politicslive;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -118,6 +124,23 @@ public class AllCandidates extends Fragment {
             }
         });
 
+        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
+        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
+
+        final TextView textViewDemocraticCandidatesLabel = (TextView)getView().findViewById(R.id.textViewDemocraticCandidatesLabel);
+        final TextView textViewRepublicansCandidatesLabel = (TextView)getView().findViewById(R.id.textViewRepublicanCandidatesLabel);
+
+        textViewDemocraticCandidatesLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment;
+                FragmentManager fragmentManager = getFragmentManager();
+                fragment = new DemocratsList();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .commit();
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

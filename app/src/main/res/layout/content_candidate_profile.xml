@@ -1,137 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.bradleycooper.politicslive.CandidateProfile"
-    tools:showIn="@layout/activity_candidate_profile">
+    tools:showIn="@layout/activity_candidate_profile"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundGrey">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="275dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:elevation="30dp"
+        android:clipToPadding="false">
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/candidate_profile_header" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textViewCandidateName"
+        android:textColor="@color/colorWhite"
+        android:paddingLeft="15dp"
+        android:background="@color/colorBlack"
+        android:layout_alignBottom="@+id/imageViewWidePicture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#000000"
-        android:id="@+id/relativeLayout">
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="25dp"
+        android:text="Ted Cruz"
+        android:elevation="10dp"
+         />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageViewWide"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/hilary" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description"
+        android:id="@+id/textView4"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/colorBlack" />
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/imageView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/arrow_back"
-            android:padding="27dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Medium Text"
+        android:id="@+id/textViewDescription"
+        android:layout_marginLeft="15dp" />
 
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:id="@+id/imageView7"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@android:drawable/btn_star_big_off"
-            android:padding="27dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Statistics"
+        android:id="@+id/textView13"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/colorBlack" />
 
-    </RelativeLayout>
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/candidate_profile_circles" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textViewDescription"
-            android:layout_below="@+id/relativeLayoutPartyColor"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"
-            android:textColor="@color/colorBlack" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@color/colorBlueDark"
-            android:id="@+id/relativeLayoutPartyColor"
-            android:elevation="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Hilary Clinton"
-                android:id="@+id/textViewCandidateName"
-                android:textSize="25dp"
-                android:textColor="@color/colorWhite"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="15dp" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/imageViewPartyIcon"
-                android:src="@drawable/ic_action_dnc_blue"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:padding="5dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Number of Votes:"
-            android:id="@+id/textView4"
-            android:layout_below="@+id/textViewDescription"
-            android:layout_alignLeft="@+id/textViewDescription"
-            android:layout_alignStart="@+id/textViewDescription"
-            android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="5"
-            android:id="@+id/textView13"
-            android:layout_below="@+id/textViewDescription"
-            android:layout_toRightOf="@+id/textView4"
-            android:layout_toEndOf="@+id/textView4"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp" />
-
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

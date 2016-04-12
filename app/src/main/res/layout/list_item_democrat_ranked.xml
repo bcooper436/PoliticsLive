@@ -26,7 +26,6 @@
                 android:text="Candidate Name"
                 android:id="@+id/textCandidateName"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:paddingBottom="10dp"
                 android:layout_toRightOf="@+id/imageViewCandidate"
                 android:layout_toEndOf="@+id/imageViewCandidate"
                 android:layout_marginLeft="10dp"

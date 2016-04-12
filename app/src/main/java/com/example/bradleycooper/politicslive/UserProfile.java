@@ -170,7 +170,6 @@ public class UserProfile extends Fragment {
 
         ImageView imageViewPartyIcon = (ImageView)getView().findViewById(R.id.imageViewPartyIcon);
         ImageView imageViewProfilePicture =(ImageView)getView().findViewById(R.id.imageViewProfilePicture);
-        RelativeLayout relativeLayoutPartyColor = (RelativeLayout)getView().findViewById(R.id.relativeLayoutPartyColor);
 
         int idGOP = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_gop_red", null, null);
         int idDNC = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_dnc_blue", null, null);
