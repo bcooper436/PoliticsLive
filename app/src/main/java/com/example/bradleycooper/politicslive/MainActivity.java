@@ -365,11 +365,15 @@ public class MainActivity extends AppCompatActivity
 
         Menu menu = navigationView.getMenu();
         if(nevID == R.id.nav_DNC){
+            mTitle = "Democratic Party";
             MenuItem nav_camara = menu.findItem(R.id.nav_DNC);
             nav_camara.setChecked(true);
+            restoreActionBar();
         }else if(nevID == R.id.nav_GOP){
+            mTitle = "Republican Party" + "";
             MenuItem nav_camara = menu.findItem(R.id.nav_GOP);
             nav_camara.setChecked(true);
+            restoreActionBar();
         }
 
     }
