@@ -53,8 +53,6 @@ public class HomePage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Context thisContext;
-
     private OnFragmentInteractionListener mListener;
 
     public HomePage() {
@@ -112,7 +110,6 @@ public class HomePage extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        thisContext = context;
     }
 
     @Override
@@ -169,8 +166,7 @@ public class HomePage extends Fragment {
         TextView demChartLabel = (TextView) getView().findViewById(R.id.textViewDemChartLabel);
         TextView repChartLabel = (TextView) getView().findViewById(R.id.textViewRepChartLabel);
 
-        final CandidateDataSource ds = new CandidateDataSource(thisContext);
-
+        final CandidateDataSource ds = new CandidateDataSource(getActivity());
         ds.open();
         Map<String, Integer> democrats = ds.getDemocratVotes();
         Map<String, Integer> republicans = ds.getRepublicanVotes();
@@ -224,7 +220,7 @@ public class HomePage extends Fragment {
         repPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getActivity(), CandidateProfile.class);
                 ds.open();
                 intent.putExtra("candidateId",
                         ds.getCandidateByName(repCandidates.get(e.getXIndex())).getCandidateID());
@@ -262,7 +258,7 @@ public class HomePage extends Fragment {
         demPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getActivity(), CandidateProfile.class);
                 ds.open();
                 intent.putExtra("candidateId",
                         ds.getCandidateByName(demCandidates.get(e.getXIndex())).getCandidateID());
