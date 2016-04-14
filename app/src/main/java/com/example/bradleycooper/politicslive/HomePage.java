@@ -8,10 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
+//import com.github.mikephil.charting.charts.BarChart;
+//import com.github.mikephil.charting.data.BarData;
+//import com.github.mikephil.charting.data.BarDataSet;
+//import com.github.mikephil.charting.data.BarEntry;
+
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,12 +117,14 @@ public class HomePage extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        createGraphs();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        createGraphs();
+        //Not sure if this should be here or in activity created.
+        //createGraphs();
     }
 
     /**
@@ -136,8 +144,8 @@ public class HomePage extends Fragment {
 
 
     private void createGraphs() {
-        BarChart demBarChart = (BarChart) getView().findViewById(R.id.chartDem);
-        BarChart repBarChart = (BarChart) getView().findViewById(R.id.chartRep);
+        PieChart demPieChart = (PieChart) getView().findViewById(R.id.chartDem);
+        PieChart repPieChart = (PieChart) getView().findViewById(R.id.chartRep);
 
         CandidateDataSource ds = new CandidateDataSource(thisContext);
 
@@ -152,34 +160,42 @@ public class HomePage extends Fragment {
         republicans.remove("TOTAL");
 
         ArrayList<String> demCandidates = new ArrayList<>();
-        ArrayList<BarEntry> demVotes = new ArrayList<>();
+        ArrayList<Entry> demVotes = new ArrayList<>();
         if (totalDemocratVotes > 0) {
             int i = 0;
             for (Map.Entry<String, Integer> entry : democrats.entrySet()) {
                 demCandidates.add(entry.getKey());
-                demVotes.add(new BarEntry(((float) entry.getValue() / (float) totalDemocratVotes) * 100f, i));
+                demVotes.add(new Entry(((float) entry.getValue() / (float) totalDemocratVotes) * 100f, i));
                 i++;
             }
         }
 
         ArrayList<String> repCandidates = new ArrayList<>();
-        ArrayList<BarEntry> repVotes = new ArrayList<>();
+        ArrayList<Entry> repVotes = new ArrayList<>();
         if (totalRepublicanVotes > 0) {
             int i = 0;
             for (Map.Entry<String, Integer> entry : republicans.entrySet()) {
                 repCandidates.add(entry.getKey());
-                repVotes.add(new BarEntry(((float) entry.getValue() / (float) totalRepublicanVotes) * 100f, i));
+                repVotes.add(new Entry(((float) entry.getValue() / (float) totalRepublicanVotes) * 100f, i));
                 i++;
             }
         }
 
-        BarDataSet repDataSet = new BarDataSet(repVotes, "Percent of Votes");
-        BarData repData = new BarData(repCandidates, repDataSet);
-        repBarChart.setData(repData);
+        PieDataSet repDataSet = new PieDataSet(repVotes, "% of " +totalRepublicanVotes +" Votes");
+        repDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData repData = new PieData(repCandidates, repDataSet);
+        repPieChart.setData(repData);
+        repPieChart.setDescription("");
+        repPieChart.setCenterText("Republican\nCandidates");
+        repPieChart.animateXY(5000,5000);
 
-        BarDataSet demDataSet = new BarDataSet(demVotes, "Percent of Votes");
-        BarData demData = new BarData(demCandidates, demDataSet);
-        demBarChart.setData(demData);
+        PieDataSet demDataSet = new PieDataSet(demVotes, "% of " +totalDemocratVotes +" Votes");
+        demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        PieData demData = new PieData(demCandidates, demDataSet);
+        demPieChart.setData(demData);
+        demPieChart.setDescription("");
+        demPieChart.setCenterText("Democrat\nCandidates");
+        demPieChart.animateXY(5000,5000);
 
     }
 

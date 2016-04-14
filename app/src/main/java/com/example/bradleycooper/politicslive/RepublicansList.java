@@ -97,7 +97,7 @@ public class RepublicansList extends Fragment {
 
         CandidateDataSource dataSource = new CandidateDataSource(thisContext);
         dataSource.open();
-        arrayListCandidates = dataSource.getSpecificParty("GOP");
+        arrayListCandidates = dataSource.getCandidatesInOrderOfVotes("GOP");
         dataSource.close();
 
         adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);

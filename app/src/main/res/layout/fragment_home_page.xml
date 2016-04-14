@@ -32,20 +32,21 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-            <com.github.mikephil.charting.charts.BarChart
+            <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chartRep"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="80dp"/>
 
-            <com.github.mikephil.charting.charts.BarChart
+            <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chartDem"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_below="@+id/chartRep"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="80dp"/>
 
         </RelativeLayout>
 
