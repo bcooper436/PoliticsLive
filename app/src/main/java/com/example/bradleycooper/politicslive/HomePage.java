@@ -1,12 +1,14 @@
 package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 //import com.github.mikephil.charting.charts.BarChart;
 //import com.github.mikephil.charting.data.BarData;
@@ -18,6 +20,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -119,14 +123,23 @@ public class HomePage extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        createGraphs();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //createGraphs();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //Not sure if this should be here or in activity created.
-        //createGraphs();
+        PieChart demPieChart = (PieChart) getView().findViewById(R.id.chartDem);
+        PieChart repPieChart = (PieChart) getView().findViewById(R.id.chartRep);
+        demPieChart.highlightValue(-1,-1);
+        repPieChart.highlightValue(-1,-1);
+        //Not sure if this should be here or in activity created or on start...
+        createGraphs();
     }
 
     /**
@@ -148,8 +161,10 @@ public class HomePage extends Fragment {
     private void createGraphs() {
         PieChart demPieChart = (PieChart) getView().findViewById(R.id.chartDem);
         PieChart repPieChart = (PieChart) getView().findViewById(R.id.chartRep);
+        TextView demChartLabel = (TextView) getView().findViewById(R.id.textViewDemChartLabel);
+        TextView repChartLabel = (TextView) getView().findViewById(R.id.textViewRepChartLabel);
 
-        CandidateDataSource ds = new CandidateDataSource(thisContext);
+        final CandidateDataSource ds = new CandidateDataSource(thisContext);
 
         ds.open();
         Map<String, Integer> democrats = ds.getDemocratVotes();
@@ -161,7 +176,7 @@ public class HomePage extends Fragment {
         int totalRepublicanVotes = republicans.get("TOTAL");
         republicans.remove("TOTAL");
 
-        ArrayList<String> demCandidates = new ArrayList<>();
+        final ArrayList<String> demCandidates = new ArrayList<>();
         ArrayList<Entry> demVotes = new ArrayList<>();
         if (totalDemocratVotes > 0) {
             int i = 0;
@@ -172,7 +187,7 @@ public class HomePage extends Fragment {
             }
         }
 
-        ArrayList<String> repCandidates = new ArrayList<>();
+        final ArrayList<String> repCandidates = new ArrayList<>();
         ArrayList<Entry> repVotes = new ArrayList<>();
         if (totalRepublicanVotes > 0) {
             int i = 0;
@@ -200,7 +215,26 @@ public class HomePage extends Fragment {
         repPieChart.setHoleRadius(38f);
         repPieChart.setTransparentCircleRadius(43f);
         repPieChart.getLegend().setEnabled(false);
-        repPieChart.animateXY(5000,5000);
+
+        repPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                ds.open();
+                intent.putExtra("candidateId",
+                        ds.getCandidateByName(repCandidates.get(e.getXIndex())).getCandidateID());
+                ds.close();
+                startActivity(intent);
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        repPieChart.animateXY(2500,2500);
+        repChartLabel.setText("" +totalRepublicanVotes +" Votes Cast");
 
         PieDataSet demDataSet = new PieDataSet(demVotes, "% of " +totalDemocratVotes +" Votes");
         demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -219,7 +253,26 @@ public class HomePage extends Fragment {
         demPieChart.setHoleRadius(38f);
         demPieChart.setTransparentCircleRadius(43f);
         demPieChart.getLegend().setEnabled(false);
-        demPieChart.animateXY(5000,5000);
+
+        demPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                ds.open();
+                intent.putExtra("candidateId",
+                        ds.getCandidateByName(demCandidates.get(e.getXIndex())).getCandidateID());
+                ds.close();
+                startActivity(intent);
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        demPieChart.animateXY(2500,2500);
+        demChartLabel.setText("" +totalDemocratVotes +" Votes Cast");
 
     }
 
