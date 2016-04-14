@@ -58,13 +58,66 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:id="@+id/relativeLayoutBrowseUsers"
+                android:background="@drawable/layout_selector"
+                android:layout_below="@+id/listViewGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="35dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Voter Demographics"
+                    android:id="@+id/textView36"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#212121" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Tap to expand"
+                    android:id="@+id/textViewTapToExpand"
+                    android:layout_below="@+id/textView36"
+                    android:layout_alignLeft="@+id/textView36"
+                    android:layout_alignStart="@+id/textView36"
+                    android:textColor="#616161" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="MORE"
+                    android:id="@+id/textView22"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="25dp" />
+
+            </RelativeLayout>
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/card_layout_voter_demographics"
+                android:layout_below="@+id/relativeLayoutBrowseUsers"
+                android:id="@+id/viewDemographics" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:id="@+id/relativeLayoutRegisteredDemocrats"
                 android:background="@drawable/layout_selector"
                 android:layout_below="@+id/listViewGOP"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp" >
+                android:layout_marginTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,52 +169,6 @@
                 android:showDividers="beginning|middle|end"
                 android:layout_marginTop="5dp"></LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:id="@+id/relativeLayoutBrowseUsers"
-                android:background="@drawable/layout_selector"
-                android:layout_below="@+id/listViewGOP"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="35dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Voter Demographics"
-                    android:id="@+id/textView36"
-                    android:layout_marginLeft="15dp"
-                    android:textColor="#212121" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Tap to expand"
-                    android:id="@+id/textViewTapToExpand"
-                    android:layout_below="@+id/textView36"
-                    android:layout_alignLeft="@+id/textView36"
-                    android:layout_alignStart="@+id/textView36"
-                    android:textColor="#616161" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="MORE"
-                    android:id="@+id/textView22"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="25dp" />
-
-            </RelativeLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,13 +182,6 @@
                 android:layout_marginLeft="25dp"
                 android:visibility="gone"
                 android:layout_marginTop="10dp" />
-
-            <include
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/card_layout_voter_demographics"
-                android:layout_below="@+id/relativeLayoutBrowseUsers"
-                android:id="@+id/viewDemographics" />
 
             <View
                 android:layout_width="match_parent"
