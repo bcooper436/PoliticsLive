@@ -17,7 +17,9 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -184,17 +186,39 @@ public class HomePage extends Fragment {
         PieDataSet repDataSet = new PieDataSet(repVotes, "% of " +totalRepublicanVotes +" Votes");
         repDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData repData = new PieData(repCandidates, repDataSet);
+        repData.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return String.format("%.2f%c", value, '%');
+            }
+        });
+        repData.setValueTextSize(10f);
         repPieChart.setData(repData);
         repPieChart.setDescription("");
         repPieChart.setCenterText("Republican\nCandidates");
+        repPieChart.setCenterTextSize(16f);
+        repPieChart.setHoleRadius(38f);
+        repPieChart.setTransparentCircleRadius(43f);
+        repPieChart.getLegend().setEnabled(false);
         repPieChart.animateXY(5000,5000);
 
         PieDataSet demDataSet = new PieDataSet(demVotes, "% of " +totalDemocratVotes +" Votes");
         demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         PieData demData = new PieData(demCandidates, demDataSet);
+        demData.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return String.format("%.2f%c", value, '%');
+            }
+        });
+        demData.setValueTextSize(10f);
         demPieChart.setData(demData);
         demPieChart.setDescription("");
         demPieChart.setCenterText("Democrat\nCandidates");
+        demPieChart.setCenterTextSize(16f);
+        demPieChart.setHoleRadius(38f);
+        demPieChart.setTransparentCircleRadius(43f);
+        demPieChart.getLegend().setEnabled(false);
         demPieChart.animateXY(5000,5000);
 
     }
