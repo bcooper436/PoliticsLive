@@ -1,11 +1,13 @@
 package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,7 +24,7 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
     private ArrayList<Candidate> items;
     private Context adapterContext;
     private int democratColor, republicanColor;
-    private int totalDemocratVotes, totalRepublicanVotes, candidateVotesDNC, candidateVotesGOP, votePercentage, totalVotesForParty;
+    private int colorPrimary, colorMotionPress, colorMotionPressGOP, colorMotionPressDNC, totalDemocratVotes, totalRepublicanVotes, candidateVotesDNC, candidateVotesGOP, votePercentage, totalVotesForParty;
     private Bitmap bitmapRepublican, bitmapDemocrat;
     public CandidateAdapterRanking(Context context, ArrayList<Candidate> items) {
         super(context, R.layout.list_item_democrat_ranked, items);
@@ -34,12 +36,13 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         democratColor = ContextCompat.getColor(adapterContext, R.color.colorPrimary);
-        republicanColor = ContextCompat.getColor(adapterContext, R.color.colorRed);
-
+        republicanColor = ContextCompat.getColor(adapterContext, R.color.colorRedDark);
+        colorMotionPressDNC = ContextCompat.getColor(adapterContext, R.color.colorMotionPressDNC);
+        colorMotionPressGOP = ContextCompat.getColor(adapterContext, R.color.colorMotionPressGOP);
 
         View v = convertView;
         try {
-            Candidate candidate = items.get(position);
+            final Candidate candidate = items.get(position);
 
             if(v == null){
                 LayoutInflater vi = (LayoutInflater) adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,13 +53,40 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
             TextView voteCount = (TextView)v.findViewById(R.id.textViewVotePercent);
             TextView ranking = (TextView)v.findViewById(R.id.textViewCandidatePlace);
             ImageView imageView = (ImageView)v.findViewById(R.id.imageViewCandidate);
+            ImageView imageViewCrown = (ImageView)v.findViewById(R.id.imageViewCrown);
 
+            final RelativeLayout relativeLayoutPartyColor = (RelativeLayout)v.findViewById(R.id.relativeLayoutPartyColor);
             if(candidate.getParty().equalsIgnoreCase("GOP")) {
-                voteCount.setTextColor(republicanColor);
+                relativeLayoutPartyColor.setBackgroundColor(republicanColor);
+                colorPrimary = republicanColor;
+                colorMotionPress = colorMotionPressGOP;
             }
             else{
-                voteCount.setTextColor(democratColor);
+                relativeLayoutPartyColor.setBackgroundColor(democratColor);
+                colorPrimary = democratColor;
+                colorMotionPress = colorMotionPressDNC;
             }
+            relativeLayoutPartyColor.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            relativeLayoutPartyColor.setBackgroundColor(colorMotionPress);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            Intent intent = new Intent(getContext(), CandidateProfile.class);
+                            intent.putExtra("candidateId", candidate.getCandidateID());
+                            adapterContext.startActivity(intent);
+                            relativeLayoutPartyColor.setBackgroundColor(colorPrimary);
+                            break;
+                        case MotionEvent.ACTION_CANCEL:
+                            relativeLayoutPartyColor.setBackgroundColor(colorPrimary);
+                            break;
+                    }
+                    return true;
+
+                }
+            });
 
             if(candidate.getNumberOfVotes() > 0) {
                 CandidateDataSource candidateDataSource = new CandidateDataSource(getContext());
@@ -67,6 +97,7 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
                 sb.append(rankingString);
                 if(rankingString.equalsIgnoreCase("1")) {
                     sb.append("st");
+                    imageViewCrown.setVisibility(View.VISIBLE);
                 }
                 else if(rankingString.equalsIgnoreCase("2")){
                     sb.append("nd");

@@ -220,6 +220,43 @@ public class UserDataSource {
         }
         return partyMembers;
     }
+    public ArrayList<User> getUsersByCandidate(String candidateName, String party){
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            String query;
+            if(party.equalsIgnoreCase("DNC")){
+                query = "SELECT * FROM user WHERE chosendemocrat = '" + candidateName + "'";
+            }
+            else {
+                query = "SELECT * FROM user WHERE chosenrepublican = '" + candidateName + "'";
+            }
+            Cursor cursor = database.rawQuery(query, null);
+
+            User newUser;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newUser = new User();
+                newUser.setUserID(cursor.getInt(0));
+                newUser.setDisplayName(cursor.getString(1));
+                newUser.setUserName(cursor.getString(2));
+                newUser.setPassword(cursor.getString(3));
+                newUser.setPartyAffiliation(cursor.getString(4));
+                newUser.setAge(cursor.getInt(5));
+                newUser.setGender(cursor.getString(6));
+                newUser.setChosenDemocrat(cursor.getString(7));
+                newUser.setChosenRepublican(cursor.getString(8));
+                newUser.setProfilePicture(cursor.getBlob(9));
+                users.add(newUser);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            users = new ArrayList<User>();
+        }
+        return users;
+    }
+
     public int getGenderPercentage(String party, String gender){
         int males = 0, females = 0, totalVoters = 0;
 
@@ -239,6 +276,32 @@ public class UserDataSource {
             }
         }
 
+        if(totalVoters > 0) {
+            if (gender.equalsIgnoreCase("Male")) {
+                return (100 * males) / totalVoters;
+            } else {
+                return (100 * females) / totalVoters;
+            }
+        }
+        else
+            return 0;
+    }
+    public int getGenderPercentageByCandidate(String candidateName, String party, String gender){
+        int males = 0, females = 0, totalVoters = 0;
+        ArrayList<User> userArrayList = getUsersByCandidate(candidateName, party);
+        if(userArrayList.size() == 0){
+            return 0;
+        }
+        for(User u : userArrayList){
+            if(u.getGender().equalsIgnoreCase("Male")) {
+                males++;
+                totalVoters++;
+            }
+            else{
+                females++;
+                totalVoters++;
+            }
+        }
         if(gender.equalsIgnoreCase("Male")) {
             return (100 * males)/totalVoters;
         }
@@ -246,7 +309,18 @@ public class UserDataSource {
             return (100 * females)/totalVoters;
         }
     }
-
+    public int getAverageVoterAgeByCandidate(String candidateName, String party){
+        int averageAgeOfVoter = 0, totalVoters = 0;
+        for(User u : getUsersByCandidate(candidateName, party)) {
+            averageAgeOfVoter += u.getAge();
+            totalVoters++;
+        }
+        if(totalVoters > 0) {
+            return averageAgeOfVoter / totalVoters;
+        }
+        else
+            return 0;
+    }
     public boolean deleteAllUsers(){
         boolean didDelete = false;
         try{

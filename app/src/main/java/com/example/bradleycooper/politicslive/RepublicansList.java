@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,11 +38,13 @@ public class RepublicansList extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private int republicanColor;
+    private int republicanColor, colorDown, colorUp;
 
     Context thisContext;
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
+    ArrayList<User> arrayListRepublicanUsers;
+    UserAdapter adapterUser;
 
     ArrayList<User> arrayListUsers;
 
@@ -92,40 +94,138 @@ public class RepublicansList extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity) getActivity()).hideFloatingActionButton();
+
+        TextView textViewResources = (TextView)getView().findViewById(R.id.textViewResources);
+        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewOfficialCampaignWebsite);
+        final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
+        final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
+
+        colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
+        colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
 
 
+        textViewResources.setText("REPUBLICAN PARTY RESOURCES");
+        textViewOfficalCampaignWebsite.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gop.com/"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewEmailCandidate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewEmailCandidate.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
 
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.setType("message/rfc822");
+                        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ecampaign@gop.com"});
+                        i.putExtra(Intent.EXTRA_SUBJECT, "About the 2016 Republican Primary...");
+                        i.putExtra(Intent.EXTRA_TEXT, "Sent from Politics Live!");
+                        try {
+                            startActivity(Intent.createChooser(i, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewTwitterPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        textViewTwitterPage.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/GOP?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"));
+                        startActivity(browserIntent);
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        inflateLinearLayoutRepublicanRanking();
+        inflateLinearLayoutRegisteredRepublicans();
+        inflateVoterDemographics();
+    }
+
+    public void inflateLinearLayoutRepublicanRanking(){
         CandidateDataSource dataSource = new CandidateDataSource(thisContext);
         dataSource.open();
         arrayListCandidates = dataSource.getCandidatesInOrderOfVotes("GOP");
         dataSource.close();
-
         adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);
-        ListView listViewGOP = (ListView)getView().findViewById(R.id.listViewDNC);
-        listViewGOP.setAdapter(adapter);
+        LinearLayout linearLayoutRepublicanRanking = (LinearLayout)getView().findViewById(R.id.linearLayoutRepublicanRanking);
+        final int adapterCount = adapter.getCount();
+        for(int i = 0 ; i < adapterCount ; i++) {
+            final int iFinal = i;
+            View item = adapter.getView(i, null, null);
+            linearLayoutRepublicanRanking.addView(item);
+        }
+    }
 
-        listViewGOP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayListCandidates.get(position);
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
-                intent.putExtra("candidateId", selectedCandidate.getCandidateID());
-                startActivity(intent);
-            }
-        });
-        listViewGOP.setFocusable(false);
+    public void inflateLinearLayoutRegisteredRepublicans(){
+        UserDataSource userDataSource = new UserDataSource(thisContext);
+        userDataSource.open();
+        arrayListRepublicanUsers = userDataSource.getUsersByParty("Republican");
+        userDataSource.close();
+        adapterUser = new UserAdapter(thisContext, arrayListRepublicanUsers);
+        LinearLayout linearLayoutRegisteredRepublicans = (LinearLayout)getView().findViewById(R.id.linearLayoutRegisteredRepublicans);
+        final int adapterCount = adapterUser.getCount();
+        for(int i = 0 ; i < adapterCount ; i++) {
+            final int iFinal = i;
+            View item = adapterUser.getView(i, null, null);
+            linearLayoutRegisteredRepublicans.addView(item);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                }
+            });
+        }
+    }
 
-
-
+    public void inflateVoterDemographics(){
         UserDataSource userDataSource = new UserDataSource(thisContext);
         userDataSource.open();
         arrayListUsers = userDataSource.getUsersByParty("Republican");
+
+
+
         republicanColor = ContextCompat.getColor(thisContext, R.color.colorRed);
 
         TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
         TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
         TextView textViewRegisteredPartyMembers = (TextView) getView().findViewById(R.id.textViewRegisteredPartyMembers);
-        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewRegisteredPartyMembersLabel);
+        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewImmigration);
         TextView textViewAverageAge = (TextView) getView().findViewById(R.id.textViewAverageAge);
         TextView textViewAverageAgeLabel = (TextView) getView().findViewById(R.id.textViewAverageAgeLabel);
         TextView textViewMalePercentage = (TextView) getView().findViewById(R.id.textViewMalePercentage);
@@ -137,6 +237,17 @@ public class RepublicansList extends Fragment {
             textViewMalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Republican", "Male")));
             textViewFemalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Republican", "Female")));
         }
+        else {
+            textViewRegisteredPartyMembers.setText("0");
+            TextView textViewWarning = (TextView)getView().findViewById(R.id.textViewWarning);
+            textViewWarning.setVisibility(View.VISIBLE);
+            TextView textViewWarning2 = (TextView)getView().findViewById(R.id.textViewWarning2);
+            textViewWarning2.setVisibility(View.VISIBLE);
+            View viewDemographics = (View)getView().findViewById(R.id.viewDemographics);
+            viewDemographics.setVisibility(View.GONE);
+            TextView textViewTapToExpand = (TextView)getView().findViewById(R.id.textViewTapToExpand);
+            textViewTapToExpand.setVisibility(View.GONE);
+        }
 
         textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
         textViewTotalVotes.setBackgroundResource(R.drawable.circle_gop);
@@ -147,7 +258,6 @@ public class RepublicansList extends Fragment {
         textViewAverageAgeLabel.setText("Average Age of Republican Voter = ");
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
-        userDataSource.close();
 
         final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
         final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
@@ -165,19 +275,32 @@ public class RepublicansList extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
-                        AlertDialog alertDialog2 = new AlertDialog.Builder(thisContext).create();
-                        alertDialog2.setTitle("Success");
-                        alertDialog2.setMessage("TODO = goto Users List Page");
-                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog2.show();
+                        ((MainActivity) getActivity()).onNavigationItemSelected("home");
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        final RelativeLayout relativeLayoutRegisteredRepublicans = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredRepublicans);
+        relativeLayoutRegisteredRepublicans.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutRegisteredRepublicans.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        relativeLayoutRegisteredRepublicans.setBackgroundColor(colorUp);
+                        ((MainActivity) getActivity()).onNavigationItemSelected("userslist");
+
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutRegisteredRepublicans.setBackgroundColor(colorUp);
                         break;
                 }
 
@@ -289,6 +412,7 @@ public class RepublicansList extends Fragment {
         });
 
     }
+
     public void makeAllExtendedInvisible(String relativeLayoutName){
         RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
         relativeLayoutTotalVotesExtended.setVisibility(View.GONE);
@@ -316,6 +440,7 @@ public class RepublicansList extends Fragment {
                 break;
         }
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,6 +124,10 @@ public class HomePage extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        FloatingActionButton floatingActionButton = ((MainActivity) getActivity()).getFloatingActionButton();
+        if(floatingActionButton != null){
+            floatingActionButton.show();
+        }
     }
 
     @Override
@@ -207,11 +212,11 @@ public class HomePage extends Fragment {
                 return String.format("%.2f%c", value, '%');
             }
         });
-        repData.setValueTextSize(10f);
+        repData.setValueTextSize(8f);
         repPieChart.setData(repData);
         repPieChart.setDescription("");
         repPieChart.setCenterText("Republican\nCandidates");
-        repPieChart.setCenterTextSize(16f);
+        repPieChart.setCenterTextSize(10f);
         repPieChart.setHoleRadius(38f);
         repPieChart.setTransparentCircleRadius(43f);
         repPieChart.getLegend().setEnabled(false);
@@ -245,11 +250,11 @@ public class HomePage extends Fragment {
                 return String.format("%.2f%c", value, '%');
             }
         });
-        demData.setValueTextSize(10f);
+        demData.setValueTextSize(8f);
         demPieChart.setData(demData);
         demPieChart.setDescription("");
         demPieChart.setCenterText("Democrat\nCandidates");
-        demPieChart.setCenterTextSize(16f);
+        demPieChart.setCenterTextSize(10f);
         demPieChart.setHoleRadius(38f);
         demPieChart.setTransparentCircleRadius(43f);
         demPieChart.getLegend().setEnabled(false);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorWhite"
+        android:layout_marginBottom="1dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageViewProfilePicture"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_action_contact_icon"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Display Name"
+            android:id="@+id/textViewDisplayName"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageViewProfilePicture"
+            android:layout_toEndOf="@+id/imageViewProfilePicture" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="username"
+            android:id="@+id/textViewUsername"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_toEndOf="@+id/textView4"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-"
+            android:id="@+id/textView4"
+            android:layout_alignBottom="@+id/textViewDisplayName"
+            android:layout_toRightOf="@+id/textViewDisplayName"
+            android:layout_toEndOf="@+id/textViewDisplayName"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
+</LinearLayout>

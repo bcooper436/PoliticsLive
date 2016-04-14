@@ -66,7 +66,6 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
                 CandidateDataSource candidateDataSource = new CandidateDataSource(getContext());
                 candidateDataSource.open();
                 voteCount.setText(candidateDataSource.getPercentageOfVote(candidate.getCandidateName()));
-                //ranking.setText(Integer.toString(candidateDataSource.getCandidateRanking(candidate.getCandidateName())));
                 candidateDataSource.close();
             }
             candidateName.setText(candidate.getCandidateName());

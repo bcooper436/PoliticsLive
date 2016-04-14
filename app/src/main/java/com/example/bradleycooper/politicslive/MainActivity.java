@@ -31,11 +31,13 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        RepublicansList.OnFragmentInteractionListener,RepublicansList.OnCommunicateActivityListener,
+        RepublicansList.OnFragmentInteractionListener,
         DemocratsList.OnFragmentInteractionListener,
         HomePage.OnFragmentInteractionListener,
         UserProfile.OnFragmentInteractionListener,
-        AllCandidates.OnFragmentInteractionListener,AllCandidates.OnCommunicateActivityListener {
+        UsersList.OnFragmentInteractionListener,
+        AllCandidates.OnFragmentInteractionListener,
+        AllCandidates.OnCommunicateActivityListener {
 
     private CharSequence mTitle;
     public final static String IS_LOGIN_USER = "pref_is_login";
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity
         Bitmap bitmapSquareKasich = BitmapFactory.decodeResource(getResources(), R.drawable.kasich_square);
         byte[] byteArraySquareKasich = convertBitmapToByteArray(bitmapSquareKasich);
 
-        Bitmap bitmapWideBernie = BitmapFactory.decodeResource(getResources(),R.drawable.bernie);
+        Bitmap bitmapWideBernie = BitmapFactory.decodeResource(getResources(), R.drawable.bernie);
         byte[] byteArrayWideBernie = convertBitmapToByteArray(bitmapWideBernie);
         Bitmap bitmapWideHilary = BitmapFactory.decodeResource(getResources(), R.drawable.hilary);
         byte[] byteArrayWideHilary = convertBitmapToByteArray(bitmapWideHilary);
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity
         generateCandidates("Hilary Clinton", "Former Secretary of State, many years in politics.",byteArraySquareHilary, byteArrayWideHilary, "DNC");
         generateCandidates("Donald Trump", "Successful Business man from New York City.", byteArraySquareTrump, byteArrayWideTrump,"GOP");
         generateCandidates("Ted Cruz", "Reported Zodiac killer, wants to turn abolish secularism.",byteArraySquareCruz, byteArrayWideCruz,"GOP");
-        generateCandidates("John Kasich", "What am I still doing in this race anyways...?", byteArraySquareKasich, byteArrayWideKasich,"GOP");
+        generateCandidates("John Kasich", "What am I still doing in this race anyways...?", byteArraySquareKasich, byteArrayWideKasich, "GOP");
     }
     public void generateCandidates(String candidateName, String candidateDescription, byte[] byteArraySquare, byte[] byteArrayWide ,String party){
         currentCandidate = new Candidate();
@@ -228,6 +230,7 @@ public class MainActivity extends AppCompatActivity
             fragment = new RepublicansList();
             mTitle = "Republican Party" +
                     "";
+
         } else if (id == R.id.nav_Candidates) {
             fragment = new AllCandidates();
             mTitle = "All Candidates" +
@@ -270,7 +273,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_DNC) {
             fragment = new DemocratsList();
             mTitle = "Democratic Party";
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_users_list){
+            fragment = new UsersList();
+            mTitle = "Browse Users";
+        }
+
+        else if (id == R.id.nav_settings) {
             Intent intent = new Intent(MainActivity.this, AppSettings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -322,6 +330,121 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public boolean onNavigationItemSelected(String fragmentToLoad) {
+        // Handle navigation view item clicks here.
+        Fragment fragment;
+        FragmentManager fragmentManager = getFragmentManager();
+        fragment = new HomePage();
+        if (fragmentToLoad.equalsIgnoreCase("home")) {
+            fragment = new HomePage();
+            mTitle = "Politics Live!";
+        } else if (fragmentToLoad.equalsIgnoreCase("republicanslist")) {
+            fragment = new RepublicansList();
+            mTitle = "Republican Party" +
+                    "";
+
+        } else if (fragmentToLoad.equalsIgnoreCase("allcandidates")) {
+            fragment = new AllCandidates();
+            mTitle = "All Candidates" +
+                    "";
+        } else if (fragmentToLoad.equalsIgnoreCase("logout")) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String userName = preferences.getString("Username", "");
+            if(userName.equalsIgnoreCase("") || userName == null) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }else{
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                builder1.setMessage("Are you sure you want to logout?");
+                builder1.setCancelable(true);
+
+                builder1.setNegativeButton(
+                        "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setPositiveButton(
+                        "Logout",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                clearUserPreferences();
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+
+        } else if (fragmentToLoad.equalsIgnoreCase("democratslist")) {
+            fragment = new DemocratsList();
+            mTitle = "Democratic Party";
+        } else if (fragmentToLoad.equalsIgnoreCase("userslist")){
+            fragment = new UsersList();
+            mTitle = "Browse Users";
+        }
+
+        else if (fragmentToLoad.equalsIgnoreCase("settings")) {
+            Intent intent = new Intent(MainActivity.this, AppSettings.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        else if (fragmentToLoad.equalsIgnoreCase("user")) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String userName = preferences.getString("Username", "");
+            if(userName.equalsIgnoreCase("") || userName == null) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                builder1.setMessage("You must be logged in to access this page.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Login",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }
+            else {
+                fragment = new UserProfile();
+                mTitle = userName +
+                        "";
+            }
+        }
+        restoreActionBar();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
     public void restoreActionBar () {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -336,8 +459,8 @@ public class MainActivity extends AppCompatActivity
     public void clearUserPreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("Username","");
-        editor.putString("Password","");
+        editor.putString("Username", "");
+        editor.putString("Password", "");
         editor.apply();
     }
 
@@ -373,4 +496,17 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+    public FloatingActionButton getFloatingActionButton (){
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        return fab;
+    }
+    public void showFloatingActionButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.show();
+    };
+
+    public void hideFloatingActionButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide();
+    };
 }

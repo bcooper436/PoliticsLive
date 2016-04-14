@@ -25,7 +25,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="125dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textViewGradient"
             android:textColor="@color/colorWhite"
@@ -40,18 +40,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="25dp" />
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/imageViewBackButton"
-            android:src="@drawable/arrow_back"
-            android:padding="27dp"
-            android:onClick="BackNavigate"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="-7dp" />
 
     </RelativeLayout>
 

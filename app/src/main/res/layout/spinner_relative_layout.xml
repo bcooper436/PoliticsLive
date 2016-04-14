@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="FILTER:"
+            android:id="@+id/textView26"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="15dp" />
+
+        <Spinner
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerFilter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="15dp" />
+
+        <Spinner
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerSort"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="SORT:"
+            android:id="@+id/textView37"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_alignTop="@+id/textView26"
+            android:layout_alignLeft="@+id/spinnerSort"
+            android:layout_alignStart="@+id/spinnerSort" />
+
+    </RelativeLayout>
+</LinearLayout>

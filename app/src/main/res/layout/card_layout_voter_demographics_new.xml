@@ -31,7 +31,7 @@
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Registered Democrats = "
-                    android:id="@+id/textViewRegisteredPartyMembersLabel"
+                    android:id="@+id/textViewImmigration"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -49,8 +49,8 @@
                     android:background="@drawable/circle_dnc"
                     android:textColor="@color/colorBlueLight"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
-                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_toRightOf="@+id/textViewImmigration"
+                    android:layout_toEndOf="@+id/textViewImmigration"
                     android:layout_marginLeft="5dp" />
             </RelativeLayout>
 

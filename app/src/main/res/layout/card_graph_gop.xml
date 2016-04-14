@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        card_view:cardCornerRadius="4dp"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Republican Primary"
+                android:id="@+id/textView35"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="The 2016 race for the Republican nominee has been highly volatile.  Currently, Donald trump is leading the polls, follwed not too far behind by senator Ted Cruz.  Kasich is mathmatically out; his only hope is a contested convention."
+                android:id="@+id/textView50"
+                android:layout_below="@+id/textView35"
+                android:layout_alignLeft="@+id/textView35"
+                android:layout_alignStart="@+id/textView35"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="220dp"
+                android:textSize="12dp" />
+        </RelativeLayout>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chartRep"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="180dp"
+            />
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

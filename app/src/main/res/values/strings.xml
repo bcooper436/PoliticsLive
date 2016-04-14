@@ -106,4 +106,21 @@
         <item>dbinnion@gmail.com</item>
     </string-array>
 
+    <string-array name="filter_array">
+        <item>None</item>
+        <item>Republican</item>
+        <item>Democrat</item>
+        <item>Unaffiliated</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="sort_array">
+        <item>First name</item>
+        <item>Last name</item>
+        <item>Username</item>
+        <item>Age</item>
+        <item>Gender</item>
+        <item>Party Affiliation</item>
+        <item>Selected Candidate</item>
+    </string-array>
 </resources>

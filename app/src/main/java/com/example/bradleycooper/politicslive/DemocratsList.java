@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,11 +39,13 @@ public class DemocratsList extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private int democratColor;
+    private int democratColor, colorDown, colorUp;
 
     Context thisContext;
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
+    ArrayList<User> arrayListDemocratUsers;
+    UserAdapter adapterUser;
 
     ArrayList<User> arrayListUsers;
 
@@ -69,8 +71,6 @@ public class DemocratsList extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-
-
     }
 
     @Override
@@ -93,30 +93,120 @@ public class DemocratsList extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity) getActivity()).hideFloatingActionButton();
+
+        TextView textViewResources = (TextView)getView().findViewById(R.id.textViewResources);
+        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewOfficialCampaignWebsite);
+        final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
+        final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
+
+        colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
+        colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
 
 
+        textViewResources.setText("DEMOCRATIC PARTY RESOURCES");
+        textViewOfficalCampaignWebsite.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.democrats.org/"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewEmailCandidate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        textViewEmailCandidate.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://my.democrats.org/page/s/contact-the-democrats"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewTwitterPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        textViewTwitterPage.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/TheDemocrats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+        inflateLinearLayoutDemocratRanking();
+        inflateLinearLayoutRegisteredDemocrats();
+        inflateVoterDemographics();
+    }
+
+    public void inflateLinearLayoutDemocratRanking(){
         CandidateDataSource dataSource = new CandidateDataSource(thisContext);
         dataSource.open();
         arrayListCandidates = dataSource.getCandidatesInOrderOfVotes("DNC");
         dataSource.close();
-
         adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);
-        ListView listViewDNC = (ListView)getView().findViewById(R.id.listViewDNC);
-        listViewDNC.setAdapter(adapter);
+        LinearLayout linearLayoutDemocratRanking = (LinearLayout)getView().findViewById(R.id.linearLayoutDemocratRanking);
+        final int adapterCount = adapter.getCount();
+        for(int i = 0 ; i < adapterCount ; i++) {
+            final int iFinal = i;
+            View item = adapter.getView(i, null, null);
+            linearLayoutDemocratRanking.addView(item);
+        }
+    }
 
-        listViewDNC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayListCandidates.get(position);
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
-                intent.putExtra("candidateId", selectedCandidate.getCandidateID());
-                startActivity(intent);
-            }
-        });
-        listViewDNC.setFocusable(false);
+    public void inflateLinearLayoutRegisteredDemocrats(){
+        UserDataSource userDataSource = new UserDataSource(thisContext);
+        userDataSource.open();
+        arrayListDemocratUsers = userDataSource.getUsersByParty("Democrat");
+        userDataSource.close();
+        adapterUser = new UserAdapter(thisContext, arrayListDemocratUsers);
+        LinearLayout linearLayoutRegisteredDemocrats = (LinearLayout)getView().findViewById(R.id.linearLayoutRegisteredDemocrats);
+        final int adapterCount2 = adapterUser.getCount();
+        for(int i = 0 ; i < adapterCount2 ; i++) {
+            final int iFinal = i;
+            View item = adapterUser.getView(i, null, null);
+            linearLayoutRegisteredDemocrats.addView(item);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                }
+            });
+        }
+    }
 
-
-
+    public void inflateVoterDemographics(){
         UserDataSource userDataSource = new UserDataSource(thisContext);
         userDataSource.open();
         arrayListUsers = userDataSource.getUsersByParty("Democrat");
@@ -128,7 +218,7 @@ public class DemocratsList extends Fragment {
         TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
         TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
         TextView textViewRegisteredPartyMembers = (TextView) getView().findViewById(R.id.textViewRegisteredPartyMembers);
-        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewRegisteredPartyMembersLabel);
+        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewImmigration);
         TextView textViewAverageAge = (TextView) getView().findViewById(R.id.textViewAverageAge);
         TextView textViewAverageAgeLabel = (TextView) getView().findViewById(R.id.textViewAverageAgeLabel);
         TextView textViewMalePercentage = (TextView) getView().findViewById(R.id.textViewMalePercentage);
@@ -140,6 +230,17 @@ public class DemocratsList extends Fragment {
             textViewMalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Democrat", "Male")));
             textViewFemalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Democrat", "Female")));
         }
+        else {
+            textViewRegisteredPartyMembers.setText("0");
+            TextView textViewWarning = (TextView)getView().findViewById(R.id.textViewWarning);
+            textViewWarning.setVisibility(View.VISIBLE);
+            TextView textViewWarning2 = (TextView)getView().findViewById(R.id.textViewWarning2);
+            textViewWarning2.setVisibility(View.VISIBLE);
+            View viewDemographics = (View)getView().findViewById(R.id.viewDemographics);
+            viewDemographics.setVisibility(View.GONE);
+            TextView textViewTapToExpand = (TextView)getView().findViewById(R.id.textViewTapToExpand);
+            textViewTapToExpand.setVisibility(View.GONE);
+        }
 
         textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
         textViewTotalVotes.setBackgroundResource(R.drawable.circle_dnc);
@@ -150,13 +251,13 @@ public class DemocratsList extends Fragment {
         textViewAverageAgeLabel.setText("Average Age of Democratic Voter = ");
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_dnc);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_dnc);
-        userDataSource.close();
 
         final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
         final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
 
         final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
         final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+
 
         final RelativeLayout relativeLayoutBrowseUsers = (RelativeLayout)getView().findViewById(R.id.relativeLayoutBrowseUsers);
         relativeLayoutBrowseUsers.setOnTouchListener(new View.OnTouchListener() {
@@ -168,19 +269,33 @@ public class DemocratsList extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
-                        AlertDialog alertDialog2 = new AlertDialog.Builder(thisContext).create();
-                        alertDialog2.setTitle("Success");
-                        alertDialog2.setMessage("Your account has been created");
-                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog2.show();
+                        ((MainActivity) getActivity()).onNavigationItemSelected("home");
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
+        final RelativeLayout relativeLayoutRegisteredDemocrats = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredDemocrats);
+        relativeLayoutRegisteredDemocrats.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
+                        ((MainActivity) getActivity()).onNavigationItemSelected("userslist");
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
                         break;
                 }
 
@@ -290,8 +405,8 @@ public class DemocratsList extends Fragment {
                 return true;
             }
         });
-
     }
+
     public void makeAllExtendedInvisible(String relativeLayoutName){
         RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
         relativeLayoutTotalVotesExtended.setVisibility(View.GONE);
@@ -319,6 +434,7 @@ public class DemocratsList extends Fragment {
                 break;
         }
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -366,4 +482,5 @@ public class DemocratsList extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
+
 }

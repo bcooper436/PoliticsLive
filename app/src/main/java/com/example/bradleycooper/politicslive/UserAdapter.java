@@ -20,7 +20,7 @@ public class UserAdapter extends ArrayAdapter<User> {
     private Context adapterContext;
 
     public UserAdapter(Context context, ArrayList<User> items) {
-        super(context, R.layout.list_item_democrat, items);
+        super(context, R.layout.list_item_user, items);
         adapterContext = context;
         this.items = items;
     }
@@ -31,15 +31,19 @@ public class UserAdapter extends ArrayAdapter<User> {
         View v = convertView;
         try {
             User user = items.get(position);
-
             if(v == null){
                 LayoutInflater vi = (LayoutInflater) adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.list_item_democrat, null);
+                v = vi.inflate(R.layout.list_item_user, null);
             }
+            TextView textViewDisplayName = (TextView)v.findViewById(R.id.textViewDisplayName);
+            TextView textViewUsername = (TextView)v.findViewById(R.id.textViewUsername);
+            /*TextView textViewAge = (TextView)v.findViewById(R.id.textViewAge);
+            TextView textViewGender = (TextView)v.findViewById(R.id.textViewGender);*/
 
-            TextView userName = (TextView)v.findViewById(R.id.textCandidateName);
-
-            userName.setText(user.getDisplayName());
+            textViewDisplayName.setText(user.getDisplayName());
+            textViewUsername.setText(user.getUserName()); /*
+            textViewAge.setText(Integer.toString(user.getAge()));
+            textViewGender.setText(user.getGender());*/
 
         }catch (Exception e) {
             e.printStackTrace();

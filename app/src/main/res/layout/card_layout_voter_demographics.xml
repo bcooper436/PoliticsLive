@@ -10,7 +10,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +26,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:id="@+id/relativeLayoutRegisteredParty"
                 android:background="@color/colorWhite">
 
@@ -31,7 +35,7 @@
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Registered Democrats = "
-                    android:id="@+id/textViewRegisteredPartyMembersLabel"
+                    android:id="@+id/textViewImmigration"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -39,8 +43,8 @@
                     android:layout_marginLeft="15dp" />
 
                 <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
                     android:id="@+id/textViewRegisteredPartyMembers"
@@ -49,10 +53,10 @@
                     android:background="@drawable/circle_dnc"
                     android:textColor="@color/colorWhite"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
-                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_toRightOf="@+id/textViewImmigration"
+                    android:layout_toEndOf="@+id/textViewImmigration"
                     android:layout_marginLeft="10dp"
-                    android:elevation="10dp" />
+                    android:elevation="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,7 +91,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutTotalVotes"
                 android:background="@color/colorWhite">
@@ -105,8 +109,8 @@
                     android:layout_marginLeft="15dp" />
 
                 <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
                     android:id="@+id/textViewTotalVotes"
@@ -118,7 +122,7 @@
                     android:layout_toRightOf="@+id/textViewTotalVotesLabel"
                     android:layout_toEndOf="@+id/textViewTotalVotesLabel"
                     android:layout_marginLeft="10dp"
-                    android:elevation="10dp" />
+                    android:elevation="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -153,7 +157,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutAverageAge"
                 android:background="@color/colorWhite">
@@ -171,8 +175,8 @@
                     android:id="@+id/textViewAverageAgeLabel" />
 
                 <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
                     android:layout_gravity="center_horizontal"
@@ -186,7 +190,7 @@
                     android:layout_alignParentTop="false"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:elevation="10dp" />
+                    android:elevation="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -221,7 +225,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutGender"
                 android:background="@color/colorWhite">
@@ -239,8 +243,8 @@
                     android:layout_marginLeft="15dp" />
 
                 <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
                     android:id="@+id/textViewMalePercentage"
@@ -252,11 +256,11 @@
                     android:layout_toRightOf="@+id/textViewGenderBreakdown"
                     android:layout_toEndOf="@+id/textViewGenderBreakdown"
                     android:layout_marginLeft="10dp"
-                    android:elevation="10dp" />
+                    android:elevation="5dp" />
 
                 <TextView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
                     android:id="@+id/textViewFemalePercentage"
@@ -268,7 +272,7 @@
                     android:layout_toRightOf="@+id/textViewMalePercentageLabel"
                     android:layout_toEndOf="@+id/textViewMalePercentageLabel"
                     android:layout_marginLeft="15dp"
-                    android:elevation="10dp" />
+                    android:elevation="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
