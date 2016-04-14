@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/colorBlack"
-                android:elevation="15dp">
+                android:elevation="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,21 +66,11 @@
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Voting Trends"
-                android:id="@+id/textView13"
-                android:layout_marginLeft="15dp"
-                android:capitalize="characters"
-                android:layout_marginTop="15dp"
-                android:textColor="#212121" />
-
             <include
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/candidate_profile_circles" />
+            layout="@layout/candidate_profile_circles"
+                android:layout_marginTop="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +80,7 @@
                 android:id="@+id/textView29"
                 android:layout_marginLeft="15dp"
                 android:capitalize="characters"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:textColor="#212121" />
 
             <TextView
@@ -118,7 +108,7 @@
             android:id="@+id/textViewTopSupportersLabel"
             android:layout_marginLeft="15dp"
                 android:capitalize="characters"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:textColor="#212121" />
 
             <TextView
@@ -141,6 +131,24 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:id="@+id/linearLayoutRegisteredVoters"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Other Candidates"
+                android:id="@+id/textView53"
+                android:layout_marginLeft="15dp"
+                android:capitalize="characters"
+                android:layout_marginTop="15dp"
+                android:textColor="#212121" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutOtherCandidates"
+                android:layout_marginLeft="10dp"></LinearLayout>
 
             <View
             android:layout_width="match_parent"

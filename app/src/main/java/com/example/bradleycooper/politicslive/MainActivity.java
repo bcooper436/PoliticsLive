@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         RepublicansList.OnFragmentInteractionListener,
         DemocratsList.OnFragmentInteractionListener,
         HomePage.OnFragmentInteractionListener,
+        HomePage.OnCommunicateActivityListener,
         UserProfile.OnFragmentInteractionListener,
         UsersList.OnFragmentInteractionListener,
         AllCandidates.OnFragmentInteractionListener,

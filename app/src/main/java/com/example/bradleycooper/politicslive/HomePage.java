@@ -1,14 +1,18 @@
 package com.example.bradleycooper.politicslive;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 //import com.github.mikephil.charting.charts.BarChart;
@@ -48,6 +52,8 @@ public class HomePage extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private OnCommunicateActivityListener activityCommunicator;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,6 +118,8 @@ public class HomePage extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        activityCommunicator = (OnCommunicateActivityListener)context;
+
         thisContext = context;
     }
 
@@ -128,6 +136,62 @@ public class HomePage extends Fragment {
         if(floatingActionButton != null){
             floatingActionButton.show();
         }
+        final RelativeLayout relativeLayoutGraphDNC = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGraphDNC);
+        final RelativeLayout relativeLayoutGraphGOP = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGraphGOP);
+
+        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+
+        relativeLayoutGraphDNC.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutGraphDNC.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Fragment fragment;
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragment = new DemocratsList();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment)
+                                .commit();
+                        activityCommunicator.passDataToActivity(R.id.nav_DNC);
+                        relativeLayoutGraphDNC.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutGraphDNC.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutGraphGOP.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutGraphGOP.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Fragment fragment;
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragment = new RepublicansList();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment)
+                                .commit();
+                        activityCommunicator.passDataToActivity(R.id.nav_GOP);
+                        relativeLayoutGraphGOP.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutGraphGOP.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+
+
     }
 
     @Override
@@ -215,8 +279,6 @@ public class HomePage extends Fragment {
         repData.setValueTextSize(8f);
         repPieChart.setData(repData);
         repPieChart.setDescription("");
-        repPieChart.setCenterText("Republican\nCandidates");
-        repPieChart.setCenterTextSize(10f);
         repPieChart.setHoleRadius(38f);
         repPieChart.setTransparentCircleRadius(43f);
         repPieChart.getLegend().setEnabled(false);
@@ -239,7 +301,7 @@ public class HomePage extends Fragment {
         });
 
         repPieChart.animateXY(2500,2500);
-        repChartLabel.setText("" +totalRepublicanVotes +" Votes Cast");
+        repChartLabel.setText("Votes cast = " + totalRepublicanVotes);
 
         PieDataSet demDataSet = new PieDataSet(demVotes, "% of " +totalDemocratVotes +" Votes");
         demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -253,8 +315,6 @@ public class HomePage extends Fragment {
         demData.setValueTextSize(8f);
         demPieChart.setData(demData);
         demPieChart.setDescription("");
-        demPieChart.setCenterText("Democrat\nCandidates");
-        demPieChart.setCenterTextSize(10f);
         demPieChart.setHoleRadius(38f);
         demPieChart.setTransparentCircleRadius(43f);
         demPieChart.getLegend().setEnabled(false);
@@ -277,9 +337,204 @@ public class HomePage extends Fragment {
         });
 
         demPieChart.animateXY(2500,2500);
-        demChartLabel.setText("" +totalDemocratVotes +" Votes Cast");
+        demChartLabel.setText("Votes cast = " +totalDemocratVotes);
+
+        inflateVoterDemographics();
 
     }
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
+    }
+    public void inflateVoterDemographics(){
+        UserDataSource userDataSource = new UserDataSource(thisContext);
+        userDataSource.open();
+        ArrayList<User> arrayListUsers = userDataSource.getUsers();
 
 
+
+        int colorfulColor = ContextCompat.getColor(thisContext, R.color.colorPurple);
+
+        TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
+        TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
+        TextView textViewRegisteredPartyMembers = (TextView) getView().findViewById(R.id.textViewRegisteredPartyMembers);
+        TextView textViewRegisteredPartyMembersLabel = (TextView)getView().findViewById(R.id.textViewRegisteredPartyMembersLabel);
+        TextView textViewAverageAge = (TextView) getView().findViewById(R.id.textViewAverageAge);
+        TextView textViewAverageAgeLabel = (TextView) getView().findViewById(R.id.textViewAverageAgeLabel);
+        TextView textViewMalePercentage = (TextView) getView().findViewById(R.id.textViewMalePercentage);
+        TextView textViewFemalePercentage = (TextView) getView().findViewById(R.id.textViewFemalePercentage);
+
+        textViewRegisteredPartyMembersLabel.setText("Registered users = ");
+        textViewTotalVotesLabel.setText("Total votes for all candidates = ");
+        textViewAverageAgeLabel.setText("Average age of voter = ");
+
+        if(arrayListUsers.size() > 0) {
+            textViewRegisteredPartyMembers.setText(Integer.toString(userDataSource.getNumberOfUsers()));
+            textViewAverageAge.setText(Integer.toString(userDataSource.getAverageVoterAge()));
+            textViewMalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Male")));
+            textViewFemalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Female")));
+        }
+        else {
+            textViewRegisteredPartyMembers.setText("0");
+            TextView textViewWarning = (TextView)getView().findViewById(R.id.textViewWarning);
+            textViewWarning.setVisibility(View.VISIBLE);
+            View viewDemographics = (View)getView().findViewById(R.id.viewDemographics);
+            viewDemographics.setVisibility(View.GONE);
+        }
+        userDataSource.close();
+
+        CandidateDataSource candidateDataSource = new CandidateDataSource(getActivity());
+        candidateDataSource.open();
+        ArrayList<Candidate> arrayListCandidates = candidateDataSource.getCandidates();
+        candidateDataSource.close();
+
+        textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
+        //textViewTotalVotes.setBackgroundResource(R.drawable.circle_gop);
+        //textViewRegisteredPartyMembers.setBackgroundResource(R.drawable.circle_gop);
+        //textViewAverageAge.setBackgroundResource(R.drawable.circle_gop);
+        //textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
+        //textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
+
+        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
+        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+
+        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
+        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+
+        final RelativeLayout relativeLayoutRegisteredParty = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredParty);
+        final RelativeLayout relativeLayoutRegisteredPartyExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredPartyExtended);
+        final RelativeLayout relativeLayoutTotalVotes = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotes);
+        final RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
+        final RelativeLayout relativeLayoutAverageAge = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAge);
+        final RelativeLayout relativeLayoutAverageAgeExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAgeExtended);
+        final RelativeLayout relativeLayoutGender = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGender);
+        final RelativeLayout relativeLayoutGenderExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGenderExtended);
+
+        relativeLayoutRegisteredParty.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutRegisteredPartyExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutRegisteredPartyExtended");
+                        }
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutTotalVotes.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutTotalVotes.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutTotalVotesExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutTotalVotesExtended");
+                        }
+                        relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutAverageAge.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutAverageAge.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutAverageAgeExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutAverageAgeExtended");
+                        }
+                        relativeLayoutAverageAge.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutAverageAge.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+        relativeLayoutGender.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutGender.setBackgroundColor(colorDownLight);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(relativeLayoutGenderExtended.getVisibility() == View.VISIBLE) {
+                            makeAllExtendedInvisible("");
+                        }
+                        else {
+                            makeAllExtendedInvisible("relativeLayoutGenderExtended");
+                        }
+                        relativeLayoutGender.setBackgroundColor(colorWhite);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutGender.setBackgroundColor(colorWhite);
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
+    public void makeAllExtendedInvisible(String relativeLayoutName){
+        RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
+        relativeLayoutTotalVotesExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutAverageAgeExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutAverageAgeExtended);
+        relativeLayoutAverageAgeExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutGenderExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGenderExtended);
+        relativeLayoutGenderExtended.setVisibility(View.GONE);
+        RelativeLayout relativeLayoutRegisteredPartyExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredPartyExtended);
+        relativeLayoutRegisteredPartyExtended.setVisibility(View.GONE);
+
+        switch(relativeLayoutName){
+            case "relativeLayoutTotalVotesExtended":
+                relativeLayoutTotalVotesExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutAverageAgeExtended":
+                relativeLayoutAverageAgeExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutGenderExtended":
+                relativeLayoutGenderExtended.setVisibility(View.VISIBLE);
+                break;
+            case "relativeLayoutRegisteredPartyExtended":
+                relativeLayoutRegisteredPartyExtended.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
+    public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
+        int totalVotes = 0;
+        for(Candidate c : arrayListCandidates) {
+            totalVotes += c.getNumberOfVotes();
+        }
+        return totalVotes;
+    }
 }

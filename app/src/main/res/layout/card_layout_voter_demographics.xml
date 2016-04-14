@@ -10,11 +10,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
-        android:layout_margin="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +34,7 @@
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Registered Democrats = "
-                    android:id="@+id/textViewImmigration"
+                    android:id="@+id/textViewRegisteredPartyMembersLabel"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -53,8 +52,8 @@
                     android:background="@drawable/circle_dnc"
                     android:textColor="@color/colorWhite"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewImmigration"
-                    android:layout_toEndOf="@+id/textViewImmigration"
+                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
                     android:layout_marginLeft="10dp"
                     android:elevation="5dp" />
 
@@ -67,7 +66,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewRegisteredPartyMembers"
                     android:layout_toEndOf="@+id/textViewRegisteredPartyMembers"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="7dp"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:textSize="12dp" />
@@ -135,7 +134,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewTotalVotes"
                     android:layout_toEndOf="@+id/textViewTotalVotes"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="7dp"
                     android:textSize="12dp" />
             </RelativeLayout>
 
@@ -203,7 +202,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewAverageAge"
                     android:layout_toEndOf="@+id/textViewAverageAge"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="7dp"
                     android:textSize="12dp" />
             </RelativeLayout>
 
@@ -285,7 +284,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewMalePercentage"
                     android:layout_toEndOf="@+id/textViewMalePercentage"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="12dp" />
 
                 <TextView
@@ -299,7 +298,7 @@
                     android:layout_alignTop="@+id/textViewMalePercentageLabel"
                     android:layout_toRightOf="@+id/textViewFemalePercentage"
                     android:layout_toEndOf="@+id/textViewFemalePercentage"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="12dp" />
             </RelativeLayout>
 

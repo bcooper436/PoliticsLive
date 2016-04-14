@@ -205,6 +205,16 @@ public class UserDataSource {
         }
         return user;
     }
+
+    /* Average Age Methods */
+    public int getAverageVoterAge(){
+        int averageAgeOfVoter = 0, totalVoters = 0;
+        for(User u : getUsers()) {
+            averageAgeOfVoter += u.getAge();
+            totalVoters++;
+        }
+        return averageAgeOfVoter/totalVoters;
+    }
     public int getAverageVoterAge(String party){
         int averageAgeOfVoter = 0, totalVoters = 0;
         for(User u : getUsersByParty(party)) {
@@ -213,6 +223,19 @@ public class UserDataSource {
         }
         return averageAgeOfVoter/totalVoters;
     }
+    public int getAverageVoterAgeByCandidate(String candidateName, String party){
+        int averageAgeOfVoter = 0, totalVoters = 0;
+        for(User u : getUsersByCandidate(candidateName, party)) {
+            averageAgeOfVoter += u.getAge();
+            totalVoters++;
+        }
+        if(totalVoters > 0) {
+            return averageAgeOfVoter / totalVoters;
+        }
+        else
+            return 0;
+    }
+
     public int getPartyMembers(String party){
         int partyMembers = 0;
         for(User u : getUsersByParty(party)){
@@ -220,6 +243,14 @@ public class UserDataSource {
         }
         return partyMembers;
     }
+    public int getNumberOfUsers(){
+        int users = 0;
+        for(User u : getUsers()){
+            users++;
+        }
+        return users;
+    }
+
     public ArrayList<User> getUsersByCandidate(String candidateName, String party){
         ArrayList<User> users = new ArrayList<User>();
         try {
@@ -257,11 +288,41 @@ public class UserDataSource {
         return users;
     }
 
+    /* Gender Methods */
+    public int getGenderPercentage(String gender){
+        int males = 0, females = 0, totalVoters = 0;
+
+        for (User u : getUsers()) {
+            switch (u.getGender()) {
+                case "Male":
+                    males++;
+                    totalVoters++;
+                    break;
+                case "Female":
+                    females++;
+                    totalVoters++;
+                    break;
+                default:
+                    totalVoters++;
+                    break;
+            }
+        }
+
+        if(totalVoters > 0) {
+            if (gender.equalsIgnoreCase("Male")) {
+                return (100 * males) / totalVoters;
+            } else {
+                return (100 * females) / totalVoters;
+            }
+        }
+        else
+            return 0;
+    }
     public int getGenderPercentage(String party, String gender){
         int males = 0, females = 0, totalVoters = 0;
 
-        for(User u : getUsersByParty(party)){
-            switch (u.getGender()){
+        for (User u : getUsersByParty(party)) {
+            switch (u.getGender()) {
                 case "Male":
                     males++;
                     totalVoters++;
@@ -308,18 +369,6 @@ public class UserDataSource {
         else {
             return (100 * females)/totalVoters;
         }
-    }
-    public int getAverageVoterAgeByCandidate(String candidateName, String party){
-        int averageAgeOfVoter = 0, totalVoters = 0;
-        for(User u : getUsersByCandidate(candidateName, party)) {
-            averageAgeOfVoter += u.getAge();
-            totalVoters++;
-        }
-        if(totalVoters > 0) {
-            return averageAgeOfVoter / totalVoters;
-        }
-        else
-            return 0;
     }
     public boolean deleteAllUsers(){
         boolean didDelete = false;

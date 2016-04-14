@@ -36,7 +36,7 @@ public class CandidateProfile extends AppCompatActivity {
 
     Candidate currentCandidate;
     private int idDNC, colorDown, colorUp, colorPrimaryColor, colorMotionPress, colorMotionPressDNC, colorMotionPressGOP, democratColor, democratColorLight, democratColorDark, democratColorDarker, idGOP, republicanColor, republicanColorLight, republicanColorDarker;
-    private String candidateParty;
+    private String candidateParty, candidateName;
     private Toolbar toolbar;
     private ImageView imgView;
     @Override
@@ -80,6 +80,7 @@ public class CandidateProfile extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
 
         candidateParty = currentCandidate.getParty();
+        candidateName = currentCandidate.getCandidateName();
 
         final TextView textViewOfficalCampaignWebsite = (TextView)findViewById(R.id.textViewOfficialCampaignWebsite);
         final TextView textViewEmailCandidate = (TextView)findViewById(R.id.textViewEmailCandidate);
@@ -142,6 +143,22 @@ public class CandidateProfile extends AppCompatActivity {
         });
 
         initCandidate(extras.getInt("candidateId"));
+        initOtherCandidates(candidateName);
+    }
+    private void initOtherCandidates(String nameOfCurrentCandidate){
+        CandidateDataSource candidateDataSource = new CandidateDataSource(this);
+        candidateDataSource.open();
+        ArrayList<Candidate> arrayListCandidatesOther = candidateDataSource.getOtherCandidates(nameOfCurrentCandidate);
+        candidateDataSource.close();
+        CandidateAdapterOther candidateAdapterOther = new CandidateAdapterOther(this, arrayListCandidatesOther);
+        LinearLayout linearLayoutCandidatesOther = (LinearLayout)findViewById(R.id.linearLayoutOtherCandidates);
+
+        final int adapterCount = candidateAdapterOther.getCount();
+        for(int i = 0 ; i < adapterCount ; i++) {
+            final int iFinal = i;
+            View item = candidateAdapterOther.getView(i, null, null);
+            linearLayoutCandidatesOther.addView(item);
+        }
     }
     private void initCandidate(int id) {
         CandidateDataSource ds = new CandidateDataSource(CandidateProfile.this);
@@ -164,7 +181,7 @@ public class CandidateProfile extends AppCompatActivity {
         final RelativeLayout relativeLayoutEducation = (RelativeLayout)findViewById(R.id.relativeLayoutEducation);
         final RelativeLayout relativeLayoutEducationExtended = (RelativeLayout)findViewById(R.id.relativeLayoutEducationExtended);
         final RelativeLayout relativeLayoutGuns = (RelativeLayout)findViewById(R.id.relativeLayoutGuns);
-        final RelativeLayout relativeLayoutGunsExtended = (RelativeLayout)findViewById(R.id.relativeLayoutImmigrationExtended);
+        final RelativeLayout relativeLayoutGunsExtended = (RelativeLayout)findViewById(R.id.relativeLayoutGunsExtended);
         final RelativeLayout relativeLayoutHealthCare = (RelativeLayout)findViewById(R.id.relativeLayoutHealthCare);
         final RelativeLayout relativeLayoutHealthCareExtended = (RelativeLayout)findViewById(R.id.relativeLayoutHealthCareExtended);
         final RelativeLayout relativeLayoutEconomy = (RelativeLayout)findViewById(R.id.relativeLayoutEconomy);
@@ -457,7 +474,6 @@ public class CandidateProfile extends AppCompatActivity {
         ds.close();
     }
     public void inflateLinearLayoutRegisteredDemocrats(){
-
         UserDataSource userDataSource = new UserDataSource(this);
         userDataSource.open();
         ArrayList<User> arrayListDemocratUsers = userDataSource.getUsersByParty("Democrat");
@@ -469,7 +485,7 @@ public class CandidateProfile extends AppCompatActivity {
         final RelativeLayout relativeLayoutImmigrationExtended = (RelativeLayout)findViewById(R.id.relativeLayoutImmigrationExtended);
         final RelativeLayout relativeLayoutMarriageExtended = (RelativeLayout)findViewById(R.id.relativeLayoutMarriageExtended);
         final RelativeLayout relativeLayoutEducationExtended = (RelativeLayout)findViewById(R.id.relativeLayoutEducationExtended);
-        final RelativeLayout relativeLayoutGunsExtended = (RelativeLayout)findViewById(R.id.relativeLayoutImmigrationExtended);
+        final RelativeLayout relativeLayoutGunsExtended = (RelativeLayout)findViewById(R.id.relativeLayoutGunsExtended);
         final RelativeLayout relativeLayoutHealthCareExtended = (RelativeLayout)findViewById(R.id.relativeLayoutHealthCareExtended);
         final RelativeLayout relativeLayoutEconomyExtended = (RelativeLayout)findViewById(R.id.relativeLayoutEconomyExtended);
         final RelativeLayout relativeLayoutEnviornmentExtended = (RelativeLayout)findViewById(R.id.relativeLayoutEnviornmentExtended);
