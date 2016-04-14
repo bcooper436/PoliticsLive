@@ -377,4 +377,8 @@ public class RepublicansList extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
+
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
+    }
 }

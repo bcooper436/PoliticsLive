@@ -35,6 +35,8 @@ public class AllCandidates extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private OnCommunicateActivityListener activityCommunicator;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -139,6 +141,20 @@ public class AllCandidates extends Fragment {
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
                         .commit();
+                activityCommunicator.passDataToActivity(R.id.nav_DNC);
+            }
+        });
+
+        textViewRepublicansCandidatesLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment;
+                FragmentManager fragmentManager = getFragmentManager();
+                fragment = new RepublicansList();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .commit();
+                activityCommunicator.passDataToActivity(R.id.nav_GOP);
             }
         });
     }
@@ -159,6 +175,8 @@ public class AllCandidates extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+        activityCommunicator = (OnCommunicateActivityListener)context;
         thisContext = context;
     }
 
@@ -182,5 +200,9 @@ public class AllCandidates extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
 
+    }
+
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
     }
 }

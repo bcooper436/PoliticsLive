@@ -31,11 +31,11 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        RepublicansList.OnFragmentInteractionListener,
+        RepublicansList.OnFragmentInteractionListener,RepublicansList.OnCommunicateActivityListener,
         DemocratsList.OnFragmentInteractionListener,
         HomePage.OnFragmentInteractionListener,
         UserProfile.OnFragmentInteractionListener,
-        AllCandidates.OnFragmentInteractionListener {
+        AllCandidates.OnFragmentInteractionListener,AllCandidates.OnCommunicateActivityListener {
 
     private CharSequence mTitle;
     public final static String IS_LOGIN_USER = "pref_is_login";
@@ -355,6 +355,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void passDataToActivity(int nevID) {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menu = navigationView.getMenu();
+        if(nevID == R.id.nav_DNC){
+            MenuItem nav_camara = menu.findItem(R.id.nav_DNC);
+            nav_camara.setChecked(true);
+        }else if(nevID == R.id.nav_GOP){
+            MenuItem nav_camara = menu.findItem(R.id.nav_GOP);
+            nav_camara.setChecked(true);
+        }
 
     }
 }
