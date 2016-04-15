@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity
             nav_camara.setTitle("Login");
         }
 
-        Fragment fragment;
-        FragmentManager fragmentManager = getFragmentManager();
-        fragment = new HomePage();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
+//        Fragment fragment;
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragment = new HomePage();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, fragment)
+//                .commit();
 
         // Check to see if user is logged in, if not, redirect to login page
         String skip = preferences.getString("Skip", "");
@@ -115,6 +115,14 @@ public class MainActivity extends AppCompatActivity
         String tutorialMainPage = preferences.getString("TutorialMainPage", "");
         if(tutorialMainPage.equalsIgnoreCase("") || tutorialMainPage==null) {
             firstTimeAppOpen(preferences);
+        }
+        else{
+            Fragment fragment;
+            FragmentManager fragmentManager = getFragmentManager();
+            fragment = new HomePage();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
         }
 
         String randomUsersJustAdded = preferences.getString("RandomUsersJustAdded", "");
@@ -153,6 +161,9 @@ public class MainActivity extends AppCompatActivity
                         editor.putString("TutorialMainPage", "Completed");
                         editor.apply();
                         dialog.cancel();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 });
 
