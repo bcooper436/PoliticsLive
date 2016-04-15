@@ -20,7 +20,11 @@ import android.widget.TextView;
 //import com.github.mikephil.charting.data.BarDataSet;
 //import com.github.mikephil.charting.data.BarEntry;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -59,7 +63,6 @@ public class HomePage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Context thisContext;
 
     private OnFragmentInteractionListener mListener;
 
@@ -120,7 +123,6 @@ public class HomePage extends Fragment {
         }
         activityCommunicator = (OnCommunicateActivityListener)context;
 
-        thisContext = context;
     }
 
     @Override
@@ -139,8 +141,8 @@ public class HomePage extends Fragment {
         final RelativeLayout relativeLayoutGraphDNC = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGraphDNC);
         final RelativeLayout relativeLayoutGraphGOP = (RelativeLayout)getView().findViewById(R.id.relativeLayoutGraphGOP);
 
-        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
-        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+        final int colorDownLight = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressedLight);
+        final int colorWhite = ContextCompat.getColor(getActivity(), R.color.colorWhite);
 
         relativeLayoutGraphDNC.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -233,7 +235,7 @@ public class HomePage extends Fragment {
         TextView demChartLabel = (TextView) getView().findViewById(R.id.textViewDemChartLabel);
         TextView repChartLabel = (TextView) getView().findViewById(R.id.textViewRepChartLabel);
 
-        final CandidateDataSource ds = new CandidateDataSource(thisContext);
+        final CandidateDataSource ds = new CandidateDataSource(getActivity());
 
         ds.open();
         Map<String, Integer> democrats = ds.getDemocratVotes();
@@ -286,7 +288,7 @@ public class HomePage extends Fragment {
         repPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getActivity(), CandidateProfile.class);
                 ds.open();
                 intent.putExtra("candidateId",
                         ds.getCandidateByName(repCandidates.get(e.getXIndex())).getCandidateID());
@@ -322,7 +324,7 @@ public class HomePage extends Fragment {
         demPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getActivity(), CandidateProfile.class);
                 ds.open();
                 intent.putExtra("candidateId",
                         ds.getCandidateByName(demCandidates.get(e.getXIndex())).getCandidateID());
@@ -342,17 +344,60 @@ public class HomePage extends Fragment {
         inflateVoterDemographics();
 
     }
+
+    public void createAverageAgeGraph() {
+
+    }
+
+    public void createGenderGraph() {
+
+    }
+
+    public void createRegisteredPartyGraph(){
+
+    }
+
+    public void createTotalVotesForPartyGraph() {
+        BarChart totalVotes = (BarChart) getView().findViewById(R.id.chartTotalVotesByParty);
+        CandidateDataSource ds = new CandidateDataSource(getActivity());
+        int gop = 0;
+        int dnc = 0;
+
+        ds.open();
+        for(Candidate c : ds.getCandidates()) {
+            if(c.getParty().equals("DNC")) {
+                dnc += c.getNumberOfVotes();
+            } else {
+                gop += c.getNumberOfVotes();
+            }
+        }
+        ds.close();
+        ArrayList<String> parties = new ArrayList<>();
+        ArrayList<BarEntry> values = new ArrayList<>();
+        parties.add("DNC");
+        parties.add("GOP");
+        values.add(new BarEntry(dnc, 0));
+        values.add(new BarEntry(gop, 1));
+        BarDataSet barDataSet = new BarDataSet(values, "Party Votes");
+        BarData barData = new BarData(parties, barDataSet);
+        totalVotes.setData(barData);
+    }
+
+    public void createVotesForCandidateGraph() {
+
+    }
+
     public interface OnCommunicateActivityListener{
         void passDataToActivity(int nevID);
     }
     public void inflateVoterDemographics(){
-        UserDataSource userDataSource = new UserDataSource(thisContext);
+        UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();
         ArrayList<User> arrayListUsers = userDataSource.getUsers();
 
 
 
-        int colorfulColor = ContextCompat.getColor(thisContext, R.color.colorPurple);
+        int colorfulColor = ContextCompat.getColor(getActivity(), R.color.colorPurple);
 
         TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
         TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
@@ -394,11 +439,11 @@ public class HomePage extends Fragment {
         //textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
         //textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
 
-        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
-        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        final int colorDownLight = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressedLight);
 
-        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
-        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
+        final int colorWhite = ContextCompat.getColor(getActivity(), R.color.colorWhite);
 
         final RelativeLayout relativeLayoutRegisteredParty = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredParty);
         final RelativeLayout relativeLayoutRegisteredPartyExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredPartyExtended);
@@ -422,6 +467,7 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutRegisteredPartyExtended");
+                            createTotalVotesForPartyGraph();
                         }
                         relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
                         break;
@@ -445,6 +491,7 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutTotalVotesExtended");
+
                         }
                         relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
                         break;

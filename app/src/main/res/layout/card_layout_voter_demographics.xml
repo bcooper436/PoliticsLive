@@ -78,14 +78,22 @@
                 android:id="@+id/relativeLayoutRegisteredPartyExtended"
                 android:visibility="gone">
 
-                <TextView
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartRegisteredPartyMembers"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TODO: Insert Graph about Total Votes"
                     android:id="@+id/textView30"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -144,14 +152,22 @@
                 android:id="@+id/relativeLayoutTotalVotesExtended"
                 android:visibility="gone">
 
-                <TextView
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartTotalVotesByParty"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TODO: Insert Graph about Total Votes"
                     android:id="@+id/textView31"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true" />-->
             </RelativeLayout>
 
             <RelativeLayout
