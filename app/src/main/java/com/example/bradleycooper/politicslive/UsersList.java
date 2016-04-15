@@ -273,4 +273,8 @@ public class UsersList extends Fragment {
         ListView listViewUsers = (ListView)getView().findViewById(R.id.listViewUsers);
         listViewUsers.setAdapter(likeAdapter);
     }
+
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
+    }
 }

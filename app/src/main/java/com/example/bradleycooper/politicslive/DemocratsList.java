@@ -48,6 +48,8 @@ public class DemocratsList extends Fragment {
 
     private int democratColor, colorDown, colorUp;
 
+    private OnCommunicateActivityListener activityCommunicator;
+
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
     ArrayList<User> arrayListDemocratUsers;
@@ -281,6 +283,7 @@ public class DemocratsList extends Fragment {
                     case MotionEvent.ACTION_UP:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
                         ((MainActivity) getActivity()).onNavigationItemSelected("home");
+                        activityCommunicator.passDataToActivity(R.id.nav_home);
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
@@ -304,6 +307,7 @@ public class DemocratsList extends Fragment {
                     case MotionEvent.ACTION_UP:
                         relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
                         ((MainActivity) getActivity()).onNavigationItemSelected("userslist");
+                        activityCommunicator.passDataToActivity(R.id.nav_users_list);
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
@@ -633,6 +637,8 @@ public class DemocratsList extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+        activityCommunicator = (OnCommunicateActivityListener)context;
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;
@@ -670,6 +676,10 @@ public class DemocratsList extends Fragment {
             registered++;
         }
         return registered;
+    }
+
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
     }
 
 }

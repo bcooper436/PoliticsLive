@@ -49,6 +49,8 @@ public class RepublicansList extends Fragment {
 
     private int republicanColor, colorDown, colorUp;
 
+    private OnCommunicateActivityListener activityCommunicator;
+
 
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
@@ -290,6 +292,7 @@ public class RepublicansList extends Fragment {
                     case MotionEvent.ACTION_UP:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
                         ((MainActivity) getActivity()).onNavigationItemSelected("home");
+                        activityCommunicator.passDataToActivity(R.id.nav_home);
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
@@ -311,6 +314,7 @@ public class RepublicansList extends Fragment {
                     case MotionEvent.ACTION_UP:
                         relativeLayoutRegisteredRepublicans.setBackgroundColor(colorUp);
                         ((MainActivity) getActivity()).onNavigationItemSelected("userslist");
+                        activityCommunicator.passDataToActivity(R.id.nav_users_list);
 
                         break;
                     case MotionEvent.ACTION_CANCEL:
@@ -642,6 +646,8 @@ public class RepublicansList extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+        activityCommunicator = (OnCommunicateActivityListener)context;
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;

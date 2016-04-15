@@ -163,7 +163,7 @@ public class UserProfile extends Fragment {
                                 });
 
                         builder1.setPositiveButton(
-                                "Logout",
+                                "Confirm",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         UserDataSource userDataSource = new UserDataSource(getActivity());
@@ -378,5 +378,9 @@ public class UserProfile extends Fragment {
             }
         }
 
+    }
+
+    public interface OnCommunicateActivityListener{
+        void passDataToActivity(int nevID);
     }
 }

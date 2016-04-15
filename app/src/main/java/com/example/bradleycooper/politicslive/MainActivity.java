@@ -32,7 +32,9 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         RepublicansList.OnFragmentInteractionListener,
+        RepublicansList.OnCommunicateActivityListener,
         DemocratsList.OnFragmentInteractionListener,
+        DemocratsList.OnCommunicateActivityListener,
         HomePage.OnFragmentInteractionListener,
         HomePage.OnCommunicateActivityListener,
         UserProfile.OnFragmentInteractionListener,
@@ -566,6 +568,16 @@ public class MainActivity extends AppCompatActivity
         }else if(nevID == R.id.nav_GOP){
             mTitle = "Republican Party" + "";
             MenuItem nav_camara = menu.findItem(R.id.nav_GOP);
+            nav_camara.setChecked(true);
+            restoreActionBar();
+        }else if(nevID == R.id.nav_home){
+            mTitle = "Politics Live!";
+            MenuItem nav_camara = menu.findItem(R.id.nav_home);
+            nav_camara.setChecked(true);
+            restoreActionBar();
+        }else if(nevID == R.id.nav_users_list){
+            mTitle = "Browse Users";
+            MenuItem nav_camara = menu.findItem(R.id.nav_users_list);
             nav_camara.setChecked(true);
             restoreActionBar();
         }
