@@ -366,10 +366,7 @@ public class HomePage extends Fragment {
         b.setDrawMarkerViews(false);
         b.setDrawBarShadow(false);
         b.setDrawBorders(false);
-        b.getXAxis().setTextSize(5f);
         b.animateXY(1000,1000);
-
-
     }
 
     private void formatBarDataSet(BarDataSet d) {
@@ -380,9 +377,6 @@ public class HomePage extends Fragment {
                 return String.format("%.0f", value);
             }
         });
-
-
-
     }
 
     private void createRegisteredUsersGraph() {
@@ -445,6 +439,7 @@ public class HomePage extends Fragment {
             i++;
         }
         ds.close();
+        barChart.getXAxis().setTextSize(5f);
         BarDataSet barDataSet = new BarDataSet(votes, "Candidate Votes");
         formatBarDataSet(barDataSet);
         BarData barData = new BarData(candidates, barDataSet);
