@@ -473,6 +473,7 @@ public class RepublicansList extends Fragment {
                 return String.format("%.0f", value);
             }
         });
+        d.setValueTextSize(10f);
     }
 
     private void createRegisteredUsersGraph() {
