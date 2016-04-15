@@ -1,11 +1,13 @@
 package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -41,7 +43,7 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
 
         View v = convertView;
         try {
-            Candidate candidate = items.get(position);
+            final Candidate candidate = items.get(position);
 
             if(v == null){
                 LayoutInflater vi = (LayoutInflater) adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,6 +64,32 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
                 imageViewParty.setImageBitmap(bitmapDemocrat);
             }
 
+            final int colorPressed = ContextCompat.getColor(adapterContext, R.color.colorLayoutPressed);
+            final int colorWhite = ContextCompat.getColor(adapterContext, R.color.colorWhite);
+
+            final RelativeLayout relativeLayoutCandidate = (RelativeLayout)v.findViewById(R.id.relativeLayoutCandidate);
+            relativeLayoutCandidate.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            relativeLayoutCandidate.setBackgroundColor(colorPressed);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            Intent intent = new Intent(getContext(), CandidateProfile.class);
+                            intent.putExtra("candidateId", candidate.getCandidateID());
+                            adapterContext.startActivity(intent);
+                            relativeLayoutCandidate.setBackgroundColor(colorWhite);
+                            break;
+                        case MotionEvent.ACTION_CANCEL:
+                            relativeLayoutCandidate.setBackgroundColor(colorWhite);
+                            break;
+                    }
+                    return true;
+
+                }
+            });
+
             if(candidate.getNumberOfVotes() > 0) {
                 CandidateDataSource candidateDataSource = new CandidateDataSource(getContext());
                 candidateDataSource.open();
@@ -72,7 +100,6 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
             byte[] byteArray = candidate.getSquarePicture();
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             imageView.setImageBitmap(bmp);
-
         }catch (Exception e) {
             e.printStackTrace();
             e.getCause();

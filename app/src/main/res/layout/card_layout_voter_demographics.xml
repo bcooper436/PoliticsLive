@@ -54,8 +54,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
                     android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
-                    android:layout_marginLeft="10dp"
-                    android:elevation="5dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,16 +73,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/relativeLayoutRegisteredPartyExtended"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="@color/colorWhite">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chartRegisteredUsers"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="15dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -127,8 +128,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewTotalVotesLabel"
                     android:layout_toEndOf="@+id/textViewTotalVotesLabel"
-                    android:layout_marginLeft="10dp"
-                    android:elevation="5dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,16 +147,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/relativeLayoutTotalVotesExtended"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="@color/colorWhite">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chartTotalVotesForAllCandidates"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="15dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -202,8 +204,7 @@
                     android:layout_toEndOf="@+id/textViewAverageAgeLabel"
                     android:layout_alignParentTop="false"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:elevation="5dp" />
+                    android:layout_marginLeft="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -222,16 +223,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/relativeLayoutAverageAgeExtended"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="@color/colorWhite">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chartAverageAgeOfVoter"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="15dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -275,8 +278,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewGenderBreakdown"
                     android:layout_toEndOf="@+id/textViewGenderBreakdown"
-                    android:layout_marginLeft="10dp"
-                    android:elevation="5dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="30dp"
@@ -291,8 +293,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewMalePercentageLabel"
                     android:layout_toEndOf="@+id/textViewMalePercentageLabel"
-                    android:layout_marginLeft="15dp"
-                    android:elevation="5dp" />
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -325,16 +326,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/relativeLayoutGenderExtended"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="@color/colorWhite">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chartGenderBreakdown"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="15dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"

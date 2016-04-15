@@ -5,14 +5,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:paddingBottom="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="CANDIDATE RESOURCES"
+            android:text="USER RESOURCES"
             android:id="@+id/textViewResources"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Official Website"
+            android:text="Change Vote"
             android:id="@+id/textViewChangeVote"
             android:gravity="center_vertical"
             android:textColor="#616161"
@@ -41,7 +41,7 @@
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:id="@+id/imageView"
-            android:src="@drawable/ic_action_browser"
+            android:src="@drawable/ic_action_settings"
             android:layout_alignTop="@+id/textViewChangeVote"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -51,8 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Send Email"
-            android:id="@+id/textViewEmailCandidate"
+            android:text="Delete Account"
+            android:id="@+id/textViewDeleteAccount"
             android:gravity="center_vertical"
             android:textColor="#616161"
             android:paddingLeft="55dp"
@@ -61,27 +61,17 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageView12"
-            android:src="@drawable/ic_action_email"
-            android:layout_below="@+id/textViewChangeVote"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Twitter Page"
-            android:id="@+id/textViewTwitterPage"
+            android:text="Log Off"
+            android:id="@+id/textViewLogOff"
             android:gravity="center_vertical"
             android:textColor="#616161"
             android:paddingLeft="55dp"
-            android:layout_below="@+id/textViewEmailCandidate"
+            android:layout_below="@+id/textViewDeleteAccount"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
@@ -90,11 +80,21 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="50dp"
-            android:id="@+id/imageView13"
-            android:src="@drawable/ic_action_twitter"
-            android:layout_alignTop="@+id/textViewTwitterPage"
+            android:id="@+id/imageView15"
+            android:src="@drawable/ic_action_action_delete"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView16"
+            android:src="@drawable/ic_action_logout"
+            android:layout_alignBottom="@+id/textViewLogOff"
+            android:layout_alignRight="@+id/imageView15"
+            android:layout_alignEnd="@+id/imageView15" />
+
     </RelativeLayout>
 </LinearLayout>

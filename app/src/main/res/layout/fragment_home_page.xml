@@ -98,6 +98,18 @@
                 android:layout_marginBottom="10dp"
                 android:id="@+id/viewDemographics" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/viewDivider"
+                android:layout_margin="15dp" />
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/team_member" />
+
         </LinearLayout>
 
     </ScrollView>

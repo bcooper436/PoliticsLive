@@ -25,7 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:id="@+id/relativeLayoutImmigration"
                 android:background="@color/colorPrimary">
 
@@ -46,7 +46,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutImmigrationExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Immigration"
                     android:id="@+id/textViewImmigrationExtended"
                     android:layout_centerVertical="true"
@@ -62,12 +62,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutMarriage"
                 android:background="@color/colorPrimary">
@@ -89,7 +90,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutMarriageExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -97,7 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Same-Sex Marriage"
                     android:id="@+id/textViewSameSexMarriageExtended"
                     android:layout_centerVertical="true"
@@ -105,12 +106,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutEducation"
                 android:background="@color/colorPrimary">
@@ -132,7 +134,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutEducationExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -140,7 +142,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Education"
                     android:id="@+id/textViewEducationExtended"
                     android:layout_centerVertical="true"
@@ -148,12 +150,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutGuns"
                 android:background="@color/colorPrimary">
@@ -175,7 +178,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutGunsExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -183,7 +186,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Gun Control"
                     android:id="@+id/textViewGunControlExtended"
                     android:layout_centerVertical="true"
@@ -191,12 +194,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutEconomy"
                 android:background="@color/colorPrimary">
@@ -217,7 +221,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutEconomyExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -225,7 +229,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Gun Control"
                     android:id="@+id/textViewEconomyExtended"
                     android:layout_centerVertical="true"
@@ -233,12 +237,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutHealthCare"
                 android:background="@color/colorPrimary" >
@@ -259,7 +264,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutHealthCareExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -267,7 +272,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: HealthCare"
                     android:id="@+id/textViewHealthCareExtended"
                     android:layout_centerVertical="true"
@@ -275,12 +280,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutEnviornment"
                 android:background="@color/colorPrimary" >
@@ -301,7 +307,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutEnviornmentExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -309,7 +315,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Enviornment"
                     android:id="@+id/textViewEnviornmentExtended"
                     android:layout_centerVertical="true"
@@ -317,12 +323,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutForeignPolicy"
                 android:background="@color/colorPrimary" >
@@ -343,7 +350,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:id="@+id/relativeLayoutForeignPolicyExtended"
                 android:visibility="gone"
                 android:background="@color/colorWhite">
@@ -351,7 +358,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="TODO: Foreign Policy"
                     android:id="@+id/textViewForeignPolicyExtended"
                     android:layout_centerVertical="true"
@@ -359,7 +366,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#212121" />
             </RelativeLayout>
 
         </LinearLayout>

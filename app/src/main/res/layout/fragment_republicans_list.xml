@@ -102,6 +102,20 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="There are no registered Republicansto analyze yet."
+                android:id="@+id/textViewWarning2"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
             <include
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -167,20 +181,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:id="@+id/linearLayoutRegisteredRepublicans"></LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="There are no registered Republicansto analyze yet."
-                android:id="@+id/textViewWarning2"
-                android:layout_below="@+id/textView36"
-                android:layout_alignLeft="@+id/textView36"
-                android:layout_alignStart="@+id/textView36"
-                android:textColor="#9e9e9e"
-                android:layout_marginLeft="25dp"
-                android:visibility="gone"
-                android:layout_marginTop="10dp" />
 
             <View
                 android:layout_width="match_parent"

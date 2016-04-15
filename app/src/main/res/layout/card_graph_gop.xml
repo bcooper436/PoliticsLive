@@ -72,14 +72,6 @@
                 android:layout_below="@+id/textView35"
                 android:layout_alignLeft="@+id/textView35"
                 android:layout_alignStart="@+id/textView35" />
-            <View
-                android:layout_width="150dp"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_below="@+id/textViewRepChartLabel"
-                android:layout_alignLeft="@+id/textViewRepChartLabel"
-                android:layout_alignStart="@+id/textViewRepChartLabel"
-                android:layout_marginTop="10dp" />
 
         </RelativeLayout>
         <com.github.mikephil.charting.charts.PieChart

@@ -107,7 +107,7 @@ public class DemocratsList extends Fragment {
         ((MainActivity) getActivity()).hideFloatingActionButton();
 
         TextView textViewResources = (TextView)getView().findViewById(R.id.textViewResources);
-        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewReport);
+        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewChangeVote);
         final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
         final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
 

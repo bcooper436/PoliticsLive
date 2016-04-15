@@ -69,7 +69,7 @@ public class CandidateProfile extends AppCompatActivity {
         candidateParty = currentCandidate.getParty();
         candidateName = currentCandidate.getCandidateName();
 
-        final TextView textViewOfficalCampaignWebsite = (TextView)findViewById(R.id.textViewReport);
+        final TextView textViewOfficalCampaignWebsite = (TextView)findViewById(R.id.textViewChangeVote);
         final TextView textViewEmailCandidate = (TextView)findViewById(R.id.textViewEmailCandidate);
         final TextView textViewTwitterPage = (TextView)findViewById(R.id.textViewTwitterPage);
 

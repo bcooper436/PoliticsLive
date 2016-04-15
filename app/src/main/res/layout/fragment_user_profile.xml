@@ -1,274 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.bradleycooper.politicslive.UserProfile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout"
-        android:layout_marginTop="55dp"
-        android:layout_marginLeft="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textViewDisplayName"
-            android:textColor="@color/colorBlack"
-            android:text="Display Name"
-            android:layout_alignBottom="@+id/imageViewPartyIcon" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageViewPartyIcon"
-            android:src="@drawable/ic_action_dnc_color"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textViewUserName"
-            android:textColor="@color/colorBlack"
-            android:text="username"
-            android:layout_below="@+id/textViewDisplayName" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="User Information"
-            android:id="@+id/textView32"
-            android:textColor="#212121"
-            android:layout_below="@+id/textViewUserName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="15dp">
+        android:id="@+id/scrollView4"
+        android:layout_marginTop="50dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Age:"
-            android:id="@+id/textView21"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="0dp"
-            android:textColor="#616161" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:elevation="30dp"
+                android:clipToPadding="false">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textViewAge"
-            android:layout_alignTop="@+id/textView21"
-            android:layout_toRightOf="@+id/textView21"
-            android:layout_toEndOf="@+id/textView21"
-            android:layout_marginLeft="15dp"
-            android:textColor="@color/colorBlack" />
+                <include
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/user_profile_header"
+                    android:id="@+id/include2"
+                    android:layout_alignParentStart="false" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Gender:"
-            android:id="@+id/textView23"
-            android:layout_below="@+id/textView21"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
-            android:textColor="#616161" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textViewDisplayName"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25dp"
+                    android:text="Display Name"
+                    android:gravity="center_vertical"
+                    android:layout_above="@+id/textViewUsername"
+                    android:layout_alignLeft="@+id/textViewUsername"
+                    android:layout_alignStart="@+id/textViewUsername"
+                    android:layout_marginBottom="-5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textViewGender"
-            android:textColor="@color/colorBlack"
-            android:layout_alignTop="@+id/textView23"
-            android:layout_toRightOf="@+id/textViewAge"
-            android:layout_toEndOf="@+id/textViewAge"
-            android:layout_marginLeft="15dp" />
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imageViewPartyIcon"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Party Affiliation:"
-            android:id="@+id/textView25"
-            android:layout_below="@+id/textView23"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
-            android:textColor="#616161" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="username"
+                    android:id="@+id/textViewUsername"
+                    android:textColor="#e0e0e0"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textViewParty"
-            android:textColor="@color/colorBlack"
-            android:layout_alignTop="@+id/textView25"
-            android:layout_toRightOf="@+id/textView25"
-            android:layout_toEndOf="@+id/textView25"
-            android:layout_marginLeft="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Your Current Votes:"
-            android:id="@+id/textView18"
-            android:layout_below="@+id/textView25"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="#212121" />
-
-        <RelativeLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:contextClickable="false"
-            android:elevation="3dp"
-            android:background="#ffffff"
-            android:id="@+id/relativeLayout3"
-            android:layout_below="@+id/textView18"
-            android:layout_toRightOf="@+id/textView28"
-            android:layout_toEndOf="@+id/textView28"
-            android:layout_marginLeft="15dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewChosenDemocrat"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/bernie_square" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bernie Sanders"
-                android:id="@+id/textViewChosenDemocrat"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorBlack" />
-        </RelativeLayout>
+                android:text="User Information:"
+                android:id="@+id/textView29"
+                android:layout_marginLeft="15dp"
+                android:capitalize="characters"
+                android:layout_marginTop="15dp"
+                android:textColor="#212121" />
 
-        <RelativeLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:contextClickable="false"
-            android:elevation="3dp"
-            android:background="#ffffff"
-            android:id="@+id/relativeLayout6"
-            android:layout_below="@+id/relativeLayout3"
-            android:layout_alignLeft="@+id/relativeLayout3"
-            android:layout_alignStart="@+id/relativeLayout3"
-            android:layout_marginTop="15dp">
-
-            <ImageView
-                android:layout_width="50dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageViewChosenRepublican"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/bernie_square" />
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Age:"
+                    android:id="@+id/textView58"
+                    android:layout_marginLeft="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="22"
+                    android:id="@+id/textViewAge"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/textView58"
+                    android:layout_toEndOf="@+id/textView58"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Gender:"
+                    android:id="@+id/textView64"
+                    android:layout_below="@+id/textView58"
+                    android:layout_alignLeft="@+id/textView58"
+                    android:layout_alignStart="@+id/textView58"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Male"
+                    android:id="@+id/textViewGender"
+                    android:layout_alignTop="@+id/textView64"
+                    android:layout_toRightOf="@+id/textView64"
+                    android:layout_toEndOf="@+id/textView64"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Party Affiliation:"
+                    android:id="@+id/textView66"
+                    android:layout_below="@+id/textView64"
+                    android:layout_alignLeft="@+id/textView64"
+                    android:layout_alignStart="@+id/textView64"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Independent"
+                    android:id="@+id/textViewParty"
+                    android:layout_alignBottom="@+id/textView66"
+                    android:layout_toRightOf="@+id/textView66"
+                    android:layout_toEndOf="@+id/textView66"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bernie Sanders"
-                android:id="@+id/textViewChosenRepublican"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorBlack" />
-        </RelativeLayout>
+                android:text="Current Votes:"
+                android:id="@+id/textView53"
+                android:layout_marginLeft="15dp"
+                android:capitalize="characters"
+                android:layout_marginTop="15dp"
+                android:textColor="#212121" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Democratic Candidate:"
-            android:id="@+id/textView28"
-            android:textColor="#616161"
-            android:layout_alignBottom="@+id/relativeLayout3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/relativeLayout3"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="This user has not cast any votes yet."
+                android:id="@+id/textViewWarning"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Republican Candidate:"
-            android:id="@+id/textView14"
-            android:textColor="#616161"
-            android:gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/relativeLayout6"
-            android:layout_alignTop="@+id/relativeLayout6"
-            android:layout_marginLeft="5dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/linearLayoutCandidates"></LinearLayout>
 
-    </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:weightSum="2"
-        android:id="@+id/linearLayout3"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" >
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Change Info"
-            android:id="@+id/buttonChangeUserSettings"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Logout"
-            android:id="@+id/buttonLogout"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite" />
-    </LinearLayout>
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/user_personal_resources" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -111,7 +111,7 @@ public class RepublicansList extends Fragment {
         ((MainActivity) getActivity()).hideFloatingActionButton();
 
         TextView textViewResources = (TextView)getView().findViewById(R.id.textViewResources);
-        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewReport);
+        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewChangeVote);
         final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
         final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
 
@@ -447,7 +447,7 @@ public class RepublicansList extends Fragment {
         b.setDrawMarkerViews(false);
         b.setDrawBarShadow(false);
         b.setDrawBorders(false);
-        b.animateXY(1000,1000);
+        b.animateXY(1000, 1000);
     }
 
     private void formatBarDataSet(BarDataSet d) {

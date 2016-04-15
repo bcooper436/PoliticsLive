@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
 
     private CharSequence mTitle;
     public final static String IS_LOGIN_USER = "pref_is_login";
+    public int resize = 150;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,17 +123,23 @@ public class MainActivity extends AppCompatActivity
         return dbFile.exists();
     }
     private Candidate currentCandidate;
+    private User user;
     private void initializeDB(){
         Bitmap bitmapSquareBernie = BitmapFactory.decodeResource(getResources(),R.drawable.bernie_square);
-        byte[] byteArraySquareBernie = convertBitmapToByteArray(bitmapSquareBernie);
+        Bitmap bitmapSquareBernieResized = Bitmap.createScaledBitmap(bitmapSquareBernie, resize, resize, true);
+        byte[] byteArraySquareBernie = convertBitmapToByteArray(bitmapSquareBernieResized);
         Bitmap bitmapSquareHilary = BitmapFactory.decodeResource(getResources(), R.drawable.hilary_square);
-        byte[] byteArraySquareHilary = convertBitmapToByteArray(bitmapSquareHilary);
+        Bitmap bitmapSquareHilaryResized = Bitmap.createScaledBitmap(bitmapSquareHilary, resize, resize, true);
+        byte[] byteArraySquareHilary = convertBitmapToByteArray(bitmapSquareHilaryResized);
         Bitmap bitmapSquareTrump = BitmapFactory.decodeResource(getResources(), R.drawable.trump_square);
-        byte[] byteArraySquareTrump = convertBitmapToByteArray(bitmapSquareTrump);
+        Bitmap bitmapSquareTrumpResized = Bitmap.createScaledBitmap(bitmapSquareTrump, resize, resize, true);
+        byte[] byteArraySquareTrump = convertBitmapToByteArray(bitmapSquareTrumpResized);
         Bitmap bitmapSquareCruz = BitmapFactory.decodeResource(getResources(), R.drawable.cruz_square);
-        byte[] byteArraySquareCruz = convertBitmapToByteArray(bitmapSquareCruz);
+        Bitmap bitmapSquareCruzResized = Bitmap.createScaledBitmap(bitmapSquareCruz, resize, resize, true);
+        byte[] byteArraySquareCruz = convertBitmapToByteArray(bitmapSquareCruzResized);
         Bitmap bitmapSquareKasich = BitmapFactory.decodeResource(getResources(), R.drawable.kasich_square);
-        byte[] byteArraySquareKasich = convertBitmapToByteArray(bitmapSquareKasich);
+        Bitmap bitmapSquareKasichResized = Bitmap.createScaledBitmap(bitmapSquareKasich, resize, resize, true);
+        byte[] byteArraySquareKasich = convertBitmapToByteArray(bitmapSquareKasichResized);
 
         Bitmap bitmapWideBernie = BitmapFactory.decodeResource(getResources(), R.drawable.bernie);
         byte[] byteArrayWideBernie = convertBitmapToByteArray(bitmapWideBernie);
@@ -146,19 +153,84 @@ public class MainActivity extends AppCompatActivity
         byte[] byteArrayWideKasich = convertBitmapToByteArray(bitmapWideKasich);
 
 
-        generateCandidates("Bernie Sanders", "Self-proclaimed democratic socialist from Vermont.", byteArraySquareBernie, byteArrayWideBernie, "DNC");
-        generateCandidates("Hilary Clinton", "Former Secretary of State, many years in politics.",byteArraySquareHilary, byteArrayWideHilary, "DNC");
-        generateCandidates("Donald Trump", "Successful Business man from New York City.", byteArraySquareTrump, byteArrayWideTrump,"GOP");
-        generateCandidates("Ted Cruz", "Reported Zodiac killer, wants to turn abolish secularism.",byteArraySquareCruz, byteArrayWideCruz,"GOP");
-        generateCandidates("John Kasich", "What am I still doing in this race anyways...?", byteArraySquareKasich, byteArrayWideKasich, "GOP");
+        /* Initialize table to  hold candidate objects */
+        generateCandidates("Bernie Sanders", "Self-proclaimed democratic socialist from Vermont.", byteArraySquareBernie, byteArrayWideBernie, "DNC", 5);
+        generateCandidates("Hilary Clinton", "Former Secretary of State, many years in politics.",byteArraySquareHilary, byteArrayWideHilary, "DNC", 6);
+        generateCandidates("Donald Trump", "Successful Business man from New York City.", byteArraySquareTrump, byteArrayWideTrump,"GOP", 6);
+        generateCandidates("Ted Cruz", "Reported Zodiac killer, wants to turn abolish secularism.",byteArraySquareCruz, byteArrayWideCruz,"GOP", 4);
+        generateCandidates("John Kasich", "What am I still doing in this race anyways...?", byteArraySquareKasich, byteArrayWideKasich, "GOP", 1);
+
+        /* Initialize the user table with 30 fake user accounts, to demonstrate the graphs and demographics potential */
+        generateUsers("Bradley Cooper", "bcooper436", "zun3ukit", "Democrat", 22, "Male", "Bernie Sanders", "Donald Trump");
+        generateUsers("Linden Marshall", "welcomehome8", "zun3ukit", "Republican", 31, "Male", "Bernie Sanders", "John Kasich");
+        generateUsers("Rhonda Boley", "duneiversity", "zun3ukit", "Independent", 62, "Female", "Hilary Clinton", "Donald Trump");
+        generateUsers("Rubisha Louqie", "SparklesGems80", "zun3ukit", "Democrat", 47, "Female", "Hilary Clinton", "Donald Trump");
+        generateUsers("Mark Simmons", "marksimms", "zun3ukit", "Democrat", 50, "Male", "Hilary Clinton", "Ted Cruz");
+
+        generateUsers("Willis Lesia", "williscool40", "zun3ukit", "Republican", 35, "Male", "Bernie Sanders", "Ted Cruz");
+        generateUsers("Johnie Kiersten", "JoHnIeK", "zun3ukit", "Republican", 31, "Male", "Hilary Clinton", "Donald Trump");
+        generateUsers("Biance Glade", "bglade11", "zun3ukit", "Democrat", 22, "Female", "Bernie Sanders", "Donald Trump");
+        generateUsers("Melva Denis", "Mel0192", "zun3ukit", "Republican", 55, "Male", "Bernie Sanders", "Donald Trump");
+        generateUsers("Trina Bryan", "BryTri92", "zun3ukit", "Democrat", 17, "Female", "Hilary Clinton", "Ted Cruz");
+        generateUsers("Oswald Webster", "theBookWasBetter", "zun3ukit", "Independent", 85, "Male", "Hilary Clinton", "Ted Cruz");
+
+
     }
-    public void generateCandidates(String candidateName, String candidateDescription, byte[] byteArraySquare, byte[] byteArrayWide ,String party){
+    public void generateUsers(String displayName, String username, String password, String party, int age, String gender, String chosenDemocrat, String chosenRepublican){
+        boolean wasSuccessful;
+
+        user = new User();
+        user.setDisplayName(displayName);
+        user.setUserName(username);
+        user.setPassword(password);
+        user.setPartyAffiliation(party);
+        user.setAge(age);
+        user.setGender(gender);
+        //user.setChosenDemocrat(chosenDemocrat);
+        //user.setChosenRepublican(chosenRepublican);
+        UserDataSource us = new UserDataSource(MainActivity.this);
+        us.open();
+        if(user.getUserID() == -1){
+            wasSuccessful = us.insertUser(user);
+            int newId = us.getLastUserId();
+            user.setUserID(newId);
+        }
+        else{
+            wasSuccessful = us.updateUser(user);
+        }
+        us.close();
+
+        UserDataSource userDataSource = new UserDataSource(MainActivity.this);
+        userDataSource.open();
+        user = userDataSource.getSpecificUserFromLoginInfo(user.getUserName(),"zun3ukit");
+        user.setChosenDemocrat(chosenDemocrat);
+        user.setChosenRepublican(chosenRepublican);
+        userDataSource.updateUser(user);
+        userDataSource.close();
+
+        if (wasSuccessful) {
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Success");
+            alertDialog.setMessage("Candidate " + currentCandidate.getCandidateName() + " was added as a member of the " + currentCandidate.getParty() + " party. Id is " + currentCandidate.getCandidateID());
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+
+    }
+    public void generateCandidates(String candidateName, String candidateDescription, byte[] byteArraySquare, byte[] byteArrayWide ,String party, int numberOfVotes){
         currentCandidate = new Candidate();
         currentCandidate.setCandidateName(candidateName);
         currentCandidate.setCandidateDescription(candidateDescription);
         currentCandidate.setSquarePicture(byteArraySquare);
         currentCandidate.setWidePicture(byteArrayWide);
         currentCandidate.setParty(party);
+        currentCandidate.setNumberOfVotes(numberOfVotes);
         CandidateDataSource ds = new CandidateDataSource(MainActivity.this);
         ds.open();
 
@@ -306,9 +378,7 @@ public class MainActivity extends AppCompatActivity
                         "Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
+                                dialog.dismiss();
                             }
                         });
 

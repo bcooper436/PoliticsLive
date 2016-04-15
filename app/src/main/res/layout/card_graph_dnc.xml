@@ -70,15 +70,6 @@
                 android:layout_below="@+id/textView35"
                 android:layout_alignLeft="@+id/textView35"
                 android:layout_alignStart="@+id/textView35" />
-            <View
-                android:layout_width="150dp"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                android:layout_below="@+id/textViewDemChartLabel"
-                android:layout_alignLeft="@+id/textViewDemChartLabel"
-                android:layout_alignStart="@+id/textViewDemChartLabel"
-                android:layout_marginTop="10dp" />
-
 
 
         </RelativeLayout>

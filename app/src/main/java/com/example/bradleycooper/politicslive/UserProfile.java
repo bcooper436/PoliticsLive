@@ -15,11 +15,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +47,7 @@ public class UserProfile extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public int userId;
     Activity thisActivity;
     Context thisContext;
     ArrayList<User> arrayList;
@@ -111,89 +114,146 @@ public class UserProfile extends Fragment {
         userDataSource.open();
         currentUser = userDataSource.getSpecificUserFromLoginInfo(userName,"zun3ukit");
         userDataSource.close();
+        userId = currentUser.getUserID();
 
-        Button buttonLogOff = (Button)getView().findViewById(R.id.buttonLogout);
+        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
+        final TextView textViewChangeVote = (TextView)getActivity().findViewById(R.id.textViewChangeVote);
+        final TextView textViewDeleteAccount = (TextView)getActivity().findViewById(R.id.textViewDeleteAccount);
+        final TextView textViewLogOff = (TextView)getActivity().findViewById(R.id.textViewLogOff);
 
-        buttonLogOff.setOnClickListener(new View.OnClickListener() {
+        textViewChangeVote.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                builder1.setMessage("Are you sure you want to logout?");
-                builder1.setCancelable(true);
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewChangeVote.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewChangeVote.setBackgroundColor(colorUp);
+                        Intent intent = new Intent(getActivity(), Ballot.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewChangeVote.setBackgroundColor(colorUp);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewDeleteAccount.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewDeleteAccount.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Are you sure you want to delete your account?");
+                        builder1.setCancelable(true);
 
-                builder1.setNegativeButton(
-                        "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                        builder1.setNegativeButton(
+                                "Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
 
-                builder1.setPositiveButton(
-                        "Logout",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                clearUserPreferences();
-                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                            }
-                        });
+                        builder1.setPositiveButton(
+                                "Logout",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        UserDataSource userDataSource = new UserDataSource(getActivity());
+                                        userDataSource.open();
+                                        if(userDataSource.deleteUser(userId)){
+                                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                                            alertDialog.setTitle("Success");
+                                            alertDialog.setMessage("Your account has been deleted");
+                                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.dismiss();
+                                                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            startActivity(intent);
+                                                        }
+                                                    });
+                                            alertDialog.show();
+                                        }
+                                        else {
+                                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                                            alertDialog.setTitle("Failure");
+                                            alertDialog.setMessage("Your account has not been deleted");
+                                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.dismiss();
+                                                        }
+                                                    });
+                                            alertDialog.show();
 
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                                        }
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewDeleteAccount.setBackgroundColor(colorUp);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewLogOff.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewLogOff.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewLogOff.setBackgroundColor(colorUp);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Are you sure you want to logout?");
+                        builder1.setCancelable(true);
+
+                        builder1.setNegativeButton(
+                                "Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        builder1.setPositiveButton(
+                                "Logout",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        clearUserPreferences();
+                                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewLogOff.setBackgroundColor(colorUp);
+                        break;
+                }
+                return true;
             }
         });
 
         initUser(currentUser);
-    }
-    public void initUser(User currentUser) {
-        candidateDemocrat = null;
-        candidateRepublican = null;
-        CandidateDataSource ds = new CandidateDataSource(getActivity());
-        ds.open();
-        if(currentUser.getChosenDemocrat() != null) {
-            Candidate candidateDemocrat = ds.getCandidateByName(currentUser.getChosenDemocrat());
-        }
-        if(currentUser.getChosenRepublican() != null) {
-            Candidate candidateRepublican = ds.getCandidateByName(currentUser.getChosenRepublican());
-        }
-
-        TextView textViewDisplayName = (TextView)getView().findViewById(R.id.textViewDisplayName);
-        TextView textViewUserName = (TextView)getView().findViewById(R.id.textViewUserName);
-        TextView textViewAge = (TextView)getView().findViewById(R.id.textViewAge);
-        TextView textViewGender = (TextView)getView().findViewById(R.id.textViewGender);
-        TextView textViewParty = (TextView)getView().findViewById(R.id.textViewParty);
-        TextView textChosenDemocrat = (TextView)getView().findViewById(R.id.textViewChosenDemocrat);
-        TextView textChosenRepublican = (TextView)getView().findViewById(R.id.textViewChosenRepublican);
-        ImageView imageViewChosenDemocrat = (ImageView)getView().findViewById(R.id.imageViewChosenDemocrat);
-        ImageView imageViewChosenRepublican = (ImageView)getView().findViewById(R.id.imageViewChosenRepublican);
-
-        ImageView imageViewPartyIcon = (ImageView)getView().findViewById(R.id.imageViewPartyIcon);
-        ImageView imageViewProfilePicture =(ImageView)getView().findViewById(R.id.imageViewProfilePicture);
-
-        int idGOP = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_gop_color", null, null);
-        int idDNC = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_dnc_color", null, null);
-
-
-        if(currentUser.getPartyAffiliation().equalsIgnoreCase("Democrat")){
-            imageViewPartyIcon.setImageResource(idDNC);
-        }
-        else {
-            imageViewPartyIcon.setImageResource(idGOP);
-        }
-        textViewDisplayName.setText(currentUser.getDisplayName());
-        textViewUserName.setText(currentUser.getUserName());
-        textViewAge.setText(String.valueOf(currentUser.getAge()));
-        textViewGender.setText(currentUser.getGender());
-        textViewParty.setText(currentUser.getPartyAffiliation());
-        textChosenDemocrat.setText(currentUser.getChosenDemocrat());
-        textChosenRepublican.setText(currentUser.getChosenRepublican());
-
-        if(candidateDemocrat != null){
-        }
-        if(candidateRepublican != null) {
-        }
+        initChosenCandidates(currentUser);
     }
     @Override
     public void onAttach(Context context) {
@@ -232,5 +292,91 @@ public class UserProfile extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    public void initUser(User currentUser){
+        TextView textViewDisplayName = (TextView)getActivity().findViewById(R.id.textViewDisplayName);
+        TextView textViewUsername = (TextView)getActivity().findViewById(R.id.textViewUsername);
+        TextView textViewAge = (TextView)getActivity().findViewById(R.id.textViewAge);
+        TextView textViewGender = (TextView)getActivity().findViewById(R.id.textViewGender);
+        TextView textViewParty = (TextView)getActivity().findViewById(R.id.textViewParty);
+
+        textViewDisplayName.setText(currentUser.getDisplayName());
+        textViewUsername.setText(currentUser.getUserName());
+        textViewAge.setText(Integer.toString(currentUser.getAge()));
+        textViewGender.setText(currentUser.getGender());
+        textViewParty.setText(currentUser.getPartyAffiliation());
+
+        int colorDNC = ContextCompat.getColor(getActivity(), R.color.colorPrimary);
+        int colorGOP = ContextCompat.getColor(getActivity(), R.color.colorRedDark);
+        int colorIndependent = ContextCompat.getColor(getActivity(), R.color.colorPurple);
+        RelativeLayout relativeLayoutUser = (RelativeLayout)getActivity().findViewById(R.id.relativeLayoutUser);
+        ImageView imageViewPartyIcon = (ImageView)getActivity().findViewById(R.id.imageViewPartyIcon);
+
+        switch(currentUser.getPartyAffiliation()){
+            case "Democrat":
+                imageViewPartyIcon.setBackgroundResource(R.drawable.ic_action_dnc_color);
+                //relativeLayoutUser.setBackgroundColor(colorDNC);
+                break;
+            case "Republican":
+                imageViewPartyIcon.setBackgroundResource(R.drawable.ic_action_gop_color);
+                //relativeLayoutUser.setBackgroundColor(colorGOP);
+                break;
+            default:
+                imageViewPartyIcon.setVisibility(View.INVISIBLE);
+                relativeLayoutUser.setBackgroundColor(colorIndependent);
+                break;
+        }
+    }
+
+    public void initChosenCandidates(User currentUser){
+        Boolean skipAdapter = false;
+        TextView textViewWarning = (TextView)getActivity().findViewById(R.id.textViewWarning);
+
+        String chosenDemocrat = currentUser.getChosenDemocrat();
+        String chosenRepublican = currentUser.getChosenRepublican();
+
+        ArrayList<Candidate> arrayList = new ArrayList<Candidate>();
+
+        CandidateDataSource candidateDataSource = new CandidateDataSource(getActivity());
+        candidateDataSource.open();
+        if(chosenDemocrat == null){
+            if(chosenRepublican == null) {
+                textViewWarning.setVisibility(View.VISIBLE);
+                skipAdapter = true;
+            }
+        }
+        else {
+            Candidate chosenCandidateDNC = candidateDataSource.getCandidateByName(chosenDemocrat);
+            arrayList.add(chosenCandidateDNC);
+        }
+        if(chosenRepublican == null){
+            if(chosenDemocrat == null) {
+                textViewWarning.setVisibility(View.VISIBLE);
+                skipAdapter = true;
+            }
+        }
+        else {
+            Candidate chosenCandidateGOP = candidateDataSource.getCandidateByName(chosenRepublican);
+            arrayList.add(chosenCandidateGOP);
+        }
+        candidateDataSource.close();
+
+        if(!skipAdapter) {
+            CandidateAdapter candidateAdapter = new CandidateAdapter(getActivity(), arrayList);
+            LinearLayout linearLayoutCandidates = (LinearLayout)getActivity().findViewById(R.id.linearLayoutCandidates);
+
+            final int adapterCount = candidateAdapter.getCount();
+            for (int i = 0; i < adapterCount; i++) {
+                final int iFinal = i;
+                View item = candidateAdapter.getView(i, null, null);
+                linearLayoutCandidates.addView(item);
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+            }
+        }
+
     }
 }

@@ -105,25 +105,7 @@ public class AllCandidates extends Fragment {
         listViewGOP = (ListView)getView().findViewById(R.id.listViewRepublican);
         listViewDNC = (ListView)getView().findViewById(R.id.listViewDemocrat);
         listViewGOP.setAdapter(adapterGOP);
-        listViewGOP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayListGOP.get(position);
-                Intent intent = new Intent(getContext(), CandidateProfile.class);
-                intent.putExtra("candidateId", selectedCandidate.getCandidateID());
-                startActivity(intent);
-            }
-        });
         listViewDNC.setAdapter(adapterDNC);
-        listViewDNC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayListDNC.get(position);
-                Intent intent = new Intent(getContext(), CandidateProfile.class);
-                intent.putExtra("candidateId", selectedCandidate.getCandidateID());
-                startActivity(intent);
-            }
-        });
 
         final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
         final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);

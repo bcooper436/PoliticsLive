@@ -50,7 +50,6 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:id="@+id/imageViewPartyIcon"
-                    android:src="@drawable/ic_action_dnc_blue_light"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
@@ -75,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="About"
+                android:text="User Information:"
                 android:id="@+id/textView29"
                 android:layout_marginLeft="15dp"
                 android:capitalize="characters"
@@ -84,7 +83,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp">
 
                 <TextView
@@ -105,7 +104,7 @@
                     android:layout_toRightOf="@+id/textView58"
                     android:layout_toEndOf="@+id/textView58"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/colorBlack" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,11 +123,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Male"
                     android:id="@+id/textViewGender"
-                    android:textStyle="bold"
                     android:layout_alignTop="@+id/textView64"
                     android:layout_toRightOf="@+id/textView64"
                     android:layout_toEndOf="@+id/textView64"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,18 +146,29 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Independent"
                     android:id="@+id/textViewParty"
-                    android:textStyle="bold"
                     android:layout_alignBottom="@+id/textView66"
                     android:layout_toRightOf="@+id/textView66"
                     android:layout_toEndOf="@+id/textView66"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorBlack" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Current Votes:"
+                android:id="@+id/textView53"
+                android:layout_marginLeft="15dp"
+                android:capitalize="characters"
+                android:layout_marginTop="15dp"
+                android:textColor="#212121" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="There are no registered Democrats yet."
+                android:text="This user has not cast any votes yet."
                 android:id="@+id/textViewWarning"
                 android:layout_below="@+id/textView36"
                 android:layout_alignLeft="@+id/textView36"
@@ -167,31 +177,6 @@
                 android:layout_marginLeft="25dp"
                 android:visibility="gone"
                 android:layout_marginTop="10dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:id="@+id/linearLayoutRegisteredVoters"></LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Current Votes"
-                android:id="@+id/textView53"
-                android:layout_marginLeft="15dp"
-                android:capitalize="characters"
-                android:layout_marginTop="15dp"
-                android:textColor="#212121" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/linearLayoutOtherCandidates"
-                android:layout_marginLeft="10dp"></LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -225,7 +210,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@drawable/circle_back"
+        android:background="@drawable/circle_blue_dark"
         android:padding="13dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"

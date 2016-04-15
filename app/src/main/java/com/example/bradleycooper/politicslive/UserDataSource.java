@@ -461,4 +461,14 @@ public class UserDataSource {
         }
         return didDelete;
     }
+    public boolean deleteUser(int userId){
+        boolean didDelete = false;
+        try{
+            didDelete = database.delete("user", "userid =" + userId, null) > 0;
+        }
+        catch (Exception e){
+
+        }
+        return didDelete;
+    }
 }

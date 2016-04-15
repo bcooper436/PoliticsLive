@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:elevation="7dp"
             android:contextClickable="false"
-            >
+            android:id="@+id/relativeLayoutCandidate">
 
             <TextView
                 android:layout_width="wrap_content"

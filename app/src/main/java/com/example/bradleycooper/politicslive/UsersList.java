@@ -264,17 +264,6 @@ public class UsersList extends Fragment {
     }
 
     public void searchList(String likeString){
-        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-        alertDialog.setTitle("DEBUG");
-        alertDialog.setMessage(likeString);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-
         ArrayList<User> arrayListLike;
         UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();

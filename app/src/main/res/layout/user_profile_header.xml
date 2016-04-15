@@ -5,13 +5,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="225dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:clipToPadding="false"
-        android:id="@+id/relativeLayout2"
-        android:background="@color/colorPrimary">
+        android:id="@+id/relativeLayoutUser"
+        android:background="@color/colorMotionPressDNC">
 
         <ImageView
             android:layout_width="125dp"

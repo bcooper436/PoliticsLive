@@ -6,13 +6,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp">
+        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="CANDIDATE RESOURCES"
+            android:text="TEAM MEMBERS"
             android:id="@+id/textViewResources"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -25,11 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Official Website"
+            android:text="Bradley Cooper"
             android:id="@+id/textViewChangeVote"
             android:gravity="center_vertical"
             android:textColor="#616161"
-            android:paddingLeft="55dp"
+            android:paddingLeft="30dp"
             android:layout_below="@+id/textViewResources"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -37,64 +39,57 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <ImageView
-            android:layout_width="30dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_action_browser"
-            android:layout_alignTop="@+id/textViewChangeVote"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Liquan Bai"
+            android:id="@+id/textView13"
+            android:gravity="center_vertical"
+            android:textColor="#616161"
+            android:paddingLeft="30dp"
+            android:layout_below="@+id/textViewChangeVote"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Send Email"
-            android:id="@+id/textViewEmailCandidate"
+            android:text="David Binnion"
+            android:id="@+id/textView14"
             android:gravity="center_vertical"
             android:textColor="#616161"
-            android:paddingLeft="55dp"
-            android:layout_below="@+id/textViewChangeVote"
+            android:paddingLeft="30dp"
+            android:layout_below="@+id/textView13"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageView12"
-            android:src="@drawable/ic_action_email"
-            android:layout_below="@+id/textViewChangeVote"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Twitter Page"
-            android:id="@+id/textViewTwitterPage"
+            android:text="Keonhee Park"
+            android:id="@+id/textView18"
             android:gravity="center_vertical"
             android:textColor="#616161"
-            android:paddingLeft="55dp"
-            android:layout_below="@+id/textViewEmailCandidate"
+            android:paddingLeft="30dp"
+            android:layout_below="@+id/textView14"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentStart="true" />
 
-        <ImageView
-            android:layout_width="30dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/imageView13"
-            android:src="@drawable/ic_action_twitter"
-            android:layout_alignTop="@+id/textViewTwitterPage"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Justin Hinze"
+            android:id="@+id/textView21"
+            android:gravity="center_vertical"
+            android:textColor="#616161"
+            android:paddingLeft="30dp"
+            android:layout_below="@+id/textView18"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
 </LinearLayout>
