@@ -61,8 +61,6 @@ public class HomePage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private OnCommunicateActivityListener activityCommunicator;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -130,7 +128,6 @@ public class HomePage extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        activityCommunicator = (OnCommunicateActivityListener)context;
 
     }
 
@@ -142,6 +139,7 @@ public class HomePage extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        final OnCommunicateActivityListener activityCommunicator = (OnCommunicateActivityListener) getActivity();
         super.onActivityCreated(savedInstanceState);
         FloatingActionButton floatingActionButton = ((MainActivity) getActivity()).getFloatingActionButton();
         if(floatingActionButton != null){
