@@ -38,7 +38,7 @@ public class RepublicansList extends Fragment {
 
     private int republicanColor, colorDown, colorUp;
 
-    Context thisContext;
+
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
     ArrayList<User> arrayListRepublicanUsers;
@@ -99,8 +99,8 @@ public class RepublicansList extends Fragment {
         final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
         final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
 
-        colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
-        colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
+        colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
 
 
         textViewResources.setText("REPUBLICAN PARTY RESOURCES");
@@ -177,11 +177,11 @@ public class RepublicansList extends Fragment {
     }
 
     public void inflateLinearLayoutRepublicanRanking(){
-        CandidateDataSource dataSource = new CandidateDataSource(thisContext);
+        CandidateDataSource dataSource = new CandidateDataSource(getActivity());
         dataSource.open();
         arrayListCandidates = dataSource.getCandidatesInOrderOfVotes("GOP");
         dataSource.close();
-        adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);
+        adapter = new CandidateAdapterRanking(getActivity(),arrayListCandidates);
         LinearLayout linearLayoutRepublicanRanking = (LinearLayout)getView().findViewById(R.id.linearLayoutRepublicanRanking);
         final int adapterCount = adapter.getCount();
         for(int i = 0 ; i < adapterCount ; i++) {
@@ -192,11 +192,11 @@ public class RepublicansList extends Fragment {
     }
 
     public void inflateLinearLayoutRegisteredRepublicans(){
-        UserDataSource userDataSource = new UserDataSource(thisContext);
+        UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();
         arrayListRepublicanUsers = userDataSource.getUsersByParty("Republican");
         userDataSource.close();
-        adapterUser = new UserAdapter(thisContext, arrayListRepublicanUsers);
+        adapterUser = new UserAdapter(getActivity(), arrayListRepublicanUsers);
         LinearLayout linearLayoutRegisteredRepublicans = (LinearLayout)getView().findViewById(R.id.linearLayoutRegisteredRepublicans);
         final int adapterCount = adapterUser.getCount();
         for(int i = 0 ; i < adapterCount ; i++) {
@@ -212,13 +212,13 @@ public class RepublicansList extends Fragment {
     }
 
     public void inflateVoterDemographics(){
-        UserDataSource userDataSource = new UserDataSource(thisContext);
+        UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();
         arrayListUsers = userDataSource.getUsersByParty("Republican");
 
 
 
-        republicanColor = ContextCompat.getColor(thisContext, R.color.colorRed);
+        republicanColor = ContextCompat.getColor(getActivity(), R.color.colorRed);
 
         TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
         TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
@@ -257,11 +257,11 @@ public class RepublicansList extends Fragment {
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
 
-        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
-        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        final int colorDownLight = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressedLight);
 
-        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
-        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
+        final int colorWhite = ContextCompat.getColor(getActivity(), R.color.colorWhite);
 
         final RelativeLayout relativeLayoutBrowseUsers = (RelativeLayout)getView().findViewById(R.id.relativeLayoutBrowseUsers);
         relativeLayoutBrowseUsers.setOnTouchListener(new View.OnTouchListener() {
@@ -455,7 +455,6 @@ public class RepublicansList extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        thisContext = context;
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;
