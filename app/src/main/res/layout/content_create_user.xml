@@ -9,263 +9,272 @@
     tools:showIn="@layout/activity_create_user"
     android:background="@color/colorPrimaryDark">
 
-    <RadioGroup
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroupParty"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="60dp">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView5"
+        android:layout_alignParentBottom="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Affiliated Party:"
-            android:id="@+id/textView6"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorWhite"
-            android:layout_above="@+id/radioGroupParty"
-            android:layout_toRightOf="@+id/radioGroupGender" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButton"
-            android:checked="false"
-            android:text="Republican"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
-
-        <RadioButton
+        <RelativeLayout
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.example.bradleycooper.politicslive.CreateUser"
+            tools:showIn="@layout/activity_create_user"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButton2"
-            android:checked="false"
-            android:text="Democrat"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" >
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButton3"
-            android:checked="false"
-            android:text="Other/Unaffiliated"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
-    </RadioGroup>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_first_name"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:elegantTextHeight="true"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="First Name"
+                android:textColorHint="#96ffffff"
+                android:layout_below="@+id/textView61"
+                android:layout_alignRight="@+id/radioGroupGender"
+                android:layout_alignEnd="@+id/radioGroupGender"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="60dp" />
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroupGender"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:layout_alignTop="@+id/radioGroupParty"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="-20dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_last_name"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:elegantTextHeight="true"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="Last Name"
+                android:textColorHint="#96ffffff"
+                android:layout_alignBottom="@+id/editText_first_name"
+                android:layout_toRightOf="@+id/editText_first_name"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="60dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Gender:"
-            android:id="@+id/textView12"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="20dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:weightSum="1"
+                android:id="@+id/linearLayout5"
+                android:layout_below="@+id/editText_first_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" >
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButtonMale"
-            android:checked="false"
-            android:text="Male"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_username"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    android:elegantTextHeight="true"
+                    android:backgroundTint="@color/colorAccent"
+                    android:hint="Username"
+                    android:textColorHint="#96ffffff" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButtonFemale"
-            android:checked="false"
-            android:text="Female"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_password"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    android:elegantTextHeight="true"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Password"
+                    android:textColorHint="#96ffffff"
+                    android:password="true" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButtonOther"
-            android:checked="false"
-            android:text="Other/Unaffiliated"
-            android:textColor="@color/colorWhite"
-            android:buttonTint="@color/colorBlueLight" />
-    </RadioGroup>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_password_confirm"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    android:elegantTextHeight="true"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Confirm Password"
+                    android:textColorHint="#96ffffff"
+                    android:password="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_first_name"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:elegantTextHeight="true"
-        android:backgroundTint="@color/colorAccent"
-        android:hint="First Name*"
-        android:textColorHint="#96ffffff"
-        android:layout_below="@+id/textView11"
-        android:layout_alignLeft="@+id/radioGroupGender"
-        android:layout_alignStart="@+id/radioGroupGender"
-        android:layout_alignRight="@+id/radioGroupGender"
-        android:layout_alignEnd="@+id/radioGroupGender" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_age"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginRight="160dp"
+                    android:elegantTextHeight="true"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Age"
+                    android:textColorHint="#96ffffff" />
+            </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_last_name"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:elegantTextHeight="true"
-        android:backgroundTint="@color/colorAccent"
-        android:hint="Last Name*"
-        android:textColorHint="#96ffffff"
-        android:layout_alignBottom="@+id/editText_first_name"
-        android:layout_toRightOf="@+id/editText_first_name"
-        android:layout_alignRight="@+id/radioGroupParty"
-        android:layout_alignEnd="@+id/radioGroupParty" />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroupParty"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:layout_below="@+id/linearLayout5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="40dp" >
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:weightSum="1"
-        android:id="@+id/linearLayout2"
-        android:layout_below="@+id/editText_first_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Affiliated Party:"
+                    android:id="@+id/textView6"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorWhite"
+                    android:layout_above="@+id/radioGroupParty"
+                    android:layout_toRightOf="@+id/radioGroupGender" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_user_name"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:elegantTextHeight="true"
-            android:backgroundTint="@color/colorAccent"
-            android:hint="Username*"
-            android:textColorHint="#96ffffff" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonRepublican"
+                    android:checked="false"
+                    android:text="Republican"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_password"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:elegantTextHeight="true"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_marginTop="10dp"
-            android:hint="Password*"
-            android:textColorHint="#96ffffff"
-            android:password="true" />
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonDemocrat"
+                    android:checked="false"
+                    android:text="Democrat"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_password_confirm"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:elegantTextHeight="true"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_marginTop="10dp"
-            android:hint="Confirm Password*"
-            android:textColorHint="#96ffffff"
-            android:password="true" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonIndependent"
+                    android:checked="false"
+                    android:text="Independent"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
+            </RadioGroup>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_age"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:layout_marginLeft="160dp"
-            android:layout_marginRight="160dp"
-            android:elegantTextHeight="true"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_marginTop="10dp"
-            android:hint="Age"
-            android:textColorHint="#96ffffff" />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroupGender"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:layout_alignTop="@+id/radioGroupParty"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="-20dp" >
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Gender:"
+                    android:id="@+id/textView12"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Live!"
-        android:id="@+id/textView11"
-        android:textIsSelectable="false"
-        android:textSize="40dp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold|italic"
-        android:layout_below="@+id/textView10"
-        android:layout_alignLeft="@+id/textView10"
-        android:layout_alignStart="@+id/textView10" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonMale"
+                    android:checked="false"
+                    android:text="Male"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Politics"
-        android:id="@+id/textView10"
-        android:textIsSelectable="false"
-        android:textSize="40dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold|italic"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonFemale"
+                    android:checked="false"
+                    android:text="Female"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:id="@+id/buttonCreateAccount"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/colorWhite"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButtonOther"
+                    android:checked="false"
+                    android:text="Prefer not to answer"
+                    android:textColor="@color/colorWhite"
+                    android:buttonTint="@color/colorBlueLight" />
+            </RadioGroup>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView8"
-        android:src="@drawable/ic_action_contact_icon"
-        android:layout_gravity="center_horizontal"
-        android:onClick="choosePicture"
-        android:layout_alignTop="@+id/textView10"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Live!"
+                android:id="@+id/textView61"
+                android:textIsSelectable="false"
+                android:textSize="40dp"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold|italic"
+                android:layout_below="@+id/textView62"
+                android:layout_alignLeft="@+id/textView62"
+                android:layout_alignStart="@+id/textView62" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Politics"
+                android:id="@+id/textView62"
+                android:textIsSelectable="false"
+                android:textSize="40dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold|italic"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                android:id="@+id/buttonCreateAccount"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/colorWhite"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/radioGroupGender"
+                android:layout_marginTop="15dp" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

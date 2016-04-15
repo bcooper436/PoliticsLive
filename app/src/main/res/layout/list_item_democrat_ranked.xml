@@ -8,17 +8,18 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         card_view:cardCornerRadius="4dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginBottom="1dp">
+        android:layout_marginBottom="3dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="7dp"
             android:contextClickable="false"
-            >
+            android:background="@color/colorPrimary"
+            android:id="@+id/relativeLayoutPartyColor">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,14 +30,15 @@
                 android:layout_toRightOf="@+id/imageViewCandidate"
                 android:layout_toEndOf="@+id/imageViewCandidate"
                 android:layout_marginLeft="10dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_alignParentTop="true"
                 android:gravity="center_vertical"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/colorWhite" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:id="@+id/imageViewCandidate"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -53,10 +55,11 @@
                 android:layout_gravity="right"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="15dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textColor="#e0e0e0" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +67,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="0%"
                 android:id="@+id/textViewVotePercent"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
                 android:layout_gravity="right"
                 android:layout_toLeftOf="@+id/textView9"
                 android:layout_toStartOf="@+id/textView9"
@@ -82,14 +85,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="N/a."
+        android:text="1st:"
         android:id="@+id/textViewCandidatePlace"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/card_view"
         android:layout_alignTop="@+id/card_view"
         android:gravity="center_vertical"
-        android:layout_marginLeft="15dp" />
+        android:layout_marginLeft="15dp"
+        android:textColor="#212121" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewCrown"
+        android:src="@drawable/crown"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textViewCandidatePlace"
+        android:layout_alignStart="@+id/textViewCandidatePlace"
+        android:layout_alignRight="@+id/textViewCandidatePlace"
+        android:layout_alignEnd="@+id/textViewCandidatePlace"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

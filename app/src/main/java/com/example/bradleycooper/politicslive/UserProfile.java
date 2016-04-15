@@ -102,6 +102,7 @@ public class UserProfile extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity) getActivity()).hideFloatingActionButton();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String userName = preferences.getString("Username", "");
@@ -171,19 +172,15 @@ public class UserProfile extends Fragment {
         ImageView imageViewPartyIcon = (ImageView)getView().findViewById(R.id.imageViewPartyIcon);
         ImageView imageViewProfilePicture =(ImageView)getView().findViewById(R.id.imageViewProfilePicture);
 
-        int idGOP = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_gop_red", null, null);
-        int idDNC = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_dnc_blue", null, null);
-        int idGOPProfilePicture = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/contact_red", null, null);
-        int idDNCProfilePicture = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/contact_blue", null, null);
+        int idGOP = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_gop_color", null, null);
+        int idDNC = getResources().getIdentifier("com.example.bradleycooper.politicslive:drawable/ic_action_dnc_color", null, null);
 
 
         if(currentUser.getPartyAffiliation().equalsIgnoreCase("Democrat")){
             imageViewPartyIcon.setImageResource(idDNC);
-            imageViewProfilePicture.setImageResource(idDNCProfilePicture);
         }
         else {
             imageViewPartyIcon.setImageResource(idGOP);
-            imageViewProfilePicture.setImageResource(idGOPProfilePicture);
         }
         textViewDisplayName.setText(currentUser.getDisplayName());
         textViewUserName.setText(currentUser.getUserName());
@@ -194,14 +191,8 @@ public class UserProfile extends Fragment {
         textChosenRepublican.setText(currentUser.getChosenRepublican());
 
         if(candidateDemocrat != null){
-            byte[] byteArrayDemocrat = candidateDemocrat.getSquarePicture();
-            Bitmap bmpDemocrat = BitmapFactory.decodeByteArray(byteArrayDemocrat, 0, byteArrayDemocrat.length);
-            imageViewChosenDemocrat.setImageBitmap(bmpDemocrat);
         }
         if(candidateRepublican != null) {
-            byte[] byteArrayRepublican = candidateRepublican.getSquarePicture();
-            Bitmap bmpRepublican = BitmapFactory.decodeByteArray(byteArrayRepublican, 0, byteArrayRepublican.length);
-            imageViewChosenRepublican.setImageBitmap(bmpRepublican);
         }
     }
     @Override

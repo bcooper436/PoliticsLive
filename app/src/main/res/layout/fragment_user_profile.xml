@@ -12,16 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/relativeLayout"
-        android:layout_marginTop="55dp">
-
-        <ImageView
-            android:layout_width="115dp"
-            android:layout_height="115dp"
-            android:id="@+id/imageViewProfilePicture"
-            android:src="@drawable/contact_blue"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,9 +22,7 @@
             android:id="@+id/textViewDisplayName"
             android:textColor="@color/colorBlack"
             android:text="Display Name"
-            android:layout_alignBottom="@+id/imageViewPartyIcon"
-            android:layout_toRightOf="@+id/imageViewProfilePicture"
-            android:layout_toEndOf="@+id/imageViewProfilePicture" />
+            android:layout_alignBottom="@+id/imageViewPartyIcon" />
 
         <ImageView
             android:layout_width="50dp"
@@ -51,9 +41,19 @@
             android:id="@+id/textViewUserName"
             android:textColor="@color/colorBlack"
             android:text="username"
-            android:layout_below="@+id/textViewDisplayName"
-            android:layout_toRightOf="@+id/imageViewProfilePicture"
-            android:layout_toEndOf="@+id/imageViewProfilePicture" />
+            android:layout_below="@+id/textViewDisplayName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="User Information"
+            android:id="@+id/textView32"
+            android:textColor="#212121"
+            android:layout_below="@+id/textViewUserName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -67,12 +67,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Age:"
             android:id="@+id/textView21"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="0dp" />
+            android:layout_marginTop="0dp"
+            android:textColor="#616161" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,13 +89,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Gender:"
             android:id="@+id/textView23"
             android:layout_below="@+id/textView21"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#616161" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,13 +112,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Party Affiliation:"
             android:id="@+id/textView25"
             android:layout_below="@+id/textView23"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#616161" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,11 +136,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Current Votes:"
+            android:text="Your Current Votes:"
             android:id="@+id/textView18"
-            android:layout_below="@+id/textViewParty"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp" />
+            android:layout_below="@+id/textView25"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#212121" />
 
         <RelativeLayout
             android:layout_width="200dp"
@@ -147,8 +153,9 @@
             android:background="#ffffff"
             android:id="@+id/relativeLayout3"
             android:layout_below="@+id/textView18"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+            android:layout_toRightOf="@+id/textView28"
+            android:layout_toEndOf="@+id/textView28"
+            android:layout_marginLeft="15dp">
 
             <ImageView
                 android:layout_width="50dp"
@@ -180,8 +187,9 @@
             android:background="#ffffff"
             android:id="@+id/relativeLayout6"
             android:layout_below="@+id/relativeLayout3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+            android:layout_alignLeft="@+id/relativeLayout3"
+            android:layout_alignStart="@+id/relativeLayout3"
+            android:layout_marginTop="15dp">
 
             <ImageView
                 android:layout_width="50dp"
@@ -204,6 +212,34 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colorBlack" />
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Democratic Candidate:"
+            android:id="@+id/textView28"
+            android:textColor="#616161"
+            android:layout_alignBottom="@+id/relativeLayout3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/relativeLayout3"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Republican Candidate:"
+            android:id="@+id/textView14"
+            android:textColor="#616161"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/relativeLayout6"
+            android:layout_alignTop="@+id/relativeLayout6"
+            android:layout_marginLeft="5dp" />
 
     </RelativeLayout>
 

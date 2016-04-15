@@ -1,24 +1,31 @@
 package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -39,13 +46,19 @@ public class DemocratsList extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private int democratColor;
+    private int democratColor, colorDown, colorUp;
 
-    Context thisContext;
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
+    ArrayList<User> arrayListDemocratUsers;
+    UserAdapter adapterUser;
 
     ArrayList<User> arrayListUsers;
+
+    private boolean registeredUsersCreated = false;
+    private boolean totalVotesForAllCandidatesCreated = false;
+    private boolean averageAgeofVoterCreated = false;
+    private boolean genderBreakdownCreated = false;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,8 +82,6 @@ public class DemocratsList extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-
-
     }
 
     @Override
@@ -93,37 +104,127 @@ public class DemocratsList extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity) getActivity()).hideFloatingActionButton();
+
+        TextView textViewResources = (TextView)getView().findViewById(R.id.textViewResources);
+        final TextView textViewOfficalCampaignWebsite = (TextView)getView().findViewById(R.id.textViewReport);
+        final TextView textViewEmailCandidate = (TextView)getView().findViewById(R.id.textViewEmailCandidate);
+        final TextView textViewTwitterPage = (TextView)getView().findViewById(R.id.textViewTwitterPage);
+
+        colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
 
 
-        CandidateDataSource dataSource = new CandidateDataSource(thisContext);
+        textViewResources.setText("DEMOCRATIC PARTY RESOURCES");
+        textViewOfficalCampaignWebsite.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.democrats.org/"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewEmailCandidate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        textViewEmailCandidate.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://my.democrats.org/page/s/contact-the-democrats"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewEmailCandidate.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+        textViewTwitterPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        textViewTwitterPage.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        textViewOfficalCampaignWebsite.setBackgroundColor(0x00000000);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/TheDemocrats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"));
+                        startActivity(browserIntent);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        textViewTwitterPage.setBackgroundColor(0x00000000);
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+        inflateLinearLayoutDemocratRanking();
+        inflateLinearLayoutRegisteredDemocrats();
+        inflateVoterDemographics();
+    }
+
+    public void inflateLinearLayoutDemocratRanking(){
+        CandidateDataSource dataSource = new CandidateDataSource(getActivity());
         dataSource.open();
         arrayListCandidates = dataSource.getCandidatesInOrderOfVotes("DNC");
         dataSource.close();
+        adapter = new CandidateAdapterRanking(getActivity(),arrayListCandidates);
+        LinearLayout linearLayoutDemocratRanking = (LinearLayout)getView().findViewById(R.id.linearLayoutDemocratRanking);
+        final int adapterCount = adapter.getCount();
+        for(int i = 0 ; i < adapterCount ; i++) {
+            final int iFinal = i;
+            View item = adapter.getView(i, null, null);
+            linearLayoutDemocratRanking.addView(item);
+        }
+    }
 
-        adapter = new CandidateAdapterRanking(thisContext,arrayListCandidates);
-        ListView listViewDNC = (ListView)getView().findViewById(R.id.listViewDNC);
-        listViewDNC.setAdapter(adapter);
+    public void inflateLinearLayoutRegisteredDemocrats(){
+        UserDataSource userDataSource = new UserDataSource(getActivity());
+        userDataSource.open();
+        arrayListDemocratUsers = userDataSource.getUsersByParty("Democrat");
+        userDataSource.close();
+        adapterUser = new UserAdapter(getActivity(), arrayListDemocratUsers);
+        LinearLayout linearLayoutRegisteredDemocrats = (LinearLayout)getView().findViewById(R.id.linearLayoutRegisteredDemocrats);
+        final int adapterCount2 = adapterUser.getCount();
+        for(int i = 0 ; i < adapterCount2 ; i++) {
+            final int iFinal = i;
+            View item = adapterUser.getView(i, null, null);
+            linearLayoutRegisteredDemocrats.addView(item);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                }
+            });
+        }
+    }
 
-        listViewDNC.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                Candidate selectedCandidate = arrayListCandidates.get(position);
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
-                intent.putExtra("candidateId", selectedCandidate.getCandidateID());
-                startActivity(intent);
-            }
-        });
-        listViewDNC.setFocusable(false);
-
-
-
-        UserDataSource userDataSource = new UserDataSource(thisContext);
+    public void inflateVoterDemographics(){
+        UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();
         arrayListUsers = userDataSource.getUsersByParty("Democrat");
 
 
 
-        democratColor = ContextCompat.getColor(thisContext, R.color.colorPrimary);
+        democratColor = ContextCompat.getColor(getActivity(), R.color.colorPrimary);
 
         TextView textViewTotalVotes = (TextView) getView().findViewById(R.id.textViewTotalVotes);
         TextView textViewTotalVotesLabel = (TextView) getView().findViewById(R.id.textViewTotalVotesLabel);
@@ -140,6 +241,17 @@ public class DemocratsList extends Fragment {
             textViewMalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Democrat", "Male")));
             textViewFemalePercentage.setText(Integer.toString(userDataSource.getGenderPercentage("Democrat", "Female")));
         }
+        else {
+            textViewRegisteredPartyMembers.setText("0");
+            TextView textViewWarning = (TextView)getView().findViewById(R.id.textViewWarning);
+            textViewWarning.setVisibility(View.VISIBLE);
+            TextView textViewWarning2 = (TextView)getView().findViewById(R.id.textViewWarning2);
+            textViewWarning2.setVisibility(View.VISIBLE);
+            View viewDemographics = (View)getView().findViewById(R.id.viewDemographics);
+            viewDemographics.setVisibility(View.GONE);
+            TextView textViewTapToExpand = (TextView)getView().findViewById(R.id.textViewTapToExpand);
+            textViewTapToExpand.setVisibility(View.GONE);
+        }
 
         textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
         textViewTotalVotes.setBackgroundResource(R.drawable.circle_dnc);
@@ -150,13 +262,13 @@ public class DemocratsList extends Fragment {
         textViewAverageAgeLabel.setText("Average Age of Democratic Voter = ");
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_dnc);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_dnc);
-        userDataSource.close();
 
-        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
-        final int colorDownLight = ContextCompat.getColor(thisContext, R.color.colorLayoutPressedLight);
+        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        final int colorDownLight = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressedLight);
 
-        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
-        final int colorWhite = ContextCompat.getColor(thisContext, R.color.colorWhite);
+        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
+        final int colorWhite = ContextCompat.getColor(getActivity(), R.color.colorWhite);
+
 
         final RelativeLayout relativeLayoutBrowseUsers = (RelativeLayout)getView().findViewById(R.id.relativeLayoutBrowseUsers);
         relativeLayoutBrowseUsers.setOnTouchListener(new View.OnTouchListener() {
@@ -168,19 +280,33 @@ public class DemocratsList extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
-                        AlertDialog alertDialog2 = new AlertDialog.Builder(thisContext).create();
-                        alertDialog2.setTitle("Success");
-                        alertDialog2.setMessage("Your account has been created");
-                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog2.show();
+                        ((MainActivity) getActivity()).onNavigationItemSelected("home");
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         relativeLayoutBrowseUsers.setBackgroundColor(colorUp);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
+        final RelativeLayout relativeLayoutRegisteredDemocrats = (RelativeLayout)getView().findViewById(R.id.relativeLayoutRegisteredDemocrats);
+        relativeLayoutRegisteredDemocrats.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorDown);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
+                        ((MainActivity) getActivity()).onNavigationItemSelected("userslist");
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        relativeLayoutRegisteredDemocrats.setBackgroundColor(colorUp);
                         break;
                 }
 
@@ -211,6 +337,9 @@ public class DemocratsList extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutRegisteredPartyExtended");
+                            if(!registeredUsersCreated) {
+                                createRegisteredUsersGraph();
+                            }
                         }
                         relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
                         break;
@@ -234,6 +363,9 @@ public class DemocratsList extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutTotalVotesExtended");
+                            if(!totalVotesForAllCandidatesCreated) {
+                                createTotalVotesForAllCandidatesGraph();
+                            }
                         }
                         relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
                         break;
@@ -257,6 +389,9 @@ public class DemocratsList extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutAverageAgeExtended");
+                            if(!averageAgeofVoterCreated) {
+                                createAverageAgeOfVoterGraph();
+                            }
                         }
                         relativeLayoutAverageAge.setBackgroundColor(colorWhite);
                         break;
@@ -280,6 +415,9 @@ public class DemocratsList extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutGenderExtended");
+                            if(!genderBreakdownCreated) {
+                                createGenderBreakdownGraph();
+                            }
                         }
                         relativeLayoutGender.setBackgroundColor(colorWhite);
                         break;
@@ -290,8 +428,8 @@ public class DemocratsList extends Fragment {
                 return true;
             }
         });
-
     }
+
     public void makeAllExtendedInvisible(String relativeLayoutName){
         RelativeLayout relativeLayoutTotalVotesExtended = (RelativeLayout)getView().findViewById(R.id.relativeLayoutTotalVotesExtended);
         relativeLayoutTotalVotesExtended.setVisibility(View.GONE);
@@ -319,6 +457,166 @@ public class DemocratsList extends Fragment {
                 break;
         }
     }
+
+    private void formatBarChart(BarChart b) {
+        b.setDescription("");
+        b.getLegend().setEnabled(false);
+        b.setBackgroundColor(Color.WHITE);
+        b.setDrawGridBackground(false);
+        b.setDrawMarkerViews(false);
+        b.setDrawBarShadow(false);
+        b.setDrawBorders(false);
+        b.animateXY(1000,1000);
+    }
+
+    private void formatBarDataSet(BarDataSet d) {
+        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        d.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return String.format("%.0f", value);
+            }
+        });
+    }
+
+    private void createRegisteredUsersGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartRegisteredUsers);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
+        ArrayList<String> parties = new ArrayList<>();
+        ArrayList<BarEntry> values = new ArrayList<>();
+        parties.add("DNC");
+        ds.open();
+        values.add(new BarEntry(getNumberOfRegisteredDemocrats(ds.getUsersByParty("Democrat")), 0));
+        ds.close();
+        BarDataSet barDataSet = new BarDataSet(values, "User Affiliation");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(parties, barDataSet);
+        barChart.setData(barData);
+        registeredUsersCreated = true;
+    }
+
+    private void createTotalVotesForAllCandidatesGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartTotalVotesForAllCandidates);
+        formatBarChart(barChart);
+        CandidateDataSource ds = new CandidateDataSource(getActivity());
+        ArrayList<String> candidates = new ArrayList<>();
+        ArrayList<BarEntry> votes = new ArrayList<>();
+        int i = 0;
+
+        ds.open();
+        for(Map.Entry<String, Integer> entry : ds.getDemocratVotes().entrySet()) {
+            if(entry.getKey().equals("TOTAL")) {
+                continue;
+            }
+            candidates.add(entry.getKey());
+            votes.add(new BarEntry(entry.getValue(), i));
+            i++;
+        }
+        ds.close();
+        barChart.getXAxis().setTextSize(5f);
+        BarDataSet barDataSet = new BarDataSet(votes, "Candidate Votes");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(candidates, barDataSet);
+        barChart.setData(barData);
+        totalVotesForAllCandidatesCreated = true;
+    }
+
+    private void createAverageAgeOfVoterGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartAverageAgeOfVoter);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
+        int lessThanTwentyFive = 0;
+        int twentyFiveToThrityFive = 0;
+        int thirtyFiveToFourtyFive = 0;
+        int fourtyFiveToFiftyFive = 0;
+        int fiftyFivePlus = 0;
+
+        ds.open();
+        for(User u : ds.getUsers()) {
+            if (!u.getPartyAffiliation().equals("Democrat")) {
+                continue;
+            }
+            if (u.getAge() < 25) {
+                lessThanTwentyFive++;
+                continue;
+            }
+            if (u.getAge() < 35) {
+                twentyFiveToThrityFive++;
+                continue;
+            }
+            if (u.getAge() < 45) {
+                thirtyFiveToFourtyFive++;
+                continue;
+            }
+            if (u.getAge() < 55) {
+                fourtyFiveToFiftyFive++;
+                continue;
+            }
+            fiftyFivePlus++;
+        }
+        ds.close();
+        ArrayList<String> ages = new ArrayList<>();
+        ages.add("<25");
+        ages.add("25-34");
+        ages.add("35-44");
+        ages.add("45-54");
+        ages.add("55+");
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(lessThanTwentyFive, 0));
+        entries.add(new BarEntry(twentyFiveToThrityFive, 1));
+        entries.add(new BarEntry(thirtyFiveToFourtyFive, 2));
+        entries.add(new BarEntry(fourtyFiveToFiftyFive, 3));
+        entries.add(new BarEntry(fiftyFivePlus, 4));
+        BarDataSet barDataSet = new BarDataSet(entries, "ages");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(ages, barDataSet);
+        barChart.setData(barData);
+        averageAgeofVoterCreated = true;
+
+
+
+    }
+
+    private void createGenderBreakdownGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartGenderBreakdown);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
+        int male = 0;
+        int female = 0;
+        int other = 0;
+
+        ds.open();
+        for (User u : ds.getUsers()) {
+            if (!u.getPartyAffiliation().equals("Democrat")) {
+                continue;
+            }
+            if (u.getGender().equals("Male")) {
+                male++;
+                continue;
+            }
+            if (u.getGender().equals("Female")) {
+                female++;
+                continue;
+            }
+            other++;
+        }
+        ds.close();
+        ArrayList<String> genders = new ArrayList<>();
+        genders.add("Male");
+        genders.add("Female");
+        genders.add("Undisclosed");
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(male, 0));
+        entries.add(new BarEntry(female, 1));
+        entries.add(new BarEntry(other, 2));
+        BarDataSet barDataSet = new BarDataSet(entries, "genders");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(genders, barDataSet);
+        barChart.setData(barData);
+        genderBreakdownCreated = true;
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -335,7 +633,6 @@ public class DemocratsList extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        thisContext = context;
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;
@@ -366,4 +663,13 @@ public class DemocratsList extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
+
+    public int getNumberOfRegisteredDemocrats(ArrayList<User> arrayListUsers) {
+        int registered = 0;
+        for(User u : arrayListUsers) {
+            registered++;
+        }
+        return registered;
+    }
+
 }

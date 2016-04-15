@@ -129,6 +129,33 @@ public class CandidateDataSource {
         }
         return candidates;
     }
+    public ArrayList<Candidate> getOtherCandidates(String candidateName){
+        ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+        try {
+            String query = "SELECT * FROM candidate WHERE candidatename != '" + candidateName + "'";
+            Cursor cursor = database.rawQuery(query, null);
+
+            Candidate newCandidate;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newCandidate = new Candidate();
+                newCandidate.setCandidateID(cursor.getInt(0));
+                newCandidate.setCandidateName(cursor.getString(1));
+                newCandidate.setCandidateDescription(cursor.getString(2));
+                newCandidate.setNumberOfVotes(cursor.getInt(3));
+                newCandidate.setSquarePicture(cursor.getBlob(4));
+                newCandidate.setWidePicture(cursor.getBlob(5));
+                newCandidate.setParty(cursor.getString(6));
+                candidates.add(newCandidate);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            candidates = new ArrayList<Candidate>();
+        }
+        return candidates;
+    }
     public ArrayList<Candidate> getSpecificParty(String partyString){
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         try {
@@ -156,6 +183,7 @@ public class CandidateDataSource {
         }
         return candidates;
     }
+
     public Candidate getSpecificCandidate(int candidateId) {
         Candidate candidate = new Candidate();
         String query = "SELECT * FROM candidate WHERE _id=" + candidateId;

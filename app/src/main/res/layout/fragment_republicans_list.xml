@@ -11,115 +11,192 @@
         android:scrollIndicators="right"
         android:focusable="false">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="The republican party has long been the party which held the more conservative beliefs.  They were founded some years ago and a lot has happened."
-                android:id="@+id/textView24"
-                android:textColor="@color/colorBlack"
-                android:textSize="15dp"
-                android:layout_marginTop="70dp"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/imageView10"
-                android:layout_toStartOf="@+id/imageView10"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_alignParentBottom="false"
-                android:gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Candidates Rankings"
-                android:id="@+id/textView26"
-                android:layout_below="@+id/include"
-                android:layout_marginTop="20dp"
-                android:layout_alignLeft="@+id/textView24"
-                android:layout_alignStart="@+id/textView24" />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="275dp"
-                android:id="@+id/listViewDNC"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/textView26"
-                android:divider="@null"
-                android:layout_marginTop="10dp" />
-
-            <include
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                layout="@layout/card_layout_voter_demographics"
-                android:id="@+id/include"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/relativeLayoutBrowseUsers"
-                android:layout_alignEnd="@+id/relativeLayoutBrowseUsers"
-                android:layout_below="@+id/relativeLayoutBrowseUsers" />
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/imageView10"
-                android:src="@drawable/ic_action_gop_color"
-                android:layout_alignTop="@+id/textView24"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="15dp" />
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView24"
-                android:layout_marginTop="30dp"
-                android:id="@+id/relativeLayoutBrowseUsers"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/layout_selector">
+                android:layout_height="match_parent"
+                android:layout_marginTop="70dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/imageView10"
+                    android:src="@drawable/ic_action_gop_color"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginStart="19dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Voter Demographics"
-                    android:id="@+id/textView22"
-                    android:layout_marginLeft="15dp" />
+                    android:layout_height="80dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="The 2016 race for the Republican nominee has been highly volatile.  Currently, Donald trump is leading the polls, follwed not too far behind by senator Ted Cruz.  Kasich is mathmatically out; his only hope is a contested convention."
+                    android:id="@+id/textView39"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13dp"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageView10"
+                    android:layout_toEndOf="@+id/imageView10"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutRepublicanRanking"
+                android:layout_marginTop="30dp"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:id="@+id/relativeLayoutBrowseUsers"
+                android:background="@drawable/layout_selector"
+                android:layout_below="@+id/listViewGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="35dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Breakdown of Voters"
-                    android:id="@+id/textView27"
-                    android:layout_below="@+id/textView22"
-                    android:layout_alignLeft="@+id/textView22"
-                    android:layout_alignStart="@+id/textView22" />
+                    android:text="Voter Demographics"
+                    android:id="@+id/textView36"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#212121" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Tap to expand"
+                    android:id="@+id/textViewTapToExpand"
+                    android:layout_below="@+id/textView36"
+                    android:layout_alignLeft="@+id/textView36"
+                    android:layout_alignStart="@+id/textView36"
+                    android:textColor="#616161" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="MORE"
-                    android:id="@+id/textView29"
+                    android:id="@+id/textView24"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorRed"
+                    android:textColor="@color/colorRedDark"
                     android:textStyle="bold"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignBottom="@+id/textView27"
                     android:layout_marginRight="25dp" />
+
             </RelativeLayout>
 
-        </RelativeLayout>
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/card_layout_voter_demographics"
+                android:layout_below="@+id/relativeLayoutBrowseUsers"
+                android:id="@+id/viewDemographics" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/relativeLayoutRegisteredRepublicans"
+                android:background="@drawable/layout_selector"
+                android:layout_below="@+id/listViewGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Registered Republicans"
+                    android:id="@+id/textView40"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#212121"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SEE ALL"
+                    android:id="@+id/textView42"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorRedDark"
+                    android:textStyle="bold"
+                    android:layout_marginRight="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="24dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="There are no registered Republicans yet."
+                android:id="@+id/textViewWarning"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/linearLayoutRegisteredRepublicans"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="There are no registered Republicansto analyze yet."
+                android:id="@+id/textViewWarning2"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/viewDivider"
+                android:layout_below="@+id/viewDemographics"
+                android:layout_margin="25dp" />
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/candidate_profile_resources"
+                android:id="@+id/viewResources"
+                android:layout_below="@+id/viewDivider" />
+
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="PARTY RESOURCES"
+            android:id="@+id/textViewResources"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            android:textColor="#616161"
+            android:layout_marginLeft="25dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView7"
+            android:src="@drawable/ic_action_browser"
+            android:layout_below="@+id/textViewResources"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Official Party Website"
+            android:id="@+id/textViewOfficialPartyWebsite"
+            android:layout_alignBottom="@+id/imageView7"
+            android:layout_alignTop="@+id/imageView7"
+            android:gravity="center_vertical"
+            android:textColor="#616161"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="50dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView9"
+            android:src="@drawable/ic_action_email"
+            android:layout_below="@+id/imageView7"
+            android:layout_alignLeft="@+id/imageView7"
+            android:layout_alignStart="@+id/imageView7"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Email Party"
+            android:id="@+id/textViewEmailCandidate"
+            android:gravity="center_vertical"
+            android:textColor="#616161"
+            android:layout_alignTop="@+id/imageView9"
+            android:layout_alignBottom="@+id/imageView9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="50dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView11"
+            android:src="@drawable/ic_action_twitter"
+            android:layout_below="@+id/imageView9"
+            android:layout_alignLeft="@+id/imageView9"
+            android:layout_alignStart="@+id/imageView9"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Twitter Page"
+            android:id="@+id/textViewTwitterPage"
+            android:gravity="center_vertical"
+            android:textColor="#616161"
+            android:layout_alignBottom="@+id/imageView11"
+            android:layout_alignLeft="@+id/textViewEmailCandidate"
+            android:layout_alignStart="@+id/textViewEmailCandidate"
+            android:layout_alignTop="@+id/imageView11"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="50dp" />
+    </RelativeLayout>
+</LinearLayout>
