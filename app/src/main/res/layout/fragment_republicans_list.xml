@@ -58,7 +58,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="43dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/relativeLayoutBrowseUsers"
                 android:background="@drawable/layout_selector"
                 android:layout_below="@+id/listViewGOP"

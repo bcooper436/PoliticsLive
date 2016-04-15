@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         /* Initialize the user table with 30 fake user accounts, to demonstrate the graphs and demographics potential */
         generateUsers("Bradley Cooper", "bcooper436", "zun3ukit", "Democrat", 22, "Male", "Bernie Sanders", "Donald Trump");
         generateUsers("Linden Marshall", "welcomehome8", "zun3ukit", "Republican", 31, "Male", "Bernie Sanders", "John Kasich");
-        generateUsers("Rhonda Boley", "duneiversity", "zun3ukit", "Independent", 62, "Female", "Hilary Clinton", "Donald Trump");
+        generateUsers("Rhonda Bowley", "duneiversity", "zun3ukit", "Independent", 62, "Female", "Hilary Clinton", "Donald Trump");
         generateUsers("Rubisha Louqie", "SparklesGems80", "zun3ukit", "Democrat", 47, "Female", "Hilary Clinton", "Donald Trump");
         generateUsers("Mark Simmons", "marksimms", "zun3ukit", "Democrat", 50, "Male", "Hilary Clinton", "Ted Cruz");
 

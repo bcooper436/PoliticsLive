@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="TEAM MEMBERS"
+            android:text="DEV TEAM MEMBERS"
             android:id="@+id/textViewResources"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -25,9 +25,9 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Bradley Cooper"
+            android:text="Bradley Cooper "
             android:id="@+id/textViewChangeVote"
             android:gravity="center_vertical"
             android:textColor="#616161"
@@ -41,7 +41,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Liquan Bai"
             android:id="@+id/textView13"
@@ -54,7 +54,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="David Binnion"
             android:id="@+id/textView14"
@@ -67,7 +67,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Keonhee Park"
             android:id="@+id/textView18"
@@ -80,7 +80,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Justin Hinze"
             android:id="@+id/textView21"

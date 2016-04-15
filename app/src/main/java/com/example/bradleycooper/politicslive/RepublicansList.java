@@ -265,11 +265,11 @@ public class RepublicansList extends Fragment {
 
         textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
         textViewTotalVotes.setBackgroundResource(R.drawable.circle_gop);
-        textViewTotalVotesLabel.setText("Total votes for Republican Candidates = ");
+        textViewTotalVotesLabel.setText("Total votes for party = ");
         textViewRegisteredPartyMembers.setBackgroundResource(R.drawable.circle_gop);
         textViewRegisteredPartyMembersLabel.setText("Registered Republican Voters = ");
         textViewAverageAge.setBackgroundResource(R.drawable.circle_gop);
-        textViewAverageAgeLabel.setText("Average Age of Republican Voter = ");
+        textViewAverageAgeLabel.setText("Average Age of Voter = ");
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_gop);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_gop);
 

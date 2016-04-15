@@ -255,11 +255,11 @@ public class DemocratsList extends Fragment {
 
         textViewTotalVotes.setText(Integer.toString(getTotalVotes(arrayListCandidates)));
         textViewTotalVotes.setBackgroundResource(R.drawable.circle_dnc);
-        textViewTotalVotesLabel.setText("Total votes for Democratic Candidates = ");
+        textViewTotalVotesLabel.setText("Total votes for party = ");
         textViewRegisteredPartyMembers.setBackgroundResource(R.drawable.circle_dnc);
-        textViewRegisteredPartyMembersLabel.setText("Registered Democratic Voters = ");
+        textViewRegisteredPartyMembersLabel.setText("Registered democratic voters = ");
         textViewAverageAge.setBackgroundResource(R.drawable.circle_dnc);
-        textViewAverageAgeLabel.setText("Average Age of Democratic Voter = ");
+        textViewAverageAgeLabel.setText("Avgerage age of voter = ");
         textViewMalePercentage.setBackgroundResource(R.drawable.circle_dnc);
         textViewFemalePercentage.setBackgroundResource(R.drawable.circle_dnc);
 

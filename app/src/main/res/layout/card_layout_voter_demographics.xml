@@ -84,7 +84,10 @@
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="15dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -107,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Total Votes for the Democratic Party = "
+                    android:text="Total Votes for the Party = "
                     android:id="@+id/textViewTotalVotesLabel"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
@@ -139,10 +142,10 @@
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewTotalVotes"
                     android:layout_toEndOf="@+id/textViewTotalVotes"
-                    android:layout_marginLeft="7dp"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_toRightOf="@+id/textViewTotalVotes"
+                    android:layout_marginLeft="7dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -158,7 +161,10 @@
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="15dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -181,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Average Age of Democratic Voter ="
+                    android:text="Average Age of Voter ="
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -234,7 +240,10 @@
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="15dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -293,7 +302,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewMalePercentageLabel"
                     android:layout_toEndOf="@+id/textViewMalePercentageLabel"
-                    android:layout_marginLeft="15dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -306,7 +315,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewMalePercentage"
                     android:layout_toEndOf="@+id/textViewMalePercentage"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="2dp"
                     android:textSize="12dp" />
 
                 <TextView
@@ -318,10 +327,10 @@
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:layout_alignTop="@+id/textViewMalePercentageLabel"
-                    android:layout_toRightOf="@+id/textViewFemalePercentage"
                     android:layout_toEndOf="@+id/textViewFemalePercentage"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:layout_toRightOf="@+id/textViewFemalePercentage"
+                    android:layout_marginLeft="2dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -337,7 +346,10 @@
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="15dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
