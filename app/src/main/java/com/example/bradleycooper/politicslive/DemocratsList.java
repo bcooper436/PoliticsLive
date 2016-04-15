@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -470,6 +471,16 @@ public class DemocratsList extends Fragment {
         b.setDrawMarkerViews(false);
         b.setDrawBarShadow(false);
         b.setDrawBorders(false);
+        b.getAxisLeft().setDrawLabels(false);
+        b.getAxisRight().setDrawLabels(false);
+        b.getAxisLeft().setDrawGridLines(false);
+        b.getAxisRight().setDrawGridLines(false);
+        b.getXAxis().setDrawGridLines(false);
+        b.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        b.getXAxis().setDrawAxisLine(false);
+        b.setDrawBorders(false);
+        b.getAxisLeft().setDrawAxisLine(false);
+        b.getAxisRight().setDrawAxisLine(false);
         b.animateXY(1000,1000);
     }
 

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -368,6 +369,16 @@ public class HomePage extends Fragment {
         b.setDrawMarkerViews(false);
         b.setDrawBarShadow(false);
         b.setDrawBorders(false);
+        b.getAxisLeft().setDrawLabels(false);
+        b.getAxisRight().setDrawLabels(false);
+        b.getAxisLeft().setDrawGridLines(false);
+        b.getAxisRight().setDrawGridLines(false);
+        b.getXAxis().setDrawGridLines(false);
+        b.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        b.getXAxis().setDrawAxisLine(false);
+        b.setDrawBorders(false);
+        b.getAxisLeft().setDrawAxisLine(false);
+        b.getAxisRight().setDrawAxisLine(false);
         b.animateXY(1000,1000);
     }
 
@@ -379,6 +390,7 @@ public class HomePage extends Fragment {
                 return String.format("%.0f", value);
             }
         });
+        d.setValueTextSize(10f);
     }
 
     private void createRegisteredUsersGraph() {
