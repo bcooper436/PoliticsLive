@@ -297,6 +297,8 @@ public class HomePage extends Fragment {
 
         int[] republicanColors = {colorRed1,colorRed2,colorRed3};
 
+        int[] bothColors = {colorBlue1, colorBlue2, colorRed1,colorRed2,colorRed3};
+
 
 
         PieDataSet repDataSet = new PieDataSet(repVotes, "% of " +totalRepublicanVotes +" Votes");
@@ -399,7 +401,15 @@ public class HomePage extends Fragment {
     }
 
     private void formatBarDataSet(BarDataSet d) {
-        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        final int colorBlue1 = ContextCompat.getColor(getActivity(), R.color.colorPrimary);
+        final int colorBlue2 = ContextCompat.getColor(getActivity(), R.color.colorMotionPressDNC);
+        final int colorBlue3 = ContextCompat.getColor(getActivity(), R.color.colorBlueLight);
+        final int colorRed1 = ContextCompat.getColor(getActivity(), R.color.colorRedLight);
+        final int colorRed2 = ContextCompat.getColor(getActivity(), R.color.colorRed);
+
+        int[] bothColors = {colorBlue1, colorBlue2, colorBlue3,colorRed1,colorRed2};
+
+        d.setColors(bothColors);
         d.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {

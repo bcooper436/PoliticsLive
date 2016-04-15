@@ -464,7 +464,13 @@ public class RepublicansList extends Fragment {
     }
 
     private void formatBarDataSet(BarDataSet d) {
-        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        final int colorRed1 = ContextCompat.getColor(getActivity(), R.color.colorRed);
+        final int colorRed2 = ContextCompat.getColor(getActivity(), R.color.colorMotionPressGOP);
+        final int colorRed3 = ContextCompat.getColor(getActivity(), R.color.colorRedLight);
+
+        int[] republicanColors = {colorRed1,colorRed2,colorRed3};
+
+        d.setColors(republicanColors);
         d.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {

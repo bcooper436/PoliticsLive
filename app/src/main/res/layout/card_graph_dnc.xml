@@ -81,7 +81,8 @@
                 android:layout_alignEnd="@+id/textView35"
                 android:layout_below="@+id/textViewDemChartLabel"
                 android:layout_above="@+id/relativeLayoutCardDemocrat"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:layout_marginRight="10dp" />
 
 
         </RelativeLayout>
