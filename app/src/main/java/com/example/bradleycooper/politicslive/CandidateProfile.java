@@ -566,7 +566,7 @@ public class CandidateProfile extends AppCompatActivity {
                 textViewEnviornmentExtended.setText(john_kasich[6]);
                 textViewForeignPolicyExtended.setText(john_kasich[7]);
                 break;
-            case "Hillary Clinton":
+            case "Hilary Clinton":
                 String[] hillary_clinton = getResources().getStringArray(R.array.issues_hillary_clinton);
 
                 textViewImmigrationExtended.setText(hillary_clinton[0]);
@@ -581,8 +581,7 @@ public class CandidateProfile extends AppCompatActivity {
             case "Bernie Sanders":
                 String[] bernie_sanders = getResources().getStringArray(R.array.issues_bernie_sanders);
 
-                //get string array for bernie's issues
-                textViewImmigrationExtended.setText(bernie_sanders[0]); //set to string array "bernie" item 1
+                textViewImmigrationExtended.setText(bernie_sanders[0]);
                 textViewSameSexMarriageExtended.setText(bernie_sanders[1]);
                 textViewEducationExtended.setText(bernie_sanders[2]);
                 textViewGunControlExtended.setText(bernie_sanders[3]);
