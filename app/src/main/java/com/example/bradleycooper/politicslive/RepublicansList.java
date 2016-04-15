@@ -540,7 +540,7 @@ public class RepublicansList extends Fragment {
         ArrayList<String> ages = new ArrayList<>();
         ages.add("<25");
         ages.add("25-34");
-        ages.add("45-44");
+        ages.add("35-44");
         ages.add("45-54");
         ages.add("55+");
         ArrayList<BarEntry> entries = new ArrayList<>();
