@@ -74,7 +74,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="150dp"
                 android:id="@+id/relativeLayoutRegisteredPartyExtended"
                 android:visibility="gone">
 
@@ -83,8 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -148,7 +147,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="150dp"
                 android:id="@+id/relativeLayoutTotalVotesExtended"
                 android:visibility="gone">
 
@@ -157,8 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -224,7 +222,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="150dp"
                 android:id="@+id/relativeLayoutAverageAgeExtended"
                 android:visibility="gone">
 
@@ -233,8 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"
@@ -328,7 +325,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="150dp"
                 android:id="@+id/relativeLayoutGenderExtended"
                 android:visibility="gone">
 
@@ -337,8 +334,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true" />
 
                 <!--<TextView
                     android:layout_width="wrap_content"

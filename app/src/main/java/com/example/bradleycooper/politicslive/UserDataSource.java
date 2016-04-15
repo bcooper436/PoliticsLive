@@ -205,7 +205,25 @@ public class UserDataSource {
         }
         return user;
     }
-
+    public User getUserFromUsername(String username) {
+        User user = new User();
+        String query = "SELECT * FROM user WHERE username = '" + username + "'";
+        Cursor cursor = database.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            user.setUserID(cursor.getInt(0));
+            user.setDisplayName(cursor.getString(1));
+            user.setUserName(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
+            user.setPartyAffiliation(cursor.getString(4));
+            user.setAge(cursor.getInt(5));
+            user.setGender(cursor.getString(6));
+            user.setChosenDemocrat(cursor.getString(7));
+            user.setChosenRepublican(cursor.getString(8));
+            user.setProfilePicture(cursor.getBlob(9));
+            cursor.close();
+        }
+        return user;
+    }
     /* Average Age Methods */
     public int getAverageVoterAge(){
         int averageAgeOfVoter = 0, totalVoters = 0;

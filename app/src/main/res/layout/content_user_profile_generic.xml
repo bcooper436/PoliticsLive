@@ -21,7 +21,7 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:elevation="30dp"
                 android:clipToPadding="false">
 
@@ -33,47 +33,41 @@
                     android:layout_alignParentStart="false" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/textViewDisplayName"
                     android:textColor="@color/colorWhite"
-                    android:paddingLeft="15dp"
                     android:textSize="25dp"
                     android:text="Display Name"
                     android:gravity="center_vertical"
-                    android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@+id/imageViewPartyIcon"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:id="@+id/imageViewPartyIcon"
                     android:src="@drawable/ic_action_dnc_blue_light"
-                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="10dp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/colorBlack"
-                android:elevation="10dp">
+                    android:layout_margin="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="username"
                     android:id="@+id/textViewUsername"
-                    android:layout_marginLeft="15dp"
                     android:textColor="#e0e0e0"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp" />
 
             </RelativeLayout>
 
@@ -106,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="22"
-                    android:id="@+id/textView63"
+                    android:id="@+id/textViewAge"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/textView58"
                     android:layout_toEndOf="@+id/textView58"
@@ -129,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Male"
-                    android:id="@+id/textView65"
+                    android:id="@+id/textViewGender"
                     android:textStyle="bold"
                     android:layout_alignTop="@+id/textView64"
                     android:layout_toRightOf="@+id/textView64"
@@ -152,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Independent"
-                    android:id="@+id/textView67"
+                    android:id="@+id/textViewParty"
                     android:textStyle="bold"
                     android:layout_alignBottom="@+id/textView66"
                     android:layout_toRightOf="@+id/textView66"

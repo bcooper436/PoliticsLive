@@ -35,28 +35,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="2016 Presidential Primary Race"
-                android:id="@+id/textView13"
-                android:layout_marginLeft="15dp"
-                android:textColor="#212121"
-                android:layout_marginTop="15dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Click to explore interactive graphs"
-                android:id="@+id/textView56"
-                android:layout_below="@+id/textView36"
-                android:layout_alignLeft="@+id/textView36"
-                android:layout_alignStart="@+id/textView36"
-                android:textColor="#616161"
-                android:layout_marginLeft="15dp" />
-
             <include
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +42,8 @@
                 android:id="@+id/include"
                 android:layout_below="@+id/textView52"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
 
             <include
                 android:layout_width="wrap_content"

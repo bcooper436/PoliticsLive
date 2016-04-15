@@ -39,7 +39,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
         View v = convertView;
         try {
-            User user = items.get(position);
+            final User user = items.get(position);
             if(v == null){
                 LayoutInflater vi = (LayoutInflater) adapterContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.list_item_user, null);
@@ -65,6 +65,9 @@ public class UserAdapter extends ArrayAdapter<User> {
                             relativeLayoutUser.setBackgroundColor(colorPress);
                             break;
                         case MotionEvent.ACTION_UP:
+                            Intent intent = new Intent(getContext(), UserProfileGeneric.class);
+                            intent.putExtra("userId", user.getUserID());
+                            adapterContext.startActivity(intent);
                             relativeLayoutUser.setBackgroundColor(colorWhite);
                             break;
                         case MotionEvent.ACTION_CANCEL:
