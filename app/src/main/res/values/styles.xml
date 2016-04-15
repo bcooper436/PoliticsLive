@@ -21,6 +21,7 @@
     <style name="AppThemeTransparentStatusBar" parent="AppTheme">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
     <style name="AppThemeDemocrat" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

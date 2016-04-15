@@ -1,36 +1,23 @@
 package com.example.bradleycooper.politicslive;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class CandidateProfile extends AppCompatActivity {
 
@@ -82,7 +69,7 @@ public class CandidateProfile extends AppCompatActivity {
         candidateParty = currentCandidate.getParty();
         candidateName = currentCandidate.getCandidateName();
 
-        final TextView textViewOfficalCampaignWebsite = (TextView)findViewById(R.id.textViewOfficialCampaignWebsite);
+        final TextView textViewOfficalCampaignWebsite = (TextView)findViewById(R.id.textViewReport);
         final TextView textViewEmailCandidate = (TextView)findViewById(R.id.textViewEmailCandidate);
         final TextView textViewTwitterPage = (TextView)findViewById(R.id.textViewTwitterPage);
 

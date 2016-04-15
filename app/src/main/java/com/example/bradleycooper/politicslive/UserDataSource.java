@@ -287,8 +287,71 @@ public class UserDataSource {
         }
         return users;
     }
+    public ArrayList<User> getUsersByLike(String likeString){
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            String[] args = new String[1];
+            args[0] = likeString+"%";
+            String query = "SELECT * FROM user WHERE username LIKE '%" + likeString + "%' OR displayname LIKE '%" + likeString + "%'";
+            Cursor cursor = database.rawQuery(query, null);
+
+            User newUser;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newUser = new User();
+                newUser.setUserID(cursor.getInt(0));
+                newUser.setDisplayName(cursor.getString(1));
+                newUser.setUserName(cursor.getString(2));
+                newUser.setPassword(cursor.getString(3));
+                newUser.setPartyAffiliation(cursor.getString(4));
+                newUser.setAge(cursor.getInt(5));
+                newUser.setGender(cursor.getString(6));
+                newUser.setChosenDemocrat(cursor.getString(7));
+                newUser.setChosenRepublican(cursor.getString(8));
+                newUser.setProfilePicture(cursor.getBlob(9));
+                users.add(newUser);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            users = new ArrayList<User>();
+        }
+        return users;
+    }
 
     /* Gender Methods */
+    public ArrayList<User> getUsersByGender(String gender) {
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            String query = "SELECT * FROM user WHERE gender = '" + gender + "'";
+            Cursor cursor = database.rawQuery(query, null);
+
+            User newUser;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newUser = new User();
+                newUser.setUserID(cursor.getInt(0));
+                newUser.setDisplayName(cursor.getString(1));
+                newUser.setUserName(cursor.getString(2));
+                newUser.setPassword(cursor.getString(3));
+                newUser.setPartyAffiliation(cursor.getString(4));
+                newUser.setAge(cursor.getInt(5));
+                newUser.setGender(cursor.getString(6));
+                newUser.setChosenDemocrat(cursor.getString(7));
+                newUser.setChosenRepublican(cursor.getString(8));
+                newUser.setProfilePicture(cursor.getBlob(9));
+                users.add(newUser);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            users = new ArrayList<User>();
+        }
+        return users;
+    }
+
     public int getGenderPercentage(String gender){
         int males = 0, females = 0, totalVoters = 0;
 

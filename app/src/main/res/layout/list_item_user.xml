@@ -5,10 +5,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorWhite"
-        android:layout_marginBottom="1dp">
+        android:layout_marginBottom="1dp"
+        android:id="@+id/relativeLayoutUser">
 
         <ImageView
             android:layout_width="25dp"
@@ -27,9 +28,11 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Display Name"
             android:id="@+id/textViewDisplayName"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imageViewProfilePicture"
-            android:layout_toEndOf="@+id/imageViewProfilePicture" />
+            android:layout_toEndOf="@+id/imageViewProfilePicture"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,22 +40,91 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="username"
             android:id="@+id/textViewUsername"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/textView4"
-            android:layout_toEndOf="@+id/textView4"
-            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:layout_below="@+id/textViewDisplayName"
+            android:layout_alignLeft="@+id/textViewDisplayName"
+            android:layout_alignStart="@+id/textViewDisplayName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=","
+            android:id="@+id/textView51"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:textSize="12dp"
+            android:layout_toLeftOf="@+id/textViewAge"
+            android:layout_toStartOf="@+id/textViewAge" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Male"
+            android:id="@+id/textViewGender"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/textView51"
+            android:layout_toStartOf="@+id/textView51"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:textSize="12dp"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="22"
+            android:id="@+id/textViewAge"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:textSize="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="-"
+            android:text=")"
             android:id="@+id/textView4"
-            android:layout_alignBottom="@+id/textViewDisplayName"
-            android:layout_toRightOf="@+id/textViewDisplayName"
-            android:layout_toEndOf="@+id/textViewDisplayName"
-            android:layout_marginLeft="10dp" />
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_toLeftOf="@+id/textViewGender"
+            android:layout_toStartOf="@+id/textViewGender"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Republican"
+            android:id="@+id/textViewParty"
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_toLeftOf="@+id/textView4"
+            android:layout_toStartOf="@+id/textView4"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="("
+            android:id="@+id/textView59"
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_toLeftOf="@+id/textViewParty"
+            android:layout_toStartOf="@+id/textViewParty"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 </LinearLayout>

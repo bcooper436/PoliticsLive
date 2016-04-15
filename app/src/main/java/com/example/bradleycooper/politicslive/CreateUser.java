@@ -31,7 +31,7 @@ public class CreateUser extends AppCompatActivity {
 
         final EditText editTextFirstName = (EditText) findViewById(R.id.editText_first_name);
         final EditText editTextLastName = (EditText) findViewById(R.id.editText_last_name);
-        final EditText editTextUserName = (EditText) findViewById(R.id.editText_user_name);
+        final EditText editTextUserName = (EditText) findViewById(R.id.editText_username);
         final EditText editTextPassword = (EditText) findViewById(R.id.editText_password);
         final EditText editTextPasswordConfirm = (EditText) findViewById(R.id.editText_password_confirm);
         final EditText editTextAge = (EditText) findViewById(R.id.editText_age);

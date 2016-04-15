@@ -1,18 +1,27 @@
 package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -28,6 +37,8 @@ public class UsersList extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public ArrayList<User> arrayListUsers;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,11 +94,42 @@ public class UsersList extends Fragment {
         adapterFilter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFilter.setAdapter(adapterFilter);
 
+        spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterList(parent.getItemAtPosition(position).toString());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         Spinner spinnerSort = (Spinner) getView().findViewById(R.id.spinnerSort);
         ArrayAdapter<CharSequence> adapterSort = ArrayAdapter.createFromResource(getActivity(), R.array.sort_array, R.layout.spinner_item);
         adapterSort.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(adapterSort);
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortList(parent.getItemAtPosition(position).toString());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final EditText editTextSearch = (EditText)getView().findViewById(R.id.editTextSearch);
+        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchList(editTextSearch.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
         initListViewUsers();
     }
     // TODO: Rename method, update argument and hook method into UI event
@@ -138,5 +180,108 @@ public class UsersList extends Fragment {
         userDataSource.close();
         UserAdapter userAdapter = new UserAdapter(getActivity(),arrayListUsers);
         listViewUsers.setAdapter(userAdapter);
+    }
+
+    public void filterList(String filterString) {
+        ListView listViewUsers = (ListView)getView().findViewById(R.id.listViewUsers);
+        UserDataSource userDataSource = new UserDataSource(getActivity());
+        userDataSource.open();
+
+        switch(filterString){
+            case "Republican":
+                arrayListUsers = userDataSource.getUsersByParty("Republican");
+                break;
+            case "Democrat":
+                arrayListUsers = userDataSource.getUsersByParty("Democrat");
+                break;
+            case "Independent":
+                arrayListUsers = userDataSource.getUsersByParty("Independent");
+                break;
+            case "Male":
+                arrayListUsers = userDataSource.getUsersByGender("Male");
+                break;
+            case "Female":
+                arrayListUsers = userDataSource.getUsersByGender("Female");
+                break;
+            default:
+                arrayListUsers = userDataSource.getUsers();
+                break;
+        }
+        UserAdapter userAdapter = new UserAdapter(getActivity(),arrayListUsers);
+        listViewUsers.setAdapter(userAdapter);
+    }
+    public void sortList(String filterString){
+        ArrayList<User> sortedList = arrayListUsers;
+
+        switch(filterString){
+            case "Name":
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getDisplayName().compareToIgnoreCase(user2.getDisplayName());
+                    }
+                });
+                break;
+            case "Username":
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getUserName().compareToIgnoreCase(user2.getUserName());
+                    }
+                });
+                break;
+            case "Age":
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getAge() - user2.getAge();
+                    }
+                });
+                break;
+            case "Gender":
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getGender().compareToIgnoreCase(user2.getGender());
+                    }
+                });
+                break;
+            case "Party Affiliation":
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getPartyAffiliation().compareToIgnoreCase(user2.getPartyAffiliation());
+                    }
+                });
+                break;
+            default:
+                Collections.sort(sortedList, new Comparator<User>() {
+                    public int compare(User user1, User user2) {
+                        return user1.getDisplayName().compareToIgnoreCase(user2.getDisplayName());
+                    }
+                });
+                break;
+        }
+
+        ListView listViewUsers = (ListView)getView().findViewById(R.id.listViewUsers);
+        UserAdapter userAdapter = new UserAdapter(getActivity(),arrayListUsers);
+        listViewUsers.setAdapter(userAdapter);
+    }
+
+    public void searchList(String likeString){
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("DEBUG");
+        alertDialog.setMessage(likeString);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+
+        ArrayList<User> arrayListLike;
+        UserDataSource userDataSource = new UserDataSource(getActivity());
+        userDataSource.open();
+        arrayListLike = userDataSource.getUsersByLike(likeString);
+        userDataSource.close();
+        UserAdapter likeAdapter = new UserAdapter(getActivity(),arrayListLike);
+        ListView listViewUsers = (ListView)getView().findViewById(R.id.listViewUsers);
+        listViewUsers.setAdapter(likeAdapter);
     }
 }

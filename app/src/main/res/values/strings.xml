@@ -110,17 +110,16 @@
         <item>None</item>
         <item>Republican</item>
         <item>Democrat</item>
-        <item>Unaffiliated</item>
+        <item>Independent</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
     <string-array name="sort_array">
-        <item>First name</item>
-        <item>Last name</item>
+        <item>Name</item>
         <item>Username</item>
         <item>Age</item>
         <item>Gender</item>
         <item>Party Affiliation</item>
-        <item>Selected Candidate</item>
     </string-array>
+    <string name="title_activity_user_profile_generic">UserProfileGeneric</string>
 </resources>
