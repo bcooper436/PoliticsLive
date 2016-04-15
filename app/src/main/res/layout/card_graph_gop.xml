@@ -19,48 +19,27 @@
             android:layout_height="match_parent"
             android:id="@+id/relativeLayoutGraphGOP">
 
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chartRep"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Republican Primary"
-                android:id="@+id/textView35"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:id="@+id/textView25"
                 android:textColor="@color/colorBlack"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="The 2016 race for the Republican nominee has been highly volatile.  Currently, Donald trump is leading the polls, follwed not too far by..."
-                android:id="@+id/textView50"
-                android:layout_alignLeft="@+id/textView35"
-                android:layout_alignStart="@+id/textView35"
-                android:textSize="12dp"
-                android:layout_alignRight="@+id/chartRep"
-                android:layout_alignEnd="@+id/textView35"
-                android:layout_below="@+id/textViewRepChartLabel"
-                android:layout_above="@+id/textView54"
-                android:gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="MORE"
-                android:id="@+id/textView54"
-                android:gravity="center_vertical"
-                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:layout_alignBottom="@+id/chartRep"
-                android:layout_alignLeft="@+id/textView50"
-                android:layout_alignStart="@+id/textView50"
-                android:layout_marginBottom="5dp" />
+                android:layout_alignTop="@+id/chartRep"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,19 +48,39 @@
                 android:text="0 Votes"
                 android:id="@+id/textViewRepChartLabel"
                 android:gravity="center"
-                android:layout_below="@+id/textView35"
-                android:layout_alignLeft="@+id/textView35"
-                android:layout_alignStart="@+id/textView35" />
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chartRep"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/textView25"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_toRightOf="@+id/textView35"
-                android:layout_toEndOf="@+id/textView35" />
+                android:layout_marginRight="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="The 2016 race for the Republican nominee has been highly volatile.  Currently, Donald trump is leading the polls, follwed not too far by..."
+                android:id="@+id/textView28"
+                android:textSize="12dp"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/textViewRepChartLabel"
+                android:layout_toRightOf="@+id/chartRep"
+                android:layout_toEndOf="@+id/chartRep"
+                android:layout_marginRight="15dp"
+                android:textAlignment="viewEnd"
+                android:layout_above="@+id/textView30" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="MORE"
+                android:id="@+id/textView30"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_alignBottom="@+id/chartRep"
+                android:layout_alignRight="@+id/textView28"
+                android:layout_alignEnd="@+id/textView28"
+                android:layout_marginBottom="10dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

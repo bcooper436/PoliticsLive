@@ -144,6 +144,10 @@ public class MainActivity extends AppCompatActivity
                 "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        CandidateDataSource candidateDataSource = new CandidateDataSource(MainActivity.this);
+                        candidateDataSource.open();
+                        candidateDataSource.clearAllVotes();
+                        candidateDataSource.close();
                         SharedPreferences preferencesNo = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                         SharedPreferences.Editor editor = preferencesNo.edit();
                         editor.putString("TutorialMainPage", "Completed");

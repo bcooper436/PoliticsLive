@@ -111,4 +111,14 @@
         android:layout_marginLeft="5dp"
         android:visibility="invisible" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Tutorial Mode"
+        android:id="@+id/buttonTutorial"
+        android:visibility="invisible"
+        android:layout_below="@+id/buttonClearAllVotes"
+        android:layout_alignLeft="@+id/buttonClearAllVotes"
+        android:layout_alignStart="@+id/buttonClearAllVotes" />
+
 </RelativeLayout>

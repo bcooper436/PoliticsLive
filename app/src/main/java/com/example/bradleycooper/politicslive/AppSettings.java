@@ -48,6 +48,16 @@ public class AppSettings extends AppCompatActivity {
             }
         });
 
+        Button buttonTutorial = (Button)findViewById(R.id.buttonTutorial);
+        buttonTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllPreferences();
+
+            }
+        });
+
+
         Button buttonClearUserTable = (Button)findViewById(R.id.buttonClearUserTable);
         buttonClearUserTable.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,15 +112,17 @@ public class AppSettings extends AppCompatActivity {
                             CharSequence text = "Great! You are now in developer mode, with the added ability to clear all users and votes.";
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(context, text, duration);
-                            toast.setGravity(Gravity.CENTER| Gravity.CENTER, 0, 100);
+                            toast.setGravity(Gravity.CENTER| Gravity.CENTER, 0, 200);
                             toast.show();
                             TextView textViewDeveloperOptions = (TextView) findViewById(R.id.textViewDeveloperOptions);
                             Button buttonDeleteAllUsers = (Button) findViewById(R.id.buttonClearUserTable);
                             Button buttonClearAllVotes = (Button) findViewById(R.id.buttonClearAllVotes);
+                            Button buttonTutorial = (Button) findViewById(R.id.buttonTutorial);
 
                             textViewDeveloperOptions.setVisibility(View.VISIBLE);
                             buttonDeleteAllUsers.setVisibility(View.VISIBLE);
                             buttonClearAllVotes.setVisibility(View.VISIBLE);
+                            buttonTutorial.setVisibility(View.VISIBLE);
                         }
                 }
 
@@ -181,9 +193,34 @@ public class AppSettings extends AppCompatActivity {
     public void clearUserPreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("Username","");
+        editor.putString("Username", "");
         editor.putString("Password", "");
         editor.apply();
+    }
+    public void clearAllPreferences(){
+        clearAllVotes();
+        userDataSource = new UserDataSource(AppSettings.this);
+        userDataSource.open();
+        userDataSource.deleteAllUsers();
+        userDataSource.close();
+
+        CandidateDataSource candidateDataSource = new CandidateDataSource(AppSettings.this);
+        candidateDataSource.open();
+        candidateDataSource.deleteAllCandidates();
+        candidateDataSource.close();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Username", "");
+        editor.putString("Password", "");
+        editor.putString("TutorialSettings","");
+        editor.putString("TutorialMainPage","");
+        editor.putString("TutorialUsersList","");
+        editor.apply();
+
+        Intent intent = new Intent(AppSettings.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

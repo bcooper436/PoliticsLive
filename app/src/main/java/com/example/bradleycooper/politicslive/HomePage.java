@@ -30,6 +30,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
@@ -285,8 +286,22 @@ public class HomePage extends Fragment {
             }
         }
 
+        final int colorBlue1 = ContextCompat.getColor(getActivity(), R.color.colorMotionPressDNC);
+        final int colorBlue2 = ContextCompat.getColor(getActivity(), R.color.colorBlueLight);
+
+        int[] democratColors = {colorBlue1,colorBlue2};
+
+        final int colorRed1 = ContextCompat.getColor(getActivity(), R.color.colorRed);
+        final int colorRed2 = ContextCompat.getColor(getActivity(), R.color.colorMotionPressGOP);
+        final int colorRed3 = ContextCompat.getColor(getActivity(), R.color.colorRedLight);
+
+        int[] republicanColors = {colorRed1,colorRed2,colorRed3};
+
+
+
         PieDataSet repDataSet = new PieDataSet(repVotes, "% of " +totalRepublicanVotes +" Votes");
-        repDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        //repDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        repDataSet.setColors(republicanColors);
         PieData repData = new PieData(repCandidates, repDataSet);
         repData.setValueFormatter(new ValueFormatter() {
             @Override
@@ -322,7 +337,8 @@ public class HomePage extends Fragment {
         repChartLabel.setText("Votes cast = " + totalRepublicanVotes);
 
         PieDataSet demDataSet = new PieDataSet(demVotes, "% of " +totalDemocratVotes +" Votes");
-        demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        //demDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        demDataSet.setColors(democratColors);
         PieData demData = new PieData(demCandidates, demDataSet);
         demData.setValueFormatter(new ValueFormatter() {
             @Override

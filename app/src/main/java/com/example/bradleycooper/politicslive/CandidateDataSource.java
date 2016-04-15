@@ -316,4 +316,14 @@ public class CandidateDataSource {
         String where = "UPDATE candidate SET numberofvotes = 0";
         database.execSQL(where);
     }
+    public boolean deleteAllCandidates(){
+        boolean didDelete = false;
+        try{
+            didDelete = database.delete("candidate",null,null) > 0;
+        }
+        catch (Exception e){
+
+        }
+        return didDelete;
+    }
 }
