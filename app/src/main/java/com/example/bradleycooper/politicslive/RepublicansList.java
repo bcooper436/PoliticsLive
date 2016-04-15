@@ -647,7 +647,7 @@ public class RepublicansList extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
 
-        activityCommunicator = (OnCommunicateActivityListener)context;
+        activityCommunicator = (OnCommunicateActivityListener)getActivity();
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;
