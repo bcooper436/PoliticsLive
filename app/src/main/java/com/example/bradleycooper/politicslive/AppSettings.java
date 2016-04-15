@@ -1,5 +1,6 @@
 package com.example.bradleycooper.politicslive;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -94,10 +98,15 @@ public class AppSettings extends AppCompatActivity {
                         lastTapTimeMs = System.currentTimeMillis();
 
                         if (numberOfTaps == 3) {
-                            Toast.makeText(getApplicationContext(), "You are now in developer mode.", Toast.LENGTH_SHORT).show();
-                            TextView textViewDeveloperOptions = (TextView)findViewById(R.id.textViewDeveloperOptions);
-                            Button buttonDeleteAllUsers = (Button)findViewById(R.id.buttonClearUserTable);
-                            Button buttonClearAllVotes = (Button)findViewById(R.id.buttonClearAllVotes);
+                            Context context = getApplicationContext();
+                            CharSequence text = "Great! You are now in developer mode, with the added ability to clear all users and votes.";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.setGravity(Gravity.CENTER| Gravity.CENTER, 0, 100);
+                            toast.show();
+                            TextView textViewDeveloperOptions = (TextView) findViewById(R.id.textViewDeveloperOptions);
+                            Button buttonDeleteAllUsers = (Button) findViewById(R.id.buttonClearUserTable);
+                            Button buttonClearAllVotes = (Button) findViewById(R.id.buttonClearAllVotes);
 
                             textViewDeveloperOptions.setVisibility(View.VISIBLE);
                             buttonDeleteAllUsers.setVisibility(View.VISIBLE);
@@ -108,8 +117,28 @@ public class AppSettings extends AppCompatActivity {
                 return true;
             }
         });
-    }
 
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String tutorialCompleted = preferences.getString("TutorialSettings", "");
+        if(tutorialCompleted.equalsIgnoreCase("") || tutorialCompleted == null) {
+            completeTutorialSetPreferences(preferences);
+        }
+
+
+        Context context = getApplicationContext();
+    }
+    private void completeTutorialSetPreferences(SharedPreferences preferences){
+        CharSequence text = "First Time Tip: Try triple clicking on the build number at the bottom of the screen.";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(AppSettings.this, text, duration);
+        toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 100);
+        toast.show();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("TutorialSettings","Completed");
+        editor.apply();
+    }
     private void deleteAllUsers(){
         clearUserPreferences();
         userDataSource = new UserDataSource(AppSettings.this);

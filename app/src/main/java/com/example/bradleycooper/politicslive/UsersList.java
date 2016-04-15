@@ -2,11 +2,15 @@ package com.example.bradleycooper.politicslive;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,6 +94,12 @@ public class UsersList extends Fragment {
 
         ((MainActivity) getActivity()).hideFloatingActionButton();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String tutorialCompleted = preferences.getString("TutorialUsersList", "");
+        if(tutorialCompleted.equalsIgnoreCase("") || tutorialCompleted == null) {
+            completeTutorialSetPreferences(preferences);
+        }
+
         Spinner spinnerFilter = (Spinner) getView().findViewById(R.id.spinnerFilter);
         ArrayAdapter<CharSequence> adapterFilter = ArrayAdapter.createFromResource(getActivity(), R.array.filter_array, R.layout.spinner_item);
         adapterFilter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -131,6 +142,18 @@ public class UsersList extends Fragment {
             }
         });
         initListViewUsers();
+    }
+
+    private void completeTutorialSetPreferences(SharedPreferences preferences){
+        CharSequence text = "First Time Tip: Try searching by names, usernames, genders, age, chosen candidates, and party affiliation.  Don't forget to filter and sort your results using the bottom two buttons.";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(getActivity(), text, duration);
+        toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+        toast.show();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("TutorialUsersList", "Completed");
+        editor.apply();
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

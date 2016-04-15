@@ -15,6 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -69,18 +72,27 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        /* Check to see if database is storing any objects.  If not, populate with candidate information */
+        CandidateDataSource ds = new CandidateDataSource(MainActivity.this);
+        ds.open();
+        int lastCandidateId = ds.getLastCandidateId();
+        ds.close();
+        if(lastCandidateId < 1) {
+            initializeDBCandidates();
+        }
+
+
         mTitle = getTitle();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String userName = preferences.getString("Username", "");
         Menu menu = navigationView.getMenu();
         MenuItem nav_camara = menu.findItem(R.id.logout);
         if(userName.equalsIgnoreCase("") || userName == null) {
             nav_camara.setTitle("Login");
         }
-
 
         Fragment fragment;
         FragmentManager fragmentManager = getFragmentManager();
@@ -89,8 +101,7 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, fragment)
                 .commit();
 
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        String userName = preferences.getString("Username", "");
+        // Check to see if user is logged in, if not, redirect to login page
         String skip = preferences.getString("Skip", "");
         if(userName.equalsIgnoreCase("") || userName==null)
         {
@@ -101,32 +112,70 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        /*
-        SharedPreferences preferences = getSharedPreferences("com.example.bradleycooper.politicslive", 0);
-        String value = preferences.getString("userNameKey", null);
-        if (value == null) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        } else {
-            // handle the value
-        }*/
-
-        /* Check to see if database is storing any objects.  If not, populate with candidate information */
-        CandidateDataSource ds = new CandidateDataSource(MainActivity.this);
-        ds.open();
-        if(ds.getLastCandidateId() < 1) {
-            initializeDB();
+        String tutorialMainPage = preferences.getString("TutorialMainPage", "");
+        if(tutorialMainPage.equalsIgnoreCase("") || tutorialMainPage==null) {
+            firstTimeAppOpen(preferences);
         }
 
+        String randomUsersJustAdded = preferences.getString("RandomUsersJustAdded", "");
+        if(randomUsersJustAdded.equalsIgnoreCase("True")) {
+            CharSequence text = "11 users and 22 votes have been added to the database.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(MainActivity.this, text, duration);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+            toast.show();
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("RandomUsersJustAdded","");
+            editor.apply();
+        }
     }
-    private static boolean doesDataBaseExist(Context context, String dbName){
-        File dbFile = context.getDatabasePath(dbName);
-        return dbFile.exists();
-    }
+
     private Candidate currentCandidate;
     private User user;
-    private void initializeDB(){
+
+    private void firstTimeAppOpen(SharedPreferences preferences){
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setTitle("Welcome to Politics Live!");
+        builder1.setMessage("Would you like to get things started by automatically adding some randomly generated users and votes to the database?");
+        builder1.setCancelable(true);
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences preferencesNo = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                        SharedPreferences.Editor editor = preferencesNo.edit();
+                        editor.putString("TutorialMainPage", "Completed");
+                        editor.apply();
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setPositiveButton(
+                "Yes (Recommended)",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences preferencesYes = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                        SharedPreferences.Editor editor = preferencesYes.edit();
+                        editor.putString("RandomUsersJustAdded", "True");
+                        editor.putString("TutorialMainPage", "Completed");
+                        editor.apply();
+
+                        dialog.cancel();
+                        initializeDBUsers();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+
+    private void initializeDBCandidates(){
         Bitmap bitmapSquareBernie = BitmapFactory.decodeResource(getResources(),R.drawable.bernie_square);
         Bitmap bitmapSquareBernieResized = Bitmap.createScaledBitmap(bitmapSquareBernie, resize, resize, true);
         byte[] byteArraySquareBernie = convertBitmapToByteArray(bitmapSquareBernieResized);
@@ -157,11 +206,12 @@ public class MainActivity extends AppCompatActivity
 
         /* Initialize table to  hold candidate objects */
         generateCandidates("Bernie Sanders", "Self-proclaimed democratic socialist from Vermont.", byteArraySquareBernie, byteArrayWideBernie, "DNC", 5);
-        generateCandidates("Hilary Clinton", "Former Secretary of State, many years in politics.",byteArraySquareHilary, byteArrayWideHilary, "DNC", 6);
-        generateCandidates("Donald Trump", "Successful Business man from New York City.", byteArraySquareTrump, byteArrayWideTrump,"GOP", 6);
-        generateCandidates("Ted Cruz", "Reported Zodiac killer, wants to turn abolish secularism.",byteArraySquareCruz, byteArrayWideCruz,"GOP", 4);
+        generateCandidates("Hilary Clinton", "Former Secretary of State, many years in politics.", byteArraySquareHilary, byteArrayWideHilary, "DNC", 6);
+        generateCandidates("Donald Trump", "Successful Business man from New York City.", byteArraySquareTrump, byteArrayWideTrump, "GOP", 6);
+        generateCandidates("Ted Cruz", "Reported Zodiac killer, wants to turn abolish secularism.", byteArraySquareCruz, byteArrayWideCruz, "GOP", 4);
         generateCandidates("John Kasich", "What am I still doing in this race anyways...?", byteArraySquareKasich, byteArrayWideKasich, "GOP", 1);
-
+    }
+    private void initializeDBUsers(){
         /* Initialize the user table with 30 fake user accounts, to demonstrate the graphs and demographics potential */
         generateUsers("Bradley Cooper", "bcooper436", "zun3ukit", "Democrat", 22, "Male", "Bernie Sanders", "Donald Trump");
         generateUsers("Linden Marshall", "welcomehome8", "zun3ukit", "Republican", 31, "Male", "Bernie Sanders", "John Kasich");
@@ -175,9 +225,8 @@ public class MainActivity extends AppCompatActivity
         generateUsers("Melva Denis", "Mel0192", "zun3ukit", "Republican", 55, "Male", "Bernie Sanders", "Donald Trump");
         generateUsers("Trina Bryan", "BryTri92", "zun3ukit", "Democrat", 17, "Female", "Hilary Clinton", "Ted Cruz");
         generateUsers("Oswald Webster", "theBookWasBetter", "zun3ukit", "Independent", 85, "Male", "Hilary Clinton", "Ted Cruz");
-
-
     }
+
     public void generateUsers(String displayName, String username, String password, String party, int age, String gender, String chosenDemocrat, String chosenRepublican){
         boolean wasSuccessful;
 
@@ -188,8 +237,8 @@ public class MainActivity extends AppCompatActivity
         user.setPartyAffiliation(party);
         user.setAge(age);
         user.setGender(gender);
-        //user.setChosenDemocrat(chosenDemocrat);
-        //user.setChosenRepublican(chosenRepublican);
+        user.setChosenDemocrat(chosenDemocrat);
+        user.setChosenRepublican(chosenRepublican);
         UserDataSource us = new UserDataSource(MainActivity.this);
         us.open();
         if(user.getUserID() == -1){
@@ -211,19 +260,8 @@ public class MainActivity extends AppCompatActivity
         userDataSource.close();
 
         if (wasSuccessful) {
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Success");
-            alertDialog.setMessage("Candidate " + currentCandidate.getCandidateName() + " was added as a member of the " + currentCandidate.getParty() + " party. Id is " + currentCandidate.getCandidateID());
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
 
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
         }
-
     }
     public void generateCandidates(String candidateName, String candidateDescription, byte[] byteArraySquare, byte[] byteArrayWide ,String party, int numberOfVotes){
         currentCandidate = new Candidate();
@@ -247,17 +285,7 @@ public class MainActivity extends AppCompatActivity
         }
         ds.close();
         if (wasSuccessful) {
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Success");
-            alertDialog.setMessage("Candidate " + currentCandidate.getCandidateName() + " was added as a member of the " + currentCandidate.getParty() + " party. Id is " + currentCandidate.getCandidateID());
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
 
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
         }
     }
 
