@@ -79,7 +79,7 @@
                 android:visibility="gone">
 
                 <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartRegisteredPartyMembers"
+                    android:id="@+id/chartRegisteredUsers"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
@@ -153,7 +153,7 @@
                 android:visibility="gone">
 
                 <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartTotalVotesByParty"
+                    android:id="@+id/chartTotalVotesForAllCandidates"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_centerVertical="true"
@@ -228,14 +228,22 @@
                 android:id="@+id/relativeLayoutAverageAgeExtended"
                 android:visibility="gone">
 
-                <TextView
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartAverageAgeOfVoter"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TODO: Insert Graph about Voters&apos; Ages"
                     android:id="@+id/textView33"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -324,14 +332,22 @@
                 android:id="@+id/relativeLayoutGenderExtended"
                 android:visibility="gone">
 
-                <TextView
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chartGenderBreakdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="TODO: Insert Graph about Genders"
                     android:id="@+id/textView34"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true" />-->
             </RelativeLayout>
         </LinearLayout>
 
