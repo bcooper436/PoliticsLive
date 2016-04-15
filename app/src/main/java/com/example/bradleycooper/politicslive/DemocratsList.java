@@ -49,7 +49,6 @@ public class DemocratsList extends Fragment {
 
     private int democratColor, colorDown, colorUp;
 
-    private OnCommunicateActivityListener activityCommunicator;
 
     ArrayList<Candidate> arrayListCandidates;
     CandidateAdapterRanking adapter;
@@ -224,6 +223,7 @@ public class DemocratsList extends Fragment {
         UserDataSource userDataSource = new UserDataSource(getActivity());
         userDataSource.open();
         arrayListUsers = userDataSource.getUsersByParty("Democrat");
+        final OnCommunicateActivityListener activityCommunicator = (OnCommunicateActivityListener)getActivity();
 
 
 
@@ -649,8 +649,6 @@ public class DemocratsList extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-
-        activityCommunicator = (OnCommunicateActivityListener)getActivity();
     }
     public int getTotalVotes(ArrayList<Candidate> arrayListCandidates){
         int totalVotes = 0;
