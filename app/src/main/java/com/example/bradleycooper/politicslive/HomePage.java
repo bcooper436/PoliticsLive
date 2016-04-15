@@ -251,6 +251,10 @@ public class HomePage extends Fragment {
         final CandidateDataSource ds = new CandidateDataSource(getActivity());
 
         ds.open();
+
+        if(ds.getLastCandidateId() < 1) {
+            return;
+        }
         Map<String, Integer> democrats = ds.getDemocratVotes();
         Map<String, Integer> republicans = ds.getRepublicanVotes();
         ds.close();

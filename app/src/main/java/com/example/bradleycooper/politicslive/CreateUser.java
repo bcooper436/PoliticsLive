@@ -12,16 +12,21 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.github.mikephil.charting.utils.Utils;
+
 public class CreateUser extends AppCompatActivity {
 
     User newUser;
     SharedPreferences sharedpreferences;
+    private String mGender = "Other/Unaffiliated";
+    private String mParty = "Other/Unaffiliated";
 
 
     @Override
@@ -37,7 +42,39 @@ public class CreateUser extends AppCompatActivity {
         final EditText editTextAge = (EditText) findViewById(R.id.editText_age);
 
         final RadioGroup radioGroupGender = (RadioGroup)findViewById(R.id.radioGroupGender);
+//        final RadioButton radioButtonGenderMale = (RadioButton)findViewById(R.id.radioButtonMale);
+//        final RadioButton radioButtonGenderFemale = (RadioButton)findViewById(R.id.radioButtonFemale);
+//        final RadioButton radioButtonGenderOther = (RadioButton)findViewById(R.id.radioButtonOther);
+//        radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if (checkedId == R.id.radioButtonMale) {
+//                    mGender = "Male";
+//                } else if (checkedId == R.id.radioButtonFemale) {
+//                    mGender = "Female";
+//                } else if (checkedId == R.id.radioButtonOther) {
+//                    mGender = "Other/Unaffiliated";
+//                }
+//            }
+//        });
+
+
         final RadioGroup radioGroupParty = (RadioGroup)findViewById(R.id.radioGroupParty);
+//        final RadioButton radioButtonPartyGOP = (RadioButton)findViewById(R.id.radioButton);
+//        final RadioButton radioButtonPartyDNC = (RadioButton)findViewById(R.id.radioButton2);
+//        final RadioButton radioButtonPartyOther = (RadioButton)findViewById(R.id.radioButton3);
+//        radioGroupParty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if (checkedId == R.id.radioButton) {
+//                    mParty = "Republican";
+//                } else if (checkedId == R.id.radioButton2) {
+//                    mParty = "Democrat";
+//                } else if (checkedId == R.id.radioButton3) {
+//                    mParty = "Other/Unaffiliated";
+//                }
+//            }
+//        });
 
         Button createAccountButton = (Button) findViewById(R.id.buttonCreateAccount);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +97,18 @@ public class CreateUser extends AppCompatActivity {
                     newUser.setDisplayName(editTextFirstName.getText().toString() + " " + editTextLastName.getText().toString());
                     newUser.setUserName(editTextUserName.getText().toString());
                     newUser.setPassword(editTextPassword.getText().toString());
-                    newUser.setAge(Integer.parseInt(editTextAge.getText().toString()));
+                    if(TextUtils.isEmpty(editTextAge.getText().toString())){
+                        newUser.setAge(0);
+                    }else{
+                        newUser.setAge(Integer.parseInt(editTextAge.getText().toString()));
+                    }
+
                     newUser.setGender(radioButtonGender.getText().toString());
                     newUser.setPartyAffiliation(radioButtonParty.getText().toString());
+//                    newUser.setGender(mGender);
+//
+//                    newUser.setPartyAffiliation(mParty);
+
 
                     UserDataSource ds = new UserDataSource(CreateUser.this);
                     ds.open();
