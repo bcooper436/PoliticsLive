@@ -22,6 +22,7 @@ import android.widget.TextView;
 //import com.github.mikephil.charting.data.BarEntry;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -31,6 +32,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.formatter.XAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -364,6 +366,9 @@ public class HomePage extends Fragment {
         b.setDrawMarkerViews(false);
         b.setDrawBarShadow(false);
         b.setDrawBorders(false);
+        b.getXAxis().setTextSize(5f);
+        b.animateXY(1000,1000);
+
 
     }
 
@@ -375,6 +380,8 @@ public class HomePage extends Fragment {
                 return String.format("%.0f", value);
             }
         });
+
+
 
     }
 
@@ -440,7 +447,6 @@ public class HomePage extends Fragment {
         ds.close();
         BarDataSet barDataSet = new BarDataSet(votes, "Candidate Votes");
         formatBarDataSet(barDataSet);
-        
         BarData barData = new BarData(candidates, barDataSet);
         barChart.setData(barData);
         totalVotesForAllCandidatesCreated = true;
