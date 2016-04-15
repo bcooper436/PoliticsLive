@@ -3,6 +3,7 @@ package com.example.bradleycooper.politicslive;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -25,6 +26,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -65,6 +67,11 @@ public class HomePage extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
+
+    private boolean registeredUsersCreated = false;
+    private boolean totalVotesForAllCandidatesCreated = false;
+    private boolean averageAgeofVoterCreated = false;
+    private boolean genderBreakdownCreated = false;
 
     public HomePage() {
         // Required empty public constructor
@@ -209,6 +216,10 @@ public class HomePage extends Fragment {
         PieChart repPieChart = (PieChart) getView().findViewById(R.id.chartRep);
         demPieChart.highlightValue(-1,-1);
         repPieChart.highlightValue(-1,-1);
+        registeredUsersCreated = false;
+        totalVotesForAllCandidatesCreated = false;
+        averageAgeofVoterCreated = false;
+        genderBreakdownCreated = false;
         //Not sure if this should be here or in activity created or on start...
         createGraphs();
     }
@@ -345,30 +356,44 @@ public class HomePage extends Fragment {
 
     }
 
-    public void createAverageAgeGraph() {
+    private void formatBarChart(BarChart b) {
+        b.setDescription("");
+        b.getLegend().setEnabled(false);
+        b.setBackgroundColor(Color.WHITE);
+        b.setDrawGridBackground(false);
+        b.setDrawMarkerViews(false);
+        b.setDrawBarShadow(false);
+        b.setDrawBorders(false);
 
     }
 
-    public void createGenderGraph() {
+    private void formatBarDataSet(BarDataSet d) {
+        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        d.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return String.format("%.0f", value);
+            }
+        });
 
     }
 
-    public void createRegisteredPartyGraph(){
-
-    }
-
-    public void createTotalVotesForPartyGraph() {
-        BarChart totalVotes = (BarChart) getView().findViewById(R.id.chartTotalVotesByParty);
-        CandidateDataSource ds = new CandidateDataSource(getActivity());
+    private void createRegisteredUsersGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartRegisteredUsers);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
         int gop = 0;
         int dnc = 0;
+        int ind = 0;
 
         ds.open();
-        for(Candidate c : ds.getCandidates()) {
-            if(c.getParty().equals("DNC")) {
-                dnc += c.getNumberOfVotes();
+        for(User u : ds.getUsers()) {
+            if(u.getPartyAffiliation().equals("Democrat")) {
+                dnc++;
+            } else if (u.getPartyAffiliation().equals("Republican")) {
+                gop++;
             } else {
-                gop += c.getNumberOfVotes();
+                ind++;
             }
         }
         ds.close();
@@ -376,15 +401,138 @@ public class HomePage extends Fragment {
         ArrayList<BarEntry> values = new ArrayList<>();
         parties.add("DNC");
         parties.add("GOP");
+        parties.add("IND");
         values.add(new BarEntry(dnc, 0));
         values.add(new BarEntry(gop, 1));
-        BarDataSet barDataSet = new BarDataSet(values, "Party Votes");
+        values.add(new BarEntry(ind, 2));
+        BarDataSet barDataSet = new BarDataSet(values, "User Affiliation");
+        formatBarDataSet(barDataSet);
         BarData barData = new BarData(parties, barDataSet);
-        totalVotes.setData(barData);
+        barChart.setData(barData);
+        registeredUsersCreated = true;
     }
 
-    public void createVotesForCandidateGraph() {
+    private void createTotalVotesForAllCandidatesGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartTotalVotesForAllCandidates);
+        formatBarChart(barChart);
+        CandidateDataSource ds = new CandidateDataSource(getActivity());
+        ArrayList<String> candidates = new ArrayList<>();
+        ArrayList<BarEntry> votes = new ArrayList<>();
+        int i = 0;
 
+        ds.open();
+        for(Map.Entry<String, Integer> entry : ds.getRepublicanVotes().entrySet()) {
+            if(entry.getKey().equals("TOTAL")) {
+                continue;
+            }
+            candidates.add(entry.getKey());
+            votes.add(new BarEntry(entry.getValue(), i));
+            i++;
+        }
+        for(Map.Entry<String, Integer> entry : ds.getDemocratVotes().entrySet()) {
+            if(entry.getKey().equals("TOTAL")) {
+                continue;
+            }
+            candidates.add(entry.getKey());
+            votes.add(new BarEntry(entry.getValue(), i));
+            i++;
+        }
+        ds.close();
+        BarDataSet barDataSet = new BarDataSet(votes, "Candidate Votes");
+        formatBarDataSet(barDataSet);
+        
+        BarData barData = new BarData(candidates, barDataSet);
+        barChart.setData(barData);
+        totalVotesForAllCandidatesCreated = true;
+    }
+
+    private void createAverageAgeOfVoterGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartAverageAgeOfVoter);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
+        int lessThanTwentyFive = 0;
+        int twentyFiveToThrityFive = 0;
+        int thirtyFiveToFourtyFive = 0;
+        int fourtyFiveToFiftyFive = 0;
+        int fiftyFivePlus = 0;
+
+        ds.open();
+        for(User u : ds.getUsers()) {
+            if (u.getAge() < 25) {
+                lessThanTwentyFive++;
+                continue;
+            }
+            if (u.getAge() < 35) {
+                twentyFiveToThrityFive++;
+                continue;
+            }
+            if (u.getAge() < 45) {
+                thirtyFiveToFourtyFive++;
+                continue;
+            }
+            if (u.getAge() < 55) {
+                fourtyFiveToFiftyFive++;
+                continue;
+            }
+            fiftyFivePlus++;
+        }
+        ds.close();
+        ArrayList<String> ages = new ArrayList<>();
+        ages.add("<25");
+        ages.add("25-34");
+        ages.add("45-44");
+        ages.add("45-54");
+        ages.add("55+");
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(lessThanTwentyFive, 0));
+        entries.add(new BarEntry(twentyFiveToThrityFive, 1));
+        entries.add(new BarEntry(thirtyFiveToFourtyFive, 2));
+        entries.add(new BarEntry(fourtyFiveToFiftyFive, 3));
+        entries.add(new BarEntry(fiftyFivePlus, 4));
+        BarDataSet barDataSet = new BarDataSet(entries, "ages");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(ages, barDataSet);
+        barChart.setData(barData);
+        averageAgeofVoterCreated = true;
+
+
+
+    }
+
+    private void createGenderBreakdownGraph() {
+        BarChart barChart = (BarChart) getView().findViewById(R.id.chartGenderBreakdown);
+        formatBarChart(barChart);
+        UserDataSource ds = new UserDataSource(getActivity());
+        int male = 0;
+        int female = 0;
+        int other = 0;
+
+        ds.open();
+        for (User u : ds.getUsers()) {
+            if (u.getGender().equals("Male")) {
+                male++;
+                continue;
+            }
+            if (u.getGender().equals("Female")) {
+                female++;
+                continue;
+            }
+            other++;
+        }
+        ds.close();
+        ArrayList<String> genders = new ArrayList<>();
+        genders.add("Male");
+        genders.add("Female");
+        genders.add("Undisclosed");
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(male, 0));
+        entries.add(new BarEntry(female, 1));
+        entries.add(new BarEntry(other, 2));
+        BarDataSet barDataSet = new BarDataSet(entries, "genders");
+        formatBarDataSet(barDataSet);
+        BarData barData = new BarData(genders, barDataSet);
+        barChart.setData(barData);
+        genderBreakdownCreated = true;
     }
 
     public interface OnCommunicateActivityListener{
@@ -467,7 +615,9 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutRegisteredPartyExtended");
-                            createTotalVotesForPartyGraph();
+                            if (!registeredUsersCreated) {
+                                createRegisteredUsersGraph();
+                            }
                         }
                         relativeLayoutRegisteredParty.setBackgroundColor(colorWhite);
                         break;
@@ -491,7 +641,9 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutTotalVotesExtended");
-
+                            if (!totalVotesForAllCandidatesCreated) {
+                                createTotalVotesForAllCandidatesGraph();
+                            }
                         }
                         relativeLayoutTotalVotes.setBackgroundColor(colorWhite);
                         break;
@@ -515,6 +667,9 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutAverageAgeExtended");
+                            if (!averageAgeofVoterCreated) {
+                                createAverageAgeOfVoterGraph();
+                            }
                         }
                         relativeLayoutAverageAge.setBackgroundColor(colorWhite);
                         break;
@@ -538,6 +693,9 @@ public class HomePage extends Fragment {
                         }
                         else {
                             makeAllExtendedInvisible("relativeLayoutGenderExtended");
+                              if(!genderBreakdownCreated) {
+                                createGenderBreakdownGraph();
+                            }
                         }
                         relativeLayoutGender.setBackgroundColor(colorWhite);
                         break;
