@@ -524,7 +524,7 @@ public class DemocratsList extends Fragment {
             if(entry.getKey().equals("TOTAL")) {
                 continue;
             }
-            candidates.add(entry.getKey());
+            candidates.add(entry.getKey().substring(entry.getKey().indexOf(' ')));
             votes.add(new BarEntry(entry.getValue(), i));
             i++;
         }
