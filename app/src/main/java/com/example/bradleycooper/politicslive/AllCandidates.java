@@ -42,7 +42,6 @@ public class AllCandidates extends Fragment {
     private String mParam2;
 
     Activity thisActivity;
-    Context thisContext;
     ArrayList<Candidate> arrayListGOP, arrayListDNC;
     CandidateAdapter adapterGOP, adapterDNC;
     private OnFragmentInteractionListener mListener;
@@ -110,7 +109,7 @@ public class AllCandidates extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
                 Candidate selectedCandidate = arrayListGOP.get(position);
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getContext(), CandidateProfile.class);
                 intent.putExtra("candidateId", selectedCandidate.getCandidateID());
                 startActivity(intent);
             }
@@ -120,14 +119,14 @@ public class AllCandidates extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
                 Candidate selectedCandidate = arrayListDNC.get(position);
-                Intent intent = new Intent(thisContext, CandidateProfile.class);
+                Intent intent = new Intent(getContext(), CandidateProfile.class);
                 intent.putExtra("candidateId", selectedCandidate.getCandidateID());
                 startActivity(intent);
             }
         });
 
-        final int colorDown = ContextCompat.getColor(thisContext, R.color.colorLayoutPressed);
-        final int colorUp = ContextCompat.getColor(thisContext, R.color.colorBackgroundGrey);
+        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
+        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
 
         final TextView textViewDemocraticCandidatesLabel = (TextView)getView().findViewById(R.id.textViewDemocraticCandidatesLabel);
         final TextView textViewRepublicansCandidatesLabel = (TextView)getView().findViewById(R.id.textViewRepublicanCandidatesLabel);
@@ -177,7 +176,6 @@ public class AllCandidates extends Fragment {
         }
 
         activityCommunicator = (OnCommunicateActivityListener)context;
-        thisContext = context;
     }
 
     @Override

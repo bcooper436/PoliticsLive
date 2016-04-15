@@ -131,6 +131,7 @@ public class CandidateProfile extends AppCompatActivity {
 
         initCandidate(extras.getInt("candidateId"));
         initOtherCandidates(candidateName);
+        initIssues(candidateName);
     }
     private void initOtherCandidates(String nameOfCurrentCandidate){
         CandidateDataSource candidateDataSource = new CandidateDataSource(this);
@@ -518,5 +519,78 @@ public class CandidateProfile extends AppCompatActivity {
         }
     }
 
+    public void initIssues(String candidateName){
+        TextView textViewImmigrationExtended = (TextView)findViewById(R.id.textViewImmigrationExtended);
+        TextView textViewSameSexMarriageExtended = (TextView)findViewById(R.id.textViewSameSexMarriageExtended);
+        TextView textViewEducationExtended = (TextView) findViewById(R.id.textViewEducationExtended);
+        TextView textViewGunControlExtended = (TextView) findViewById(R.id.textViewGunControlExtended);
+        TextView textViewEconomyExtended = (TextView) findViewById(R.id.textViewEconomyExtended);
+        TextView textViewHealthCareExtended = (TextView) findViewById(R.id.textViewHealthCareExtended);
+        TextView textViewEnviornmentExtended = (TextView) findViewById(R.id.textViewEnviornmentExtended);
+        TextView textViewForeignPolicyExtended = (TextView) findViewById(R.id.textViewForeignPolicyExtended);
 
+        switch(candidateName) {
+            case "Ted Cruz":
+                String[] ted_cruz = getResources().getStringArray(R.array.issues_ted_cruz);
+
+                textViewImmigrationExtended.setText(ted_cruz[0]);
+                textViewSameSexMarriageExtended.setText(ted_cruz[1]);
+                textViewEducationExtended.setText(ted_cruz[2]);
+                textViewGunControlExtended.setText(ted_cruz[3]);
+                textViewEconomyExtended.setText(ted_cruz[4]);
+                textViewHealthCareExtended.setText(ted_cruz[5]);
+                textViewEnviornmentExtended.setText(ted_cruz[6]);
+                textViewForeignPolicyExtended.setText(ted_cruz[7]);
+                break;
+            case "Donald Trump":
+                String[] donald_trump = getResources().getStringArray(R.array.issues_donald_trump);
+
+                textViewImmigrationExtended.setText(donald_trump[0]);
+                textViewSameSexMarriageExtended.setText(donald_trump[1]);
+                textViewEducationExtended.setText(donald_trump[2]);
+                textViewGunControlExtended.setText(donald_trump[3]);
+                textViewEconomyExtended.setText(donald_trump[4]);
+                textViewHealthCareExtended.setText(donald_trump[5]);
+                textViewEnviornmentExtended.setText(donald_trump[6]);
+                textViewForeignPolicyExtended.setText(donald_trump[7]);
+                break;
+            case "John Kasich":
+                String[] john_kasich = getResources().getStringArray(R.array.issues_john_kasich);
+
+                textViewImmigrationExtended.setText(john_kasich[0]);
+                textViewSameSexMarriageExtended.setText(john_kasich[1]);
+                textViewEducationExtended.setText(john_kasich[2]);
+                textViewGunControlExtended.setText(john_kasich[3]);
+                textViewEconomyExtended.setText(john_kasich[4]);
+                textViewHealthCareExtended.setText(john_kasich[5]);
+                textViewEnviornmentExtended.setText(john_kasich[6]);
+                textViewForeignPolicyExtended.setText(john_kasich[7]);
+                break;
+            case "Hillary Clinton":
+                String[] hillary_clinton = getResources().getStringArray(R.array.issues_hillary_clinton);
+
+                textViewImmigrationExtended.setText(hillary_clinton[0]);
+                textViewSameSexMarriageExtended.setText(hillary_clinton[1]);
+                textViewEducationExtended.setText(hillary_clinton[2]);
+                textViewGunControlExtended.setText(hillary_clinton[3]);
+                textViewEconomyExtended.setText(hillary_clinton[4]);
+                textViewHealthCareExtended.setText(hillary_clinton[5]);
+                textViewEnviornmentExtended.setText(hillary_clinton[6]);
+                textViewForeignPolicyExtended.setText(hillary_clinton[7]);
+                break;
+            case "Bernie Sanders":
+                String[] bernie_sanders = getResources().getStringArray(R.array.issues_bernie_sanders);
+
+                //get string array for bernie's issues
+                textViewImmigrationExtended.setText(bernie_sanders[0]); //set to string array "bernie" item 1
+                textViewSameSexMarriageExtended.setText(bernie_sanders[1]);
+                textViewEducationExtended.setText(bernie_sanders[2]);
+                textViewGunControlExtended.setText(bernie_sanders[3]);
+                textViewEconomyExtended.setText(bernie_sanders[4]);
+                textViewHealthCareExtended.setText(bernie_sanders[5]);
+                textViewEnviornmentExtended.setText(bernie_sanders[6]);
+                textViewForeignPolicyExtended.setText(bernie_sanders[7]);
+                break;
+        }
+    }
 }
