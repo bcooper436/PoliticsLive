@@ -28,6 +28,12 @@ public class CreateUser extends AppCompatActivity {
     private String mGender = "Other/Unaffiliated";
     private String mParty = "Other/Unaffiliated";
 
+    private int selectedIdGender = -1;
+    private int selectedIdParty = -1;
+
+    private RadioButton radioButtonGender;
+    private RadioButton radioButtonParty;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +94,27 @@ public class CreateUser extends AppCompatActivity {
                         && editTextPassword.getText().toString().equals(editTextPasswordConfirm.getText().toString())
                         ) {
 
-                    int selectedIdGender = radioGroupGender.getCheckedRadioButtonId();
-                    RadioButton radioButtonGender = (RadioButton) findViewById(selectedIdGender);
-                    int selectedIdParty = radioGroupParty.getCheckedRadioButtonId();
-                    RadioButton radioButtonParty = (RadioButton) findViewById(selectedIdParty);
+                    if(radioGroupGender.getCheckedRadioButtonId() != -1){
+                        selectedIdGender = radioGroupGender.getCheckedRadioButtonId();
+                        View radioButton = radioGroupGender.findViewById(selectedIdGender);
+                        int radioId = radioGroupGender.indexOfChild(radioButton);
+//                        radioButtonGender = (RadioButton) findViewById(selectedIdGender);
+                        radioButtonGender = (RadioButton) radioGroupGender.getChildAt(radioId);
+                    }else{
+                        radioButtonGender = (RadioButton) findViewById(R.id.radioButtonOther);
+                    }
+//                    int selectedIdGender = radioGroupGender.getCheckedRadioButtonId();
+//                    RadioButton radioButtonGender = (RadioButton) findViewById(selectedIdGender);
+                    if(radioGroupParty.getCheckedRadioButtonId() != -1){
+                        selectedIdParty = radioGroupParty.getCheckedRadioButtonId();
+                        View radioButton = radioGroupParty.findViewById(selectedIdParty);
+                        int radioId = radioGroupParty.indexOfChild(radioButton);
+                        radioButtonParty = (RadioButton) radioGroupParty.getChildAt(radioId);
+                    }else{
+                        radioButtonParty = (RadioButton) findViewById(R.id.radioButtonIndependent);
+                    }
+//                    int selectedIdParty = radioGroupParty.getCheckedRadioButtonId();
+//                    RadioButton radioButtonParty = (RadioButton) findViewById(selectedIdParty);
 
                     newUser = new User();
                     newUser.setDisplayName(editTextFirstName.getText().toString() + " " + editTextLastName.getText().toString());
