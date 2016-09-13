@@ -390,7 +390,7 @@ public class CandidateProfile extends AppCompatActivity {
         textView_description.setText(eds.getMostCommonTypeOfVoterByCandidate(currentCandidate.getCandidateName()));
         textView_name.setText(currentCandidate.getCandidateName());
         textViewSupporters.setText("Users who voted for " + currentCandidate.getCandidateName() + ":");
-
+        eds.close();
         UserDataSource userDataSource = new UserDataSource(CandidateProfile.this);
         userDataSource.open();
         if(candidateParty.equalsIgnoreCase("DNC")) {

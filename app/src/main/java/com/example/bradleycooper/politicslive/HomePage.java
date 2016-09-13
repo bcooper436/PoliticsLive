@@ -187,11 +187,12 @@ public class HomePage extends Fragment {
                 viewQuestionOne.setVisibility(View.VISIBLE);
                 viewQuestionTwo.setVisibility(View.VISIBLE);
                 viewQuestionThree.setVisibility(View.VISIBLE);
+                linearLayoutQuestionTwo.setVisibility(View.VISIBLE);
 
                 LinearLayout linearLayoutStrip = (LinearLayout)getView().findViewById(R.id.linearLayoutStrip);
                 View viewStrip = (View)getView().findViewById(R.id.viewStrip);
 
-                viewStrip.setVisibility(View.INVISIBLE);
+                viewStrip.setVisibility(View.GONE);
             }
         });
         final Button buttonShare = (Button)getView().findViewById(R.id.buttonShare);
@@ -204,17 +205,7 @@ public class HomePage extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP:
                         buttonShare.setBackgroundResource(R.drawable.button_border);
-                        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                        emailIntent.setType("plain/text");
-
-                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                                "Email Subject");
-
-                        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                                "Sent from 'Politics In America' Android Application");
-
-                        startActivity(Intent.createChooser(
-                                emailIntent, "Send mail..."));
+                        shareApp();
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         buttonShare.setBackgroundResource(R.drawable.button_border);
@@ -718,9 +709,9 @@ public class HomePage extends Fragment {
         View viewQuestionThree = (View)getView().findViewById(R.id.viewQuestionThree);
 
         if(!questionOneAnswer.equals("") && !questionTwoAnswer.equals("") && !questionThreeAnswer.equals("")){
-            viewQuestionOne.setVisibility(View.INVISIBLE);
-            viewQuestionTwo.setVisibility(View.INVISIBLE);
-            viewQuestionThree.setVisibility(View.INVISIBLE);
+            viewQuestionOne.setVisibility(View.GONE);
+            viewQuestionTwo.setVisibility(View.GONE);
+            viewQuestionThree.setVisibility(View.GONE);
 
             View viewStrip = (View)getView().findViewById(R.id.viewStrip);
 
