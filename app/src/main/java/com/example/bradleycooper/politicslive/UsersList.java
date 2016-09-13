@@ -92,7 +92,6 @@ public class UsersList extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((MainActivity) getActivity()).hideFloatingActionButton();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String tutorialCompleted = preferences.getString("TutorialUsersList", "");

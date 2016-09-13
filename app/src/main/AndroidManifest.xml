@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -89,6 +90,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bradleycooper.politicslive.MainActivity" />
         </activity>
+        <activity
+            android:name=".PollDetailActivity"
+            android:label="@string/title_activity_poll_detail"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bradleycooper.politicslive.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PoliticalPartyProfile"
+            android:label="@string/title_activity_political_party_profile"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bradleycooper.politicslive.MainActivity" />
+        </activity>
+        <activity android:name=".EventProfile"></activity>
     </application>
 
 </manifest>

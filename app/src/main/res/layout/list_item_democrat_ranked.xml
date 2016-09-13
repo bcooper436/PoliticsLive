@@ -5,20 +5,21 @@
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+        android:id="@+id/cardViewCNN"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        card_view:cardCornerRadius="4dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="3dp">
+        card_view:cardCornerRadius="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="7dp"
             android:contextClickable="false"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorBlueLight"
             android:id="@+id/relativeLayoutPartyColor">
 
             <TextView
@@ -27,19 +28,19 @@
                 android:text="Candidate Name"
                 android:id="@+id/textCandidateName"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:layout_toRightOf="@+id/imageViewCandidate"
-                android:layout_toEndOf="@+id/imageViewCandidate"
+                android:layout_toRightOf="@+id/imageViewPoliticalParty"
+                android:layout_toEndOf="@+id/imageViewPoliticalParty"
                 android:layout_marginLeft="10dp"
                 android:textSize="15dp"
                 android:layout_alignParentTop="true"
                 android:gravity="center_vertical"
                 android:layout_alignParentBottom="true"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorMaterialGrey900" />
 
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:id="@+id/imageViewCandidate"
+                android:id="@+id/imageViewPoliticalParty"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -59,7 +60,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_vertical"
-                android:textColor="#e0e0e0" />
+                android:textColor="@color/colorMaterialGrey900" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,14 +68,15 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="0%"
                 android:id="@+id/textViewVotePercent"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlueDark"
                 android:layout_gravity="right"
                 android:layout_toLeftOf="@+id/textView9"
                 android:layout_toStartOf="@+id/textView9"
                 android:layout_marginRight="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>
@@ -89,11 +91,11 @@
         android:id="@+id/textViewCandidatePlace"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/card_view"
-        android:layout_alignTop="@+id/card_view"
+        android:layout_alignBottom="@+id/cardViewCNN"
+        android:layout_alignTop="@+id/cardViewCNN"
         android:gravity="center_vertical"
-        android:layout_marginLeft="15dp"
-        android:textColor="#212121" />
+        android:layout_marginLeft="40dp"
+        android:textColor="@color/colorWhite" />
 
     <ImageView
         android:layout_width="wrap_content"

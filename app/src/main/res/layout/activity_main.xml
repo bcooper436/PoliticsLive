@@ -28,6 +28,22 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
-        android:background="@color/colorBlueDarker"
-        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark" />
+        android:background="@color/colorMaterialGrey900"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/nav_drawer_footer"
+                />
+
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
+
 </android.support.v4.widget.DrawerLayout>

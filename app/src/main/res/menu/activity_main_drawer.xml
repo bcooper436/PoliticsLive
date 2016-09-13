@@ -2,6 +2,44 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_polls"
+            android:icon="@drawable/ic_action_polls"
+            android:title="Polls &amp; Graphs" />
+        <item
+            android:id="@+id/nav_all_candidates"
+            android:icon="@drawable/ic_action_group"
+            android:title="Candidates" />
+
+        <item
+            android:id="@+id/nav_political_party"
+            android:icon="@drawable/ic_action_hat"
+            android:title="Political Parties" />
+
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_action_calendar"
+            android:title="Upcoming Events" />
+        <item
+            android:id="@+id/nav_users_list"
+            android:icon="@drawable/ic_action_group"
+            android:title="Browse Users" />
+
+        <item
+            android:id="@+id/nav_user"
+            android:icon="@drawable/ic_action_contact"
+            android:title="Your Profile" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="Settings" />
+
+        <!--
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_action_home"
@@ -27,13 +65,17 @@
             android:icon="@drawable/ic_action_group"
             android:title="Browse Users" />
         <item
+            android:id="@+id/nav_polls"
+            android:icon="@drawable/ic_action_polls"
+            android:title="Polling Data" />
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_action_settings"
             android:title="Settings" />
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_action_logout"
-            android:title="Logout" />
+            android:title="Logout" /> -->
     </group>
 
 </menu>

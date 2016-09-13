@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -52,7 +51,7 @@ public class CandidateAdapter extends ArrayAdapter<Candidate> {
 
             TextView candidateName = (TextView)v.findViewById(R.id.textCandidateName);
             TextView voteCount = (TextView)v.findViewById(R.id.textViewVotePercent);
-            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewCandidate);
+            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewPoliticalParty);
             ImageView imageViewParty = (ImageView)v.findViewById(R.id.imageViewParty);
 
             if(candidate.getParty().equalsIgnoreCase("GOP")) {

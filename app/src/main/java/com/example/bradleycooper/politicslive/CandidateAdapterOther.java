@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -41,7 +40,7 @@ public class CandidateAdapterOther extends ArrayAdapter<Candidate> {
             }
 
             TextView candidateName = (TextView)v.findViewById(R.id.textCandidateName);
-            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewCandidate);
+            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewPoliticalParty);
 
             candidateName.setText(candidate.getCandidateName());
             byte[] byteArray = candidate.getSquarePicture();

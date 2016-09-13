@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.bradleycooper.politicslive.PollDetailActivity"
+    tools:showIn="@layout/activity_poll_detail">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView3"
+        android:scrollIndicators="right"
+        android:focusable="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="There are no registered Democrats to analyze yet."
+                android:id="@+id/textViewWarning2"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Data provided by"
+                    android:id="@+id/textView55"
+                    android:textColor="@color/colorMaterialGrey900"
+                    android:gravity="center_vertical"
+                    android:textSize="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/spinnerDataGOP"
+                    android:layout_toStartOf="@+id/spinnerDataGOP"
+                    android:layout_marginRight="5dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/spinnerDataGOP"
+                    android:touchscreenBlocksFocus="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/poll_header"
+                android:layout_gravity="center_horizontal" />
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/card_layout_voter_demographics_cnn" />
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/card_layout_voter_demographics"
+                android:layout_below="@+id/relativeLayoutBrowseUsers"
+                android:id="@+id/viewDemographics" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Data provided by"
+                    android:id="@+id/textView72"
+                    android:textColor="#616161"
+                    android:gravity="center_vertical"
+                    android:textSize="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/spinnerElectorate"
+                    android:layout_toStartOf="@+id/spinnerElectorate"
+                    android:layout_marginRight="5dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/spinnerElectorate"
+                    android:touchscreenBlocksFocus="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/relativeLayoutRegisteredUsers"
+                android:background="@drawable/layout_selector"
+                android:layout_below="@+id/listViewGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Registered Voters"
+                    android:id="@+id/textViewRegisteredVotersTitle"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/colorMaterialGrey800"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SEE ALL"
+                    android:id="@+id/textViewRegisteredVotersSeeAll"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:layout_marginRight="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="24dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="There are no registered Democrats yet."
+                android:id="@+id/textViewWarning"
+                android:layout_below="@+id/textView36"
+                android:layout_alignLeft="@+id/textView36"
+                android:layout_alignStart="@+id/textView36"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutRegisteredUsers"
+                android:showDividers="beginning|middle|end"
+                android:layout_marginTop="5dp"></LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/viewDivider"
+                android:layout_below="@+id/viewDemographics"
+                android:layout_margin="25dp" />
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/candidate_profile_resources"
+                android:id="@+id/viewResources"
+                android:layout_below="@+id/viewDivider" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

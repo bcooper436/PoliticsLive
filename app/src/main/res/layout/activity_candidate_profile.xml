@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.bradleycooper.politicslive.CandidateProfile">
+    tools:context="com.example.bradleycooper.politicslive.CandidateProfile"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    >
 
     <include layout="@layout/content_candidate_profile" />
 

@@ -156,11 +156,11 @@ public class CandidateProfile extends AppCompatActivity {
         TextView textView_name = (TextView)findViewById(R.id.textViewCandidateName);
         TextView textView_description = (TextView)findViewById(R.id.textViewDescription);
         ImageView imageViewWide = (ImageView)findViewById(R.id.imageViewWidePicture);
-        TextView textViewSupporters = (TextView)findViewById(R.id.textViewTopSupportersLabel);
-        TextView textView_total_votes = (TextView)findViewById(R.id.textViewTotalVotes);
-        TextView textView_average_age = (TextView)findViewById(R.id.textViewAverageAge);
-        TextView textView_male_percentage = (TextView)findViewById(R.id.textViewMalePercentage);
-        TextView textView_female_percentage = (TextView)findViewById(R.id.textViewFemalePercentage);
+        TextView textViewSupporters = (TextView)findViewById(R.id.textViewCardUsersForTitle);
+        TextView textView_total_votes = (TextView)findViewById(R.id.textViewAge17To29CNN);
+        TextView textView_average_age = (TextView)findViewById(R.id.textViewMaleCNN);
+        TextView textView_male_percentage = (TextView)findViewById(R.id.textViewWhiteCNN);
+        TextView textView_female_percentage = (TextView)findViewById(R.id.textViewBlackCNN);
 
         final RelativeLayout relativeLayoutImmigration = (RelativeLayout)findViewById(R.id.relativeLayoutImmigration);
         final RelativeLayout relativeLayoutImmigrationExtended = (RelativeLayout)findViewById(R.id.relativeLayoutImmigrationExtended);

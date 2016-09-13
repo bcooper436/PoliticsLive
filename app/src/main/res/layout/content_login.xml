@@ -7,7 +7,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.bradleycooper.politicslive.LoginActivity"
     tools:showIn="@layout/activity_login"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorBlueDark"
+    android:id="@+id/relativeLayoutLoginBackground">
 
     <LinearLayout
         android:orientation="vertical"
@@ -121,4 +122,22 @@
         android:textStyle="bold|italic"
         android:layout_above="@+id/textView11"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Welcome to..."
+        android:id="@+id/welcomeText"
+        android:layout_above="@+id/textView10"
+        android:layout_alignRight="@+id/textView10"
+        android:layout_alignEnd="@+id/textView10"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        android:textColor="@color/colorBlueLight"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:alpha="0" />
 </RelativeLayout>

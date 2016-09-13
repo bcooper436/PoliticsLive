@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bradleycooper.politicslive.ListOfPoliticalParties">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView7"
+        android:layout_marginTop="55dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayoutPoliticalPartiesMoreInfo"
+                android:background="@drawable/layout_selector"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView155"
+                    android:layout_marginLeft="17dp"
+                    android:textColor="@color/colorMaterialGrey800"
+                    android:textStyle="bold"
+                    android:text="About the Political Party System" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="A political party is a group of voters organized to support certain public policies. The aim of a political party is to elect officials who will try to carry out the party&apos;s policies. "
+                android:id="@+id/textView156"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/relativeLayoutPoliticalPartiesMoreInfo"
+                android:layout_marginRight="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="A political party offers candidates for public office. It sets out positions on issues that may range from war and taxes to how children should be educated. When people in a democracy disagree about what the government should do, voters express their opinions by voting for the candidates that most closely reflect their views. Political parties provide a way for voters to easily identify a candidate&apos;s positions. "
+                android:id="@+id/textView157"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/textView156"
+                android:layout_marginRight="20dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutPoliticalParties"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView157"></LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -112,7 +112,7 @@ public class AppSettings extends AppCompatActivity {
                             CharSequence text = "Great! You are now in developer mode, with the added ability to clear all users and votes.";
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(context, text, duration);
-                            toast.setGravity(Gravity.CENTER| Gravity.CENTER, 0, 200);
+                            toast.setGravity(Gravity.CENTER| Gravity.CENTER, 0, 350);
                             toast.show();
                             TextView textViewDeveloperOptions = (TextView) findViewById(R.id.textViewDeveloperOptions);
                             Button buttonDeleteAllUsers = (Button) findViewById(R.id.buttonClearUserTable);

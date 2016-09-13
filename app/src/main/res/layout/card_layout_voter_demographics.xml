@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    android:id="@+id/linearLayoutDemographicsPoliticsLive">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="General Electorate"
+        android:id="@+id/textViewElectoratePoliticsLive"
+        android:layout_marginLeft="17dp"
+        android:textColor="@color/colorMaterialGrey800"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="-25dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="90 total respondents"
+        android:id="@+id/textViewTotalRespondentsPoliticsLive"
+        android:layout_gravity="right"
+        android:paddingTop="7dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/colorMaterialGrey800"
+        android:textSize="12dp"
+        android:visibility="visible" />
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+        android:id="@+id/cardViewPoliticsLive"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp">
+        android:visibility="visible">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,16 +55,47 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="1dp"
+                android:id="@+id/relativeLayoutPersonalInformationPoliticsLive" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Personal Information"
+                    android:id="@+id/textView166"
+                    android:padding="10dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:id="@+id/imageViewArrowPersonalInformationPoliticsLive"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textView166"
+                    android:layout_toEndOf="@+id/textView166"
+                    android:src="@drawable/down_triangle_white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:id="@+id/relativeLayoutRegisteredParty"
-                android:background="@color/colorWhite">
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Registered Democrats = "
-                    android:id="@+id/textViewRegisteredPartyMembersLabel"
+                    android:id="@+id/textViewTotalVotersTitleLabel"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -46,14 +107,14 @@
                     android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
-                    android:id="@+id/textViewRegisteredPartyMembers"
+                    android:id="@+id/textViewTotalUsersPoliticsLive"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:background="@drawable/circle_dnc"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorMaterialGrey900"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembersLabel"
-                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembersLabel"
+                    android:layout_toRightOf="@+id/textViewTotalVotersTitleLabel"
+                    android:layout_toEndOf="@+id/textViewTotalVotersTitleLabel"
                     android:layout_marginLeft="10dp" />
 
                 <TextView
@@ -62,41 +123,13 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Users"
                     android:id="@+id/textView15"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewRegisteredPartyMembers"
-                    android:layout_toEndOf="@+id/textViewRegisteredPartyMembers"
-                    android:layout_marginLeft="7dp"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorMaterialGrey800"
                     android:textStyle="bold"
-                    android:textSize="12dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:id="@+id/relativeLayoutRegisteredPartyExtended"
-                android:visibility="gone"
-                android:background="@color/colorWhite">
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartRegisteredUsers"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:textSize="12dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />
-
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="TODO: Insert Graph about Total Votes"
-                    android:id="@+id/textView30"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />-->
+                    android:layout_toRightOf="@+id/textViewTotalUsersPoliticsLive"
+                    android:layout_toEndOf="@+id/textViewTotalUsersPoliticsLive"
+                    android:layout_marginLeft="5dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -104,7 +137,8 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutTotalVotes"
-                android:background="@color/colorWhite">
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,11 +157,11 @@
                     android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
-                    android:id="@+id/textViewTotalVotes"
+                    android:id="@+id/textViewTotalVotesPoliticsLive"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:background="@drawable/circle_dnc"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorMaterialGrey900"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textViewTotalVotesLabel"
                     android:layout_toEndOf="@+id/textViewTotalVotesLabel"
@@ -139,41 +173,13 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Votes"
                     android:id="@+id/textView19"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorMaterialGrey800"
                     android:textStyle="bold"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textViewTotalVotes"
                     android:textSize="12dp"
-                    android:layout_toRightOf="@+id/textViewTotalVotes"
-                    android:layout_marginLeft="7dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:id="@+id/relativeLayoutTotalVotesExtended"
-                android:visibility="gone"
-                android:background="@color/colorWhite">
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartTotalVotesForAllCandidates"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />
-
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="TODO: Insert Graph about Total Votes"
-                    android:id="@+id/textView31"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />-->
+                    android:layout_toRightOf="@+id/textViewTotalVotesPoliticsLive"
+                    android:layout_toEndOf="@+id/textViewTotalVotesPoliticsLive"
+                    android:layout_marginLeft="5dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -181,7 +187,8 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:id="@+id/relativeLayoutAverageAge"
-                android:background="@color/colorWhite">
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -193,7 +200,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="15dp"
-                    android:id="@+id/textViewAverageAgeLabel" />
+                    android:id="@+id/textViewGenderLabelCNN" />
 
                 <TextView
                     android:layout_width="30dp"
@@ -203,14 +210,14 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:background="@drawable/circle_dnc"
-                    android:textColor="@color/colorWhite"
-                    android:id="@+id/textViewAverageAge"
+                    android:textColor="@color/colorMaterialGrey900"
+                    android:id="@+id/textViewAverageAgePoliticsLive"
                     android:layout_alignParentBottom="false"
-                    android:layout_toRightOf="@+id/textViewAverageAgeLabel"
-                    android:layout_toEndOf="@+id/textViewAverageAgeLabel"
+                    android:layout_toRightOf="@+id/textViewGenderLabelCNN"
+                    android:layout_toEndOf="@+id/textViewGenderLabelCNN"
                     android:layout_alignParentTop="false"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -218,56 +225,29 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Years old"
                     android:id="@+id/textView20"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorMaterialGrey800"
                     android:textStyle="bold"
+                    android:textSize="12dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewAverageAge"
-                    android:layout_toEndOf="@+id/textViewAverageAge"
-                    android:layout_marginLeft="7dp"
-                    android:textSize="12dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:id="@+id/relativeLayoutAverageAgeExtended"
-                android:visibility="gone"
-                android:background="@color/colorWhite">
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartAverageAgeOfVoter"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />
-
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="TODO: Insert Graph about Voters&apos; Ages"
-                    android:id="@+id/textView33"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />-->
+                    android:layout_toRightOf="@+id/textViewAverageAgePoliticsLive"
+                    android:layout_toEndOf="@+id/textViewAverageAgePoliticsLive"
+                    android:layout_marginLeft="5dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:id="@+id/relativeLayoutGender"
-                android:background="@color/colorWhite">
+                android:id="@+id/relativeLayoutGenderAlt"
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Gender Breakdown = "
-                    android:id="@+id/textViewGenderBreakdown"
+                    android:id="@+id/textViewRaceLabelCNN"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
@@ -279,14 +259,14 @@
                     android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
-                    android:id="@+id/textViewMalePercentage"
+                    android:id="@+id/textViewMalePoliticsLive"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:background="@drawable/circle_dnc"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorMaterialGrey900"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewGenderBreakdown"
-                    android:layout_toEndOf="@+id/textViewGenderBreakdown"
+                    android:layout_toRightOf="@+id/textViewRaceLabelCNN"
+                    android:layout_toEndOf="@+id/textViewRaceLabelCNN"
                     android:layout_marginLeft="10dp" />
 
                 <TextView
@@ -294,14 +274,14 @@
                     android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="-"
-                    android:id="@+id/textViewFemalePercentage"
+                    android:id="@+id/textViewFemalePoliticsLive"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:background="@drawable/circle_dnc"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorMaterialGrey900"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewMalePercentageLabel"
-                    android:layout_toEndOf="@+id/textViewMalePercentageLabel"
+                    android:layout_toRightOf="@+id/textViewMaleLabelCNN"
+                    android:layout_toEndOf="@+id/textViewMaleLabelCNN"
                     android:layout_marginLeft="10dp" />
 
                 <TextView
@@ -309,57 +289,60 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="% Male"
-                    android:id="@+id/textViewMalePercentageLabel"
-                    android:textColor="@color/colorBlack"
+                    android:id="@+id/textViewMaleLabelCNN"
+                    android:textColor="@color/colorMaterialGrey800"
                     android:textStyle="bold"
+                    android:textSize="12dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textViewMalePercentage"
-                    android:layout_toEndOf="@+id/textViewMalePercentage"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="12dp" />
+                    android:layout_toRightOf="@+id/textViewMalePoliticsLive"
+                    android:layout_toEndOf="@+id/textViewMalePoliticsLive"
+                    android:layout_marginLeft="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="% Female"
-                    android:id="@+id/textViewFemalePercentageLabel"
-                    android:textColor="@color/colorBlack"
+                    android:id="@+id/textViewBlackLabelCNN"
+                    android:textColor="@color/colorMaterialGrey800"
                     android:textStyle="bold"
-                    android:layout_alignTop="@+id/textViewMalePercentageLabel"
-                    android:layout_toEndOf="@+id/textViewFemalePercentage"
                     android:textSize="12dp"
-                    android:layout_toRightOf="@+id/textViewFemalePercentage"
-                    android:layout_marginLeft="2dp" />
+                    android:layout_alignTop="@+id/textViewMaleLabelCNN"
+                    android:layout_toRightOf="@+id/textViewFemalePoliticsLive"
+                    android:layout_toEndOf="@+id/textViewFemalePoliticsLive"
+                    android:layout_marginLeft="5dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:id="@+id/relativeLayoutGenderExtended"
-                android:visibility="gone"
-                android:background="@color/colorWhite">
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="1dp"
+                android:id="@+id/relativeLayoutPoliticalBackgroundPoliticsLive" >
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartGenderBreakdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp" />
-
-                <!--<TextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="TODO: Insert Graph about Genders"
-                    android:id="@+id/textView34"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Political Background"
+                    android:id="@+id/textView167"
+                    android:padding="10dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:id="@+id/imageViewArrowPoliticalBackgroundPoliticsLive"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />-->
+                    android:layout_toRightOf="@+id/textView167"
+                    android:layout_toEndOf="@+id/textView167"
+                    android:src="@drawable/down_triangle_white" />
             </RelativeLayout>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

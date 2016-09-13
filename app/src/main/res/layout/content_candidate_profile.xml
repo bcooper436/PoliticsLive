@@ -75,44 +75,15 @@
             layout="@layout/candidate_profile_circles"
                 android:layout_marginTop="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Hot Topics"
-                android:id="@+id/textView29"
-                android:layout_marginLeft="15dp"
-                android:capitalize="characters"
-                android:layout_marginTop="10dp"
-                android:textColor="#212121" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Tap to Expand"
-                android:id="@+id/textView49"
-                android:layout_below="@+id/textView36"
-                android:layout_alignLeft="@+id/textView36"
-                android:layout_alignStart="@+id/textView36"
-                android:textColor="#616161"
-                android:layout_marginLeft="15dp" />
-
             <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/card_layout_issues" />
 
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Users who voted for Cruz"
-            android:id="@+id/textViewTopSupportersLabel"
-            android:layout_marginLeft="15dp"
-                android:capitalize="characters"
-                android:layout_marginTop="10dp"
-                android:textColor="#212121" />
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/card_users_for" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -127,13 +98,6 @@
                 android:layout_marginLeft="25dp"
                 android:visibility="gone"
                 android:layout_marginTop="10dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:id="@+id/linearLayoutRegisteredVoters"></LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

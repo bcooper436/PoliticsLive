@@ -40,6 +40,16 @@ public class CandidateDataSource {
             initialValues.put("squarepicture", c.getSquarePicture());
             initialValues.put("widepicture", c.getWidePicture());
             initialValues.put("party", c.getParty());
+            initialValues.put("delegatecount", c.getDelegateCount());
+            initialValues.put("huffpercentageofvote", c.getHuffPercentageOfVote());
+            initialValues.put("huffpercentageofvotegeneral", c.getHuffPercentageOfVoteGeneral());
+            initialValues.put("hufffavorablerating", c.getHuffFavorableRating());
+            initialValues.put("huffunfavorablerating", c.getHuffUnfavorableRating());
+            initialValues.put("site", c.getSite());
+            initialValues.put("email", c.getEmail());
+            initialValues.put("twitter", c.getTwitter());
+            initialValues.put("electiontype", c.getElectionType());
+
             didSucceed = database.insert("candidate", null, initialValues) > 0;
         }
         catch (Exception e) {
@@ -60,6 +70,16 @@ public class CandidateDataSource {
             updateValues.put("squarepicture", c.getSquarePicture());
             updateValues.put("widepicture", c.getWidePicture());
             updateValues.put("party", c.getParty());
+            updateValues.put("delegatecount", c.getDelegateCount());
+            updateValues.put("huffpercentageofvote", c.getHuffPercentageOfVote());
+            updateValues.put("huffpercentageofvotegeneral", c.getHuffPercentageOfVoteGeneral());
+            updateValues.put("hufffavorablerating", c.getHuffFavorableRating());
+            updateValues.put("huffunfavorablerating", c.getHuffUnfavorableRating());
+            updateValues.put("site", c.getSite());
+            updateValues.put("email", c.getEmail());
+            updateValues.put("twitter", c.getTwitter());
+            updateValues.put("electiontype", c.getElectionType());
+
 
             didSucceed = database.update("candidate", updateValues, "_id=" + rowId, null) > 0;
         }
@@ -119,6 +139,16 @@ public class CandidateDataSource {
                 newCandidate.setSquarePicture(cursor.getBlob(4));
                 newCandidate.setWidePicture(cursor.getBlob(5));
                 newCandidate.setParty(cursor.getString(6));
+                newCandidate.setDelegateCount(cursor.getInt(7));
+                newCandidate.setHuffPercentageOfVote(cursor.getFloat(8));
+                newCandidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+                newCandidate.setHuffFavorableRating(cursor.getFloat(10));
+                newCandidate.setHuffUnfavorableRating(cursor.getFloat(11));
+                newCandidate.setSite(cursor.getString(12));
+                newCandidate.setEmail(cursor.getString(13));
+                newCandidate.setTwitter(cursor.getString(14));
+                newCandidate.setElectionType(cursor.getString(15));
+
                 candidates.add(newCandidate);
                 cursor.moveToNext();
             }
@@ -146,6 +176,16 @@ public class CandidateDataSource {
                 newCandidate.setSquarePicture(cursor.getBlob(4));
                 newCandidate.setWidePicture(cursor.getBlob(5));
                 newCandidate.setParty(cursor.getString(6));
+                newCandidate.setDelegateCount(cursor.getInt(7));
+                newCandidate.setHuffPercentageOfVote(cursor.getFloat(8));
+                newCandidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+                newCandidate.setHuffFavorableRating(cursor.getFloat(10));
+                newCandidate.setHuffUnfavorableRating(cursor.getFloat(11));
+                newCandidate.setSite(cursor.getString(12));
+                newCandidate.setEmail(cursor.getString(13));
+                newCandidate.setTwitter(cursor.getString(14));
+                newCandidate.setElectionType(cursor.getString(15));
+
                 candidates.add(newCandidate);
                 cursor.moveToNext();
             }
@@ -173,6 +213,16 @@ public class CandidateDataSource {
                 newCandidate.setSquarePicture(cursor.getBlob(4));
                 newCandidate.setWidePicture(cursor.getBlob(5));
                 newCandidate.setParty(cursor.getString(6));
+                newCandidate.setDelegateCount(cursor.getInt(7));
+                newCandidate.setHuffPercentageOfVote(cursor.getFloat(8));
+                newCandidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+                newCandidate.setHuffFavorableRating(cursor.getFloat(10));
+                newCandidate.setHuffUnfavorableRating(cursor.getFloat(11));
+                newCandidate.setSite(cursor.getString(12));
+                newCandidate.setEmail(cursor.getString(13));
+                newCandidate.setTwitter(cursor.getString(14));
+                newCandidate.setElectionType(cursor.getString(15));
+
                 candidates.add(newCandidate);
                 cursor.moveToNext();
             }
@@ -196,6 +246,16 @@ public class CandidateDataSource {
             candidate.setSquarePicture(cursor.getBlob(4));
             candidate.setWidePicture(cursor.getBlob(5));
             candidate.setParty(cursor.getString(6));
+            candidate.setDelegateCount(cursor.getInt(7));
+            candidate.setHuffPercentageOfVote(cursor.getFloat(8));
+            candidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+            candidate.setHuffFavorableRating(cursor.getFloat(10));
+            candidate.setHuffUnfavorableRating(cursor.getFloat(11));
+            candidate.setSite(cursor.getString(12));
+            candidate.setEmail(cursor.getString(13));
+            candidate.setTwitter(cursor.getString(14));
+            candidate.setElectionType(cursor.getString(15));
+
             cursor.close();
         }
         return candidate;
@@ -212,6 +272,15 @@ public class CandidateDataSource {
             candidate.setSquarePicture(cursor.getBlob(4));
             candidate.setWidePicture(cursor.getBlob(5));
             candidate.setParty(cursor.getString(6));
+            candidate.setDelegateCount(cursor.getInt(7));
+            candidate.setHuffPercentageOfVote(cursor.getFloat(8));
+            candidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+            candidate.setHuffFavorableRating(cursor.getFloat(10));
+            candidate.setHuffUnfavorableRating(cursor.getFloat(11));
+            candidate.setSite(cursor.getString(12));
+            candidate.setEmail(cursor.getString(13));
+            candidate.setTwitter(cursor.getString(14));
+            candidate.setElectionType(cursor.getString(15));
             cursor.close();
         }
         return candidate;
@@ -243,7 +312,31 @@ public class CandidateDataSource {
         counts.put("TOTAL", total);
         return counts;
     }
+    public Map<String, Float> getRepublicanPollsterVotes() {
+        Map<String, Float> percentages = new HashMap<>();
+        for(Candidate c : getSpecificParty("GOP")) {
+            percentages.put(c.getCandidateName(), c.getHuffPercentageOfVote());
+        }
+        return percentages;
+    }
+    public Map<String, Float> getRepublicanPollsterVotesGeneral() {
+        Map<String, Float> percentages = new HashMap<>();
+        for(Candidate c : getSpecificParty("GOP")) {
+            percentages.put(c.getCandidateName(), c.getHuffPercentageOfVote());
+        }
+        return percentages;
+    }
 
+    public Map<String, Integer> getRepublicanDelegates() {
+        Map<String, Integer> counts = new HashMap<>();
+        int total = 0;
+        for(Candidate c : getSpecificParty("GOP")) {
+            counts.put(c.getCandidateName(), c.getDelegateCount());
+            total += c.getDelegateCount();
+        }
+        counts.put("TOTAL", total);
+        return counts;
+    }
     public Map<String, Integer> getDemocratVotes() {
         Map<String, Integer> counts = new HashMap<>();
         int total = 0;
@@ -254,7 +347,23 @@ public class CandidateDataSource {
         counts.put("TOTAL", total);
         return counts;
     }
-
+    public Map<String, Float> getDemocratPollsterVotes() {
+        Map<String, Float> percentages = new HashMap<>();
+        for(Candidate c : getSpecificParty("DNC")) {
+            percentages.put(c.getCandidateName(), c.getHuffPercentageOfVote());
+        }
+        return percentages;
+    }
+    public Map<String, Integer> getDemocratDelegates() {
+        Map<String, Integer> counts = new HashMap<>();
+        int total = 0;
+        for(Candidate c : getSpecificParty("DNC")) {
+            counts.put(c.getCandidateName(), c.getDelegateCount());
+            total += c.getDelegateCount();
+        }
+        counts.put("TOTAL", total);
+        return counts;
+    }
     public String getPercentageOfVote(String candidateName){
         Candidate currentCandidate;
         String percentageOfVotes;
@@ -287,6 +396,16 @@ public class CandidateDataSource {
                 newCandidate.setSquarePicture(cursor.getBlob(4));
                 newCandidate.setWidePicture(cursor.getBlob(5));
                 newCandidate.setParty(cursor.getString(6));
+                newCandidate.setDelegateCount(cursor.getInt(7));
+                newCandidate.setHuffPercentageOfVote(cursor.getFloat(8));
+                newCandidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+                newCandidate.setHuffFavorableRating(cursor.getFloat(10));
+                newCandidate.setHuffUnfavorableRating(cursor.getFloat(11));
+                newCandidate.setSite(cursor.getString(12));
+                newCandidate.setEmail(cursor.getString(13));
+                newCandidate.setTwitter(cursor.getString(14));
+                newCandidate.setElectionType(cursor.getString(15));
+
                 candidates.add(newCandidate);
                 cursor.moveToNext();
             }
@@ -326,4 +445,49 @@ public class CandidateDataSource {
         }
         return didDelete;
     }
+    public ArrayList<Candidate> getCandidatesInGeneral(String electionType){
+        ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+        try {
+            String query = "SELECT * FROM candidate WHERE electiontype = '" + electionType + "'";
+            Cursor cursor = database.rawQuery(query, null);
+
+            Candidate newCandidate;
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                newCandidate = new Candidate();
+                newCandidate.setCandidateID(cursor.getInt(0));
+                newCandidate.setCandidateName(cursor.getString(1));
+                newCandidate.setCandidateDescription(cursor.getString(2));
+                newCandidate.setNumberOfVotes(cursor.getInt(3));
+                newCandidate.setSquarePicture(cursor.getBlob(4));
+                newCandidate.setWidePicture(cursor.getBlob(5));
+                newCandidate.setParty(cursor.getString(6));
+                newCandidate.setDelegateCount(cursor.getInt(7));
+                newCandidate.setHuffPercentageOfVote(cursor.getFloat(8));
+                newCandidate.setHuffPercentageOfVoteGeneral(cursor.getFloat(9));
+                newCandidate.setHuffFavorableRating(cursor.getFloat(10));
+                newCandidate.setHuffUnfavorableRating(cursor.getFloat(11));
+                newCandidate.setSite(cursor.getString(12));
+                newCandidate.setEmail(cursor.getString(13));
+                newCandidate.setTwitter(cursor.getString(14));
+                newCandidate.setElectionType(cursor.getString(15));
+
+                candidates.add(newCandidate);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            candidates = new ArrayList<Candidate>();
+        }
+        return candidates;
+    }
+    public Map<String, Float> getGeneralPollsterVotes() {
+        Map<String, Float> percentages = new HashMap<>();
+        for(Candidate c : getCandidatesInGeneral("general")) {
+            percentages.put(c.getCandidateName(), c.getHuffPercentageOfVoteGeneral());
+        }
+        return percentages;
+    }
+
 }

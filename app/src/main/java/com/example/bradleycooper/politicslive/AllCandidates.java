@@ -42,34 +42,16 @@ public class AllCandidates extends Fragment {
     private String mParam2;
 
     Activity thisActivity;
-    ArrayList<Candidate> arrayListGOP, arrayListDNC;
-    CandidateAdapter adapterGOP, adapterDNC;
+    ArrayList<Candidate> arrayListGOP, arrayListDNC, arrayListLIB;
+    CandidateAdapter adapterGOP, adapterDNC, adapterLIB;
     private OnFragmentInteractionListener mListener;
-    ListView listViewGOP, listViewDNC;
+    ListView listViewGOP, listViewDNC, listViewLIB;
 
     public AllCandidates() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DemocratsList.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DemocratsList newInstance(String param1, String param2) {
-        DemocratsList fragment = new DemocratsList();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
 
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,47 +79,20 @@ public class AllCandidates extends Fragment {
         dataSource.open();
         arrayListGOP = dataSource.getCandidatesInOrderOfVotes("GOP");
         arrayListDNC = dataSource.getCandidatesInOrderOfVotes("DNC");
+        arrayListLIB = dataSource.getCandidatesInOrderOfVotes("Libertarian");
         dataSource.close();
 
         adapterGOP = new CandidateAdapter(getActivity(),arrayListGOP);
         adapterDNC = new CandidateAdapter(getActivity(),arrayListDNC);
+        adapterLIB = new CandidateAdapter(getActivity(),arrayListLIB);
 
         listViewGOP = (ListView)getView().findViewById(R.id.listViewRepublican);
         listViewDNC = (ListView)getView().findViewById(R.id.listViewDemocrat);
+        listViewLIB = (ListView)getView().findViewById(R.id.listViewLibertarian);
         listViewGOP.setAdapter(adapterGOP);
         listViewDNC.setAdapter(adapterDNC);
+        listViewLIB.setAdapter(adapterLIB);
 
-        final int colorDown = ContextCompat.getColor(getActivity(), R.color.colorLayoutPressed);
-        final int colorUp = ContextCompat.getColor(getActivity(), R.color.colorBackgroundGrey);
-
-        final TextView textViewDemocraticCandidatesLabel = (TextView)getView().findViewById(R.id.textViewDemocraticCandidatesLabel);
-        final TextView textViewRepublicansCandidatesLabel = (TextView)getView().findViewById(R.id.textViewRepublicanCandidatesLabel);
-
-        textViewDemocraticCandidatesLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment;
-                FragmentManager fragmentManager = getFragmentManager();
-                fragment = new DemocratsList();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commit();
-                activityCommunicator.passDataToActivity(R.id.nav_DNC);
-            }
-        });
-
-        textViewRepublicansCandidatesLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment;
-                FragmentManager fragmentManager = getFragmentManager();
-                fragment = new RepublicansList();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commit();
-                activityCommunicator.passDataToActivity(R.id.nav_GOP);
-            }
-        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

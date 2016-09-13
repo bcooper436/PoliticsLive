@@ -105,7 +105,6 @@ public class UserProfile extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((MainActivity) getActivity()).hideFloatingActionButton();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String userName = preferences.getString("Username", "");

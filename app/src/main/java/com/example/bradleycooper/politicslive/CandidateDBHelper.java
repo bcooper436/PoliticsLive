@@ -10,13 +10,19 @@ import android.util.Log;
  */
 public class CandidateDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "candidates.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     //Database creation sql statement
     private static final String CREATE_TABLE_CANDIDATE = "create table candidate (_id integer primary key autoincrement, "
             + "candidatename text not null, candidatedescription text, "
             + "numberofvotes text, squarepicture text, "
-            + "widepicture text, party text); ";
+            + "widepicture text, party text, "
+            + "delegatecount text, huffpercentageofvote text, "
+            + "huffpercentageofvotegeneral text, hufffavorablerating text, "
+            + "huffunfavorablerating text, site text , "
+            + "email text, twitter text , "
+            + "electiontype text );";
+
 
     public CandidateDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:id="@+id/layoutTop"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:elevation="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutCandidateRankings"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:elevation="2dp">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="National Results"
+                android:id="@+id/layoutTopDataSource"
+                android:textColor="@color/colorWhite"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/layoutTopImageViewTriangle"
+                android:layout_toStartOf="@+id/layoutTopImageViewTriangle"
+                android:layout_marginRight="7dp" />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/layoutTopImageViewTriangle"
+                android:src="@drawable/down_triangle_dnc"
+                android:background="@drawable/circle_white"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginRight="45dp"
+                android:scaleType="centerInside"
+                android:paddingLeft="7dp"
+                android:paddingTop="7dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="5dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

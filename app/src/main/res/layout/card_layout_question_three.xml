@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayoutQuestionThree"
+    android:visibility="gone">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardViewRegisteredToVote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorMaterialGrey300">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Who is your top presidential pick?"
+                android:id="@+id/textView179"
+                android:textAlignment="center"
+                android:textColor="@color/colorMaterialGrey700"
+                android:background="@color/colorWhite"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:weightSum="4"
+                android:background="@color/colorMaterialGrey300"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Hillary Clinton"
+                    android:id="@+id/textViewQuestionThreeClinton"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/textView175"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginRight="2dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Donald Trump"
+                    android:id="@+id/textViewQuestionThreeTrump"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/textView175"
+                    android:gravity="center"
+                    android:textColor="@color/colorMotionPressGOP"
+                    android:textSize="13dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginRight="2dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Gary Johnson"
+                    android:id="@+id/textViewQuestionThreeJohnson"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/textView175"
+                    android:gravity="center"
+                    android:textColor="@color/colorMotionPressDNC"
+                    android:textSize="13dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginRight="2dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Jill Stein"
+                    android:id="@+id/textViewQuestionThreeStein"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/textView175"
+                    android:gravity="center"
+                    android:textColor="@color/colorGreenParty"
+                    android:textSize="13dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginRight="2dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

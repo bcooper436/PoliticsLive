@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,7 +23,7 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
     private ArrayList<Candidate> items;
     private Context adapterContext;
     private int democratColor, republicanColor;
-    private int colorPrimary, colorMotionPress, colorMotionPressGOP, colorMotionPressDNC, totalDemocratVotes, totalRepublicanVotes, candidateVotesDNC, candidateVotesGOP, votePercentage, totalVotesForParty;
+    private int colorPrimary,colorPrimaryDark , colorMotionPress, colorMotionPressGOP, colorMotionPressDNC, democratColorDark, republicanColorDark, totalDemocratVotes, totalRepublicanVotes, candidateVotesDNC, candidateVotesGOP, votePercentage, totalVotesForParty;
     private Bitmap bitmapRepublican, bitmapDemocrat;
     public CandidateAdapterRanking(Context context, ArrayList<Candidate> items) {
         super(context, R.layout.list_item_democrat_ranked, items);
@@ -35,10 +34,12 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        democratColor = ContextCompat.getColor(adapterContext, R.color.colorPrimary);
-        republicanColor = ContextCompat.getColor(adapterContext, R.color.colorRedDark);
-        colorMotionPressDNC = ContextCompat.getColor(adapterContext, R.color.colorMotionPressDNC);
-        colorMotionPressGOP = ContextCompat.getColor(adapterContext, R.color.colorMotionPressGOP);
+        democratColor = ContextCompat.getColor(adapterContext, R.color.colorBlueLight);
+        republicanColor = ContextCompat.getColor(adapterContext, R.color.colorRedLight);
+        colorMotionPressDNC = ContextCompat.getColor(adapterContext, R.color.colorBlueLight2);
+        colorMotionPressGOP = ContextCompat.getColor(adapterContext, R.color.colorRedLight2);
+        democratColorDark = ContextCompat.getColor(adapterContext, R.color.colorBlueDark);
+        republicanColorDark = ContextCompat.getColor(adapterContext, R.color.colorRedDarker);
 
         View v = convertView;
         try {
@@ -52,7 +53,7 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
             TextView candidateName = (TextView)v.findViewById(R.id.textCandidateName);
             TextView voteCount = (TextView)v.findViewById(R.id.textViewVotePercent);
             TextView ranking = (TextView)v.findViewById(R.id.textViewCandidatePlace);
-            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewCandidate);
+            ImageView imageView = (ImageView)v.findViewById(R.id.imageViewPoliticalParty);
             ImageView imageViewCrown = (ImageView)v.findViewById(R.id.imageViewCrown);
 
             final RelativeLayout relativeLayoutPartyColor = (RelativeLayout)v.findViewById(R.id.relativeLayoutPartyColor);
@@ -60,11 +61,13 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
                 relativeLayoutPartyColor.setBackgroundColor(republicanColor);
                 colorPrimary = republicanColor;
                 colorMotionPress = colorMotionPressGOP;
+                colorPrimaryDark = republicanColorDark;
             }
             else{
                 relativeLayoutPartyColor.setBackgroundColor(democratColor);
                 colorPrimary = democratColor;
                 colorMotionPress = colorMotionPressDNC;
+                colorPrimaryDark = democratColorDark;
             }
             relativeLayoutPartyColor.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -116,7 +119,7 @@ public class CandidateAdapterRanking extends ArrayAdapter<Candidate> {
             byte[] byteArray = candidate.getSquarePicture();
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             imageView.setImageBitmap(bmp);
-
+            voteCount.setTextColor(colorPrimaryDark);
         }catch (Exception e) {
             e.printStackTrace();
             e.getCause();
