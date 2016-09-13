@@ -385,9 +385,10 @@ public class CandidateProfile extends AppCompatActivity {
             }
         });
 
-
+        ExitPollDataSource eds = new ExitPollDataSource(CandidateProfile.this);
+        eds.open();
+        textView_description.setText(eds.getMostCommonTypeOfVoterByCandidate(currentCandidate.getCandidateName()));
         textView_name.setText(currentCandidate.getCandidateName());
-        textView_description.setText(currentCandidate.getCandidateDescription());
         textViewSupporters.setText("Users who voted for " + currentCandidate.getCandidateName() + ":");
 
         UserDataSource userDataSource = new UserDataSource(CandidateProfile.this);
