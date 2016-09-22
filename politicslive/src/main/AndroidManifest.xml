@@ -109,7 +109,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bradleycooper.politicslive.MainActivity" />
         </activity>
-        <activity android:name=".EventProfile" />
         <activity
             android:name=".AllEvents"
             android:label="@string/title_activity_all_events"

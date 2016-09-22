@@ -1,7 +1,5 @@
 package com.example.bradleycooper.politicslive;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -15,11 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.annotation.IntegerRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,13 +21,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -44,50 +35,42 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class LoginActivity extends AppCompatActivity {
 
     UserDataSource userDataSource;
     User currentUser;
 
-    /* Fields for initializing the sqllite database */
-    //public int NUMBER_OF_DATABASES_TO_POPULATE = 1608; /* exit polls (1555) + users (23) + candidates (6) + political parties (4) + events (5) + APIs (15) = 1597, static number... */
-    public int NUMBER_OF_DATABASES_TO_POPULATE = 1599; /* exit polls (1555) + users (23) + candidates (6) + political parties (4) + events (5) + APIs (16) = 1597, static number... */
+    /* Specify how many items need to be process, set max for progress bar so that once all are processed, it goes away */
+    public int NUMBER_OF_EXIT_POLLS = 1555;
+    public int NUMBER_OF_USERS = 23;
+    public int NUMBER_OF_CANDIDATES = 6;
+    public int NUMBER_OF_POLITICAL_PARTIES = 4;
+    public int NUMBER_OF_EVENTS = 5;
+    public int NUMBER_OF_APIS = 6;
+    //Total amount of items to process
+    public int NUMBER_OF_DATABASES_TO_POPULATE = NUMBER_OF_EXIT_POLLS + NUMBER_OF_USERS + NUMBER_OF_CANDIDATES + NUMBER_OF_POLITICAL_PARTIES + NUMBER_OF_EVENTS + NUMBER_OF_APIS;
 
-    public int resize = 150;
+    /* Other fields to help populate database */
     int votesForHilary = 0, votesForBernie = 0, votesForTrump = 0, votesForCruz = 0, votesForKasich = 0, votesForGary = 0;
     private Candidate currentCandidate;
     private PoliticalParty currentPoliticalParty;
     private Event currentEvent;
     private User user;
 
-    /* Information for the loading bar during initialization */
-    public int NUMBER_OF_RANDOMLY_GENERATED_USERS = 0;
-    public int NUMBER_OF_EXIT_POLLS;
-    public int NUMBER_OF_CANDIDATES;
-    public int NUMBER_OF_APIS;
-
     String[][] arrayOfVoterPercentages;
-    String[][] arrayFavorable;
 
     int numberOfCandidatesToGenerate = 6;
     int numberOfCandidatesGenerated = 0;
@@ -137,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
     int progressBarProgress = 0;
     Candidate candidate;
     CandidateDataSource ds;
-    Candidate candidateToUpdate;
 
 
     @Override
@@ -239,8 +221,6 @@ public class LoginActivity extends AppCompatActivity {
         API_US_SATISFACTION = getResources().getString(R.string.api_us_satisfaction);
         API_US_RIGHT_DIRECTION_WRONG_TRACK = getResources().getString(R.string.api_us_right_direction_wrong_track);
         API_CONGRESS_JOB_APPROVAL = getResources().getString(R.string.api_congress_job_approval);
-
-
     }
     public void onBackPressed() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -286,12 +266,13 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
     private void initializeAppFirstTimeUse(){
+
+        /* INITIALIZE APP WHILE PROGRESS BAR DISPLAYS PROGRESS */
         initializeDBPoliticalParties();
         initializeEvents();
         initializeDBCandidates();
     }
     private void initializeEvents(){
-
         /* Access String resources to populate information about events */
         String eventOneName = getResources().getString(R.string.eventOneName);
         String eventOneDescription = getResources().getString(R.string.eventOneDescription);
@@ -566,6 +547,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+    /* Save bitmap to internal storage and return Strin of the image's path.
+            The path will be stored in the SQL database for each image, rather than the image themselves (too large for SQL)
+     */
     private String saveToInternalStorage(Bitmap bitmapImage, String fileName) throws IOException {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
@@ -749,17 +733,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void initializeExitPolls(){
-        XmlPullParserFactory pullParserFactory;
         try {
 
 
-            //pullParserFactory = XmlPullParserFactory.newInstance();
-            //XmlPullParser parser = pullParserFactory.newPullParser();
             XmlPullParser parser = getResources().getXml(R.xml.combined_primary_election);
 
-            //InputStream in_s = getActivity().getApplicationContext().getAssets().open("combined_primary_election.xml");
-            //parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            //parser.setInput(in_s, null);
 
             parseXML(parser);
 
@@ -778,7 +756,6 @@ public class LoginActivity extends AppCompatActivity {
         ExitPoll currentExitPoll = null;
         String name;
         String currentName = "debugging";
-        int number_of_items_added = 0;
         while(eventType != XmlPullParser.END_DOCUMENT){
 
             name = parser.getName();
@@ -823,15 +800,7 @@ public class LoginActivity extends AppCompatActivity {
                     name = parser.getName();
 
                     if("record".equalsIgnoreCase(name) && currentExitPoll != null){
-                        number_of_items_added++;
                         exitPolls.add(currentExitPoll);
-                        /*
-                        System.out.print("#" + number_of_items_added + " ----- ");
-                        System.out.print("State = " + currentExitPoll.getState() + ", ");
-                        System.out.print("Total Responders = " + currentExitPoll.getTotalResponders() + ", ");
-                        System.out.print("Candidate = " + currentExitPoll.getCandidate() + ", ");
-                        System.out.print("Voter Group = " + currentExitPoll.getVoterGroup() + ", ");
-                        System.out.println("Percentage of vote = " + currentExitPoll.getPercentageOfVote()); */
                     }
                     break;
             }
@@ -942,7 +911,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
-        private Exception exception;
         protected void onPreExecute() {
         }
         protected String doInBackground(Void... urls) {
@@ -974,7 +942,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("INFO", response);
 
             JSONObject object;
-            String pollTitle, pollValues, lastUpdated;
+            String  pollValues, lastUpdated;
             JSONArray jr;
 
             try {
@@ -984,7 +952,6 @@ public class LoginActivity extends AppCompatActivity {
                         API_2016_NATIONAL_GOP_PRIMARY_DONE = true;
 
                         object = (JSONObject) new JSONTokener(response).nextValue();
-                        pollTitle = object.getString("title");
                         pollValues = object.getString("estimates");
                         lastUpdated = object.getString("last_updated");
 
@@ -1016,7 +983,6 @@ public class LoginActivity extends AppCompatActivity {
                         API_2016_NATIONAL_DEMOCRATIC_PRIMARY_DONE = true;
 
                         object = (JSONObject) new JSONTokener(response).nextValue();
-                        pollTitle = object.getString("title");
                         pollValues = object.getString("estimates");
                         lastUpdated = object.getString("last_updated");
 
@@ -1046,7 +1012,6 @@ public class LoginActivity extends AppCompatActivity {
                         API_2016_GENERAL_ELECTION_DONE = true;
 
                         object = (JSONObject) new JSONTokener(response).nextValue();
-                        pollTitle = object.getString("title");
                         pollValues = object.getString("estimates");
                         lastUpdated = object.getString("last_updated");
 
@@ -1277,7 +1242,6 @@ public class LoginActivity extends AppCompatActivity {
         else {
             AMOrPM = "AM";
         }
-        hourCalc = Integer.parseInt(hour);
 
         String minutes = timeOfLastUpdate.substring(14,16);
 

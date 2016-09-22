@@ -162,17 +162,10 @@ public class AllPolls extends AppCompatActivity {
         if(LAST_UPDATED_API_2016_NATIONAL_GOP_PRIMARY != null) {
             text_view_update_api_2016_general_election.setText(LAST_UPDATED_API_2016_GENERAL_ELECTION);
         }
-        PieChart demPieChart = (PieChart)findViewById(R.id.chartDNC);
-        PieChart repPieChart = (PieChart)findViewById(R.id.chartGOP);
-        PieChart generalPieChart = (PieChart)findViewById(R.id.chartNational);
         Spinner spinnerDataGOP = (Spinner)findViewById(R.id.spinnerDataGOP);
         ArrayAdapter<CharSequence> adapterFilterGOP = ArrayAdapter.createFromResource(AllPolls.this,R.array.data_array, R.layout.spinner_item_2);
         adapterFilterGOP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDataGOP.setAdapter(adapterFilterGOP);
-
-
-        final int buttonNormal = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
-        final int buttonDown = ContextCompat.getColor(getApplicationContext(), R.color.colorBlueLight);
 
         spinnerDataGOP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
