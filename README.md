@@ -12,7 +12,7 @@ DATABASES:
 - The objects stored in the database have the following structure...class object, class datasource, dbhelper, and adapter (to populate views)
 
 
-TODO ITEMS (in order of priority:
+TODO ITEMS (Prioritized Order):
 - App Notifications for Events (5 total right now), display the name, time, and channel of the event ON THE DATE OF THE EVENT.
 - Allow user to turn on and off event notifications from the AppSettings Activity (Default behaivor = ON)
 - Migrate all SQL data onto a hosted solution (TRY FIREBASE)
