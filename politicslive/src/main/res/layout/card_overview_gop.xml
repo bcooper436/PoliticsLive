@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardViewCNN"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayoutGraphGOP">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chartGOP"
+                android:layout_marginLeft="10dp"
+                android:gravity="right"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Data provided by"
+                    android:id="@+id/textView34"
+                    android:textColor="#616161"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/spinnerDataGOP"
+                    android:layout_toStartOf="@+id/spinnerDataGOP"
+                    android:textSize="10dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerDataGOP"
+                    android:touchscreenBlocksFocus="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="5dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayoutGOPHeader"
+                android:gravity="center_vertical" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imageView28"
+                    android:layout_toEndOf="@+id/imageView28"
+                    android:layout_alignBottom="@+id/imageView28"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="2016 Republican Primary"
+                        android:id="@+id/textView32"
+                        android:textColor="@color/colorMaterialGrey800"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentTop="true"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Updated at 7:00 PM on 4/26/16"
+                        android:id="@+id/text_view_update_api_2016_national_gop_primary"
+                        android:textSize="10dp"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/textView32"
+                        android:layout_alignLeft="@+id/textView32"
+                        android:layout_alignStart="@+id/textView32" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView28"
+                    android:src="@drawable/ic_action_gop_color2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:padding="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView33"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_action_overflow_vertical"
+                    android:paddingLeft="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBottom="@+id/imageView28" />
+            </RelativeLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chartGOP"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_below="@+id/viewDividerGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorMaterialGrey300"
+                android:id="@+id/viewDividerGOP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativeLayoutGOPHeader" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/relativeLayout6"
+                android:layout_below="@+id/viewDividerGOP"
+                android:layout_toEndOf="@+id/chartGOP"
+                android:layout_alignBottom="@+id/chartGOP"
+                android:layout_toRightOf="@+id/chartGOP">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="56.4%"
+                    android:id="@+id/textView23"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorRedDark"
+                    android:textStyle="bold"
+                    android:layout_toLeftOf="@+id/textView82"
+                    android:layout_toStartOf="@+id/textView82"
+                    android:layout_above="@+id/textView25"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="23.4%"
+                    android:id="@+id/textView25"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorRedDark"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/textView82"
+                    android:layout_alignLeft="@+id/textView23"
+                    android:layout_alignStart="@+id/textView23"
+                    android:layout_alignBottom="@+id/textView30"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="of the vote"
+                    android:id="@+id/textView82"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorMaterialGrey800"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/imageView29"
+                    android:layout_toStartOf="@+id/imageView29"
+                    android:layout_alignBottom="@+id/imageView29"
+                    android:layout_alignTop="@+id/imageView29"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="of the vote"
+                    android:id="@+id/textView84"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorMaterialGrey800"
+                    android:layout_alignTop="@+id/imageView32"
+                    android:layout_toRightOf="@+id/textView25"
+                    android:layout_toEndOf="@+id/textView25"
+                    android:layout_alignBottom="@+id/imageView32"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="13.8%"
+                    android:id="@+id/textView28"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorRedDark"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/textView84"
+                    android:layout_alignLeft="@+id/textView25"
+                    android:layout_alignStart="@+id/textView25"
+                    android:layout_alignBottom="@+id/imageView32"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="of the vote"
+                    android:id="@+id/textView30"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorMaterialGrey800"
+                    android:layout_toRightOf="@+id/textView25"
+                    android:layout_toEndOf="@+id/textView25"
+                    android:layout_below="@+id/imageView29"
+                    android:layout_alignBottom="@+id/imageView30"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView29"
+                    android:src="@drawable/trump_circle_shadow"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView30"
+                    android:src="@drawable/cruz_circle_shadow"
+                    android:layout_below="@+id/imageView29"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView32"
+                    android:src="@drawable/kasich_circle_shadow"
+                    android:layout_below="@+id/imageView30"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_below="@+id/chartGOP"
+                android:id="@+id/relativeLayout13">
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner"
+                    android:touchscreenBlocksFocus="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Data provided by"
+                    android:id="@+id/textView181"
+                    android:textColor="#616161"
+                    android:gravity="center_vertical"
+                    android:textSize="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="HuffPost Pollster"
+                android:id="@+id/textView182"
+                android:textColor="@color/colorMaterialGrey800"
+                android:gravity="center_vertical"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:layout_alignTop="@+id/relativeLayout13"
+                android:layout_toRightOf="@+id/relativeLayout13"
+                android:layout_toEndOf="@+id/relativeLayout13"
+                android:layout_marginLeft="5dp" />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

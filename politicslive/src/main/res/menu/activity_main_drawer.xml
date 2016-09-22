@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <!--
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_polls"
+            android:icon="@drawable/ic_action_polls"
+            android:title="Polls &amp; Graphs" />
+        <item
+            android:id="@+id/nav_political_party"
+            android:icon="@drawable/ic_action_hat"
+            android:title="Political Parties" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_action_calendar"
+            android:title="Upcoming Events" />
+        <item
+            android:id="@+id/nav_all_candidates"
+            android:icon="@drawable/ic_action_group"
+            android:title="Presidential Candidates" /> -->
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="Settings" />
+    </group>
+
+</menu>
