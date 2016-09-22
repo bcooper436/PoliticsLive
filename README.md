@@ -2,12 +2,13 @@
 CSC 4998 Mobile Apps- Final Project
 
 APP BEHAIVOR:
--The launching activity is MainActivity.
--If user has never opened app before, MainActivity redirects to LoginActivity to initialize polls.
--If app is already initiliazed, MainActivity loads the HomePage fragment, so this is the first page the user sees
+- The launching activity is MainActivity.
+- If user has never opened app before, MainActivity redirects to LoginActivity to initialize polls.
+- If app is already initiliazed, MainActivity loads the HomePage fragment, so this is the first page the user sees
 
 DATABASES:
--There are 4 active local SQL database: Events, Candidates, Polls, ExitPolls, PoliticalParties, 
+- There are 5 active local SQL database: Events, Candidates, Polls, ExitPolls, PoliticalParties
+- The objects stored in the database have the following structure...class object, class datasource, dbhelper, and adapter (to populate views)
 
 
 TODO ITEMS (in order of priority:
