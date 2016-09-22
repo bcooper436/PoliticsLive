@@ -5,7 +5,7 @@ APP BEHAIVOR:
 - The launching activity is MainActivity.
 - If user has never opened app before, MainActivity redirects to LoginActivity to initialize polls.
 - If app is already initiliazed, MainActivity loads the HomePage fragment, so this is the first page the user sees
-- HomePage Fragment contains an overview of all of the app's information.  User can expand on this by A) clicking the title above each cardview, which will open an Activity with all of the objects related to that database, or B) User can directly click on an object from the card view which opens up an Activity populated with all that objects information (obtained using class adapters)
+- HomePage Fragment contains an overview of all of the app's information.  User can expand on this by A) clicking the title above each cardview, which will open an Activity with all of the objects related to that database, or B) User can directly click on an object from the card view which opens up an Activity populated with all that objects information (populated using class adapters)
 
 DATABASES:
 - There are 5 active local SQL database: Events, Candidates, Polls, ExitPolls, PoliticalParties
