@@ -19,4 +19,4 @@ TODO ITEMS (Prioritized Order):
 - Using Firebase, reimplement existing social features including User Profile, Vote Counts for each candidate, Ballot, Login, SignUp, Logout, etc.
 
 BUGS:
-- If the user exits the app during initialization, and then reopens app, then everthing basically breaks.
+- If the user exits the app during initialization, and then reopens app, then the initialization will not be successful (it will finish, but the database will have duplicate objects, wont show graphs)
