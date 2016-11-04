@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.bradleycooper.politicslive.CreateUser"
+    tools:context="com.example.bradleycooper.politicslive.activities.CreateUser"
     tools:showIn="@layout/activity_create_user"
     android:background="@color/colorBlueDark">
 
@@ -17,7 +17,7 @@
 
         <RelativeLayout
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.example.bradleycooper.politicslive.CreateUser"
+            tools:context="com.example.bradleycooper.politicslive.activities.CreateUser"
             tools:showIn="@layout/activity_create_user"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
